@@ -23,11 +23,11 @@ public class Worker {
         this.userRepository = userRepository;
     }
 
-    @JobWorker(type = "hello-world")
-    public Map<String, Object> hello(@Variable(name = "username") String username) {
-        LOGGER.info("Hello, World: {}", username);
-        return Map.of("hello-world", true);
-    }
+//    @JobWorker(type = "hello-world")
+//    public Map<String, Object> hello(@Variable(name = "username") String username) {
+//        LOGGER.info("Hello, World: {}", username);
+//        return Map.of("hello-world", true);
+//    }
 
     @JobWorker(type = "login")
     public Map<String, Object> login(@Variable(name = "username") String username, @Variable(name = "password") String password) {
