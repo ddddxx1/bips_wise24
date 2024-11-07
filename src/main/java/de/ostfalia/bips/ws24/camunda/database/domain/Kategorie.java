@@ -7,24 +7,24 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "katagorie")
-public class katagorie {
+public class Kategorie {
     @Id
-    @Column(name = "id_katagorie", nullable = false)
-    private Integer idKatagorie;
+    @Column(name = "id_kategorie", nullable = false)
+    private Integer idKategorie;
 
     @Column(name = "beschreibung", nullable = false)
     private String beschreibung;
 
-    public void setIdKatagorie(Integer idKatagorie) {
-        this.idKatagorie = idKatagorie;
+    public void setIdKatagorie(Integer idKategorie) {
+        this.idKategorie = idKategorie;
     }
 
     public void setBeschreibung(String beschreibung) {
         this.beschreibung = beschreibung;
     }
 
-    public Integer getIdKatagorie() {
-        return idKatagorie;
+    public Integer getIdKategorie() {
+        return idKategorie;
     }
 
     public String getBeschreibung() {
