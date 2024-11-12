@@ -2,6 +2,8 @@ package de.ostfalia.bips.ws24.camunda.database.domain;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "projekt_has_lieferant")
 public class ProjektHasLieferant {
@@ -36,5 +38,40 @@ public class ProjektHasLieferant {
 
     public Integer getRank() {
         return rank;
+    }
+
+    @Embeddable
+    public static class Id implements Serializable {
+        @ManyToOne(targetEntity = Projekt.class, optional = false)
+        @JoinColumn(name = "id_projekt", referencedColumnName = "id_projekt", nullable = false)
+        private Projekt projekt;
+
+        @ManyToOne(targetEntity = Lieferant.class, optional = false)
+        @JoinColumn(name = "id_lieferant", referencedColumnName = "id_lieferant", nullable = false)
+        private Lieferant lieferant;
+
+        public Id() {
+        }
+
+        public Id(Projekt projekt, Lieferant lieferant) {
+            this.projekt = projekt;
+            this.lieferant = lieferant;
+        }
+
+        public Projekt getProjekt() {
+            return projekt;
+        }
+
+        public Lieferant getLieferant() {
+            return lieferant;
+        }
+
+        public void setProjekt(Projekt projekt) {
+            this.projekt = projekt;
+        }
+
+        public void setLieferant(Lieferant lieferant) {
+            this.lieferant = lieferant;
+        }
     }
 }
