@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1pgqgai" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.28.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.6.0">
   <bpmn:collaboration id="Collaboration_1rwiuqm">
-    <bpmn:participant id="Participant_1lv6edr" processRef="Process_1x8rzss" />
+    <bpmn:extensionElements />
+    <bpmn:participant id="Participant_1lv6edr" processRef="bips_wise24" />
     <bpmn:textAnnotation id="TextAnnotation_0gnbwdq">
       <bpmn:text>todo：修改form</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0joigln" associationDirection="None" sourceRef="Activity_17mneq2" targetRef="TextAnnotation_0gnbwdq" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_1x8rzss" isExecutable="true">
+  <bpmn:process id="bips_wise24" isExecutable="true">
     <bpmn:extensionElements>
       <zeebe:userTaskForm id="UserTaskForm_26cbut7">{
   "components": [
@@ -1023,25 +1024,13 @@
         <bpmn:flowNodeRef>Activity_04tc80y</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:sendTask id="Activity_1ud1lkl" name="neues Ranking liegt vor">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="neues-ranking-liegt-vor" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0gksss0</bpmn:incoming>
-      <bpmn:outgoing>Flow_17t89pb</bpmn:outgoing>
-    </bpmn:sendTask>
-    <bpmn:serviceTask id="Activity_0deisjr" name="Nutzwertanalyse durchführen und speichern">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="nutzwertanalyse-durchfuhren-und-speichern" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0bdikrz</bpmn:incoming>
-      <bpmn:outgoing>Flow_0gksss0</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:exclusiveGateway id="Gateway_1akozmn">
-      <bpmn:incoming>Flow_0xlcdjb</bpmn:incoming>
-      <bpmn:incoming>Flow_1h8ni2z</bpmn:incoming>
-      <bpmn:outgoing>Flow_0mzna6l</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
+    <bpmn:intermediateCatchEvent id="Event_1byb43r" name="2 Wochen warten">
+      <bpmn:incoming>Flow_0483lep</bpmn:incoming>
+      <bpmn:outgoing>Flow_105vuxv</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_06f5u3j">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P2W</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
     <bpmn:exclusiveGateway id="Gateway_1exicq0" name="Anmeldedaten korrekt?" default="Flow_06piv31">
       <bpmn:incoming>Flow_17s6a5o</bpmn:incoming>
       <bpmn:outgoing>Flow_1h8ni2z</bpmn:outgoing>
@@ -1061,56 +1050,20 @@
       <bpmn:incoming>Flow_0mzna6l</bpmn:incoming>
       <bpmn:outgoing>Flow_02qvf5g</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:exclusiveGateway id="Gateway_134927e">
-      <bpmn:incoming>Flow_06piv31</bpmn:incoming>
-      <bpmn:incoming>Flow_099by04</bpmn:incoming>
-      <bpmn:outgoing>Flow_1gti6uq</bpmn:outgoing>
+    <bpmn:startEvent id="StartEvent_1" name="Anmelden">
+      <bpmn:outgoing>Flow_0v9pywt</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_0xdmeu8" name="Antwort vorhanden?" default="Flow_1klqonf">
+      <bpmn:incoming>Flow_1byh78v</bpmn:incoming>
+      <bpmn:outgoing>Flow_1klqonf</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1bydp9c</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway id="Gateway_0ggwm2t">
-      <bpmn:incoming>Flow_01wgron</bpmn:incoming>
-      <bpmn:incoming>Flow_1648zwq</bpmn:incoming>
-      <bpmn:outgoing>Flow_0bdikrz</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_0gksss0" sourceRef="Activity_0deisjr" targetRef="Activity_1ud1lkl" />
-    <bpmn:sequenceFlow id="Flow_17t89pb" sourceRef="Activity_1ud1lkl" targetRef="Gateway_12v7haz" />
-    <bpmn:sequenceFlow id="Flow_1if3uhg" sourceRef="Activity_11obj82" targetRef="Gateway_0cn5bf8" />
-    <bpmn:sequenceFlow id="Flow_1648zwq" sourceRef="Gateway_0cn5bf8" targetRef="Gateway_0ggwm2t" />
-    <bpmn:sequenceFlow id="Flow_0zpqzrl" name="Nein" sourceRef="Gateway_0cn5bf8" targetRef="Activity_1xsbdpr">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=false</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_099by04" sourceRef="Activity_1xsbdpr" targetRef="Gateway_134927e" />
-    <bpmn:sequenceFlow id="Flow_1vaej7m" sourceRef="Activity_15lfh44" targetRef="Activity_11obj82" />
-    <bpmn:sequenceFlow id="Flow_0bdikrz" sourceRef="Gateway_0ggwm2t" targetRef="Activity_0deisjr" />
-    <bpmn:sequenceFlow id="Flow_0xlcdjb" sourceRef="Activity_07qs932" targetRef="Gateway_1akozmn" />
-    <bpmn:sequenceFlow id="Flow_1h8ni2z" name="Nein" sourceRef="Gateway_1exicq0" targetRef="Gateway_1akozmn">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=AnmeldeKorrekt="0"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0mzna6l" sourceRef="Gateway_1akozmn" targetRef="Activity_1i4ks53" />
-    <bpmn:sequenceFlow id="Flow_17s6a5o" sourceRef="Activity_0rc29g6" targetRef="Gateway_1exicq0" />
-    <bpmn:sequenceFlow id="Flow_06piv31" sourceRef="Gateway_1exicq0" targetRef="Gateway_134927e" />
-    <bpmn:sequenceFlow id="Flow_02qvf5g" sourceRef="Activity_1i4ks53" targetRef="Activity_0rc29g6" />
-    <bpmn:sequenceFlow id="Flow_1gti6uq" sourceRef="Gateway_134927e" targetRef="Activity_1t7l9zz" />
-    <bpmn:sequenceFlow id="Flow_1j8kovk" sourceRef="Activity_1t7l9zz" targetRef="Activity_1kylabx" />
-    <bpmn:sequenceFlow id="Flow_1suit0v" sourceRef="Activity_1kylabx" targetRef="Activity_15lfh44" />
-    <bpmn:sequenceFlow id="Flow_01wgron" sourceRef="Activity_1b468q6" targetRef="Gateway_0ggwm2t" />
-    <bpmn:sendTask id="Activity_1xsbdpr" name="Lieferant über Unvollständigkeit informieren">
+    <bpmn:serviceTask id="Activity_1t7l9zz" name="Antworten laden">
       <bpmn:extensionElements>
-        <zeebe:taskDefinition type="lieferant-uber-unvollstandigkeit-informieren" />
+        <zeebe:taskDefinition type="antworten-laden1" />
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0zpqzrl</bpmn:incoming>
-      <bpmn:outgoing>Flow_099by04</bpmn:outgoing>
-    </bpmn:sendTask>
-    <bpmn:exclusiveGateway id="Gateway_0cn5bf8" name="Ist der Fragebogen vollständig?" default="Flow_1648zwq">
-      <bpmn:incoming>Flow_1if3uhg</bpmn:incoming>
-      <bpmn:outgoing>Flow_1648zwq</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0zpqzrl</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Activity_11obj82" name="Prüfung auf Vollständigkeit">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="prufung-auf-vollstandigkeit2" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1vaej7m</bpmn:incoming>
-      <bpmn:outgoing>Flow_1if3uhg</bpmn:outgoing>
+      <bpmn:incoming>Flow_1gti6uq</bpmn:incoming>
+      <bpmn:outgoing>Flow_1j8kovk</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="Activity_15lfh44" name="Antworten speichern">
       <bpmn:extensionElements>
@@ -1119,6 +1072,152 @@
       <bpmn:incoming>Flow_1suit0v</bpmn:incoming>
       <bpmn:outgoing>Flow_1vaej7m</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1n2stb6" name="Daten vom Lieferanten laden">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="daten-vom-lieferanten-laden" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0z8hapn</bpmn:incoming>
+      <bpmn:outgoing>Flow_1byh78v</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0tl1ro3" name="Daten zum Fragebogen laden">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="daten-zum-fragebogen-laden" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0rwt7ak</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ytrens</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1kd1pek" name="Daten zum Projekt laden">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="daten-zum-projekt-laden" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1dbfnei</bpmn:incoming>
+      <bpmn:outgoing>Flow_1151p7y</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sendTask id="Activity_0z3z710" name="E-Mail senden">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="email-senden" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1c40so9</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rbt5j2</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="Event_033e339">
+      <bpmn:incoming>Flow_1jxw774</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="Event_065uzic">
+      <bpmn:incoming>Flow_0zy0mnk</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_01wgron" sourceRef="Activity_1b468q6" targetRef="Gateway_0ggwm2t" />
+    <bpmn:sequenceFlow id="Flow_02qvf5g" sourceRef="Activity_1i4ks53" targetRef="Activity_0rc29g6" />
+    <bpmn:sequenceFlow id="Flow_0483lep" sourceRef="Gateway_1t6jnoh" targetRef="Event_1byb43r" />
+    <bpmn:sequenceFlow id="Flow_04nhs1g" sourceRef="Activity_1ai3uix" targetRef="Activity_0ixs62r" />
+    <bpmn:sequenceFlow id="Flow_04yx8i8" sourceRef="Activity_171v9fh" targetRef="Gateway_0kr54y3" />
+    <bpmn:sequenceFlow id="Flow_06piv31" sourceRef="Gateway_1exicq0" targetRef="Gateway_134927e" />
+    <bpmn:sequenceFlow id="Flow_08m1i2c" sourceRef="Activity_0bdf6i8" targetRef="Activity_07d95uh" />
+    <bpmn:sequenceFlow id="Flow_099by04" sourceRef="Activity_1xsbdpr" targetRef="Gateway_134927e" />
+    <bpmn:sequenceFlow id="Flow_099egq8" sourceRef="Gateway_12v7haz" targetRef="Activity_176kvzt" />
+    <bpmn:sequenceFlow id="Flow_0bdikrz" sourceRef="Gateway_0ggwm2t" targetRef="Activity_0deisjr" />
+    <bpmn:sequenceFlow id="Flow_0bpb2up" sourceRef="Gateway_0dkuq2e" targetRef="Activity_1ai3uix" />
+    <bpmn:sequenceFlow id="Flow_0eube0w" sourceRef="Activity_17mneq2" targetRef="Activity_1b468q6" />
+    <bpmn:sequenceFlow id="Flow_0gksss0" sourceRef="Activity_0deisjr" targetRef="Activity_1ud1lkl" />
+    <bpmn:sequenceFlow id="Flow_0jhtvrl" sourceRef="Activity_07d95uh" targetRef="Gateway_0s722x8" />
+    <bpmn:sequenceFlow id="Flow_0mic7ib" sourceRef="Activity_1rugmnc" targetRef="Activity_171v9fh" />
+    <bpmn:sequenceFlow id="Flow_0mzna6l" sourceRef="Gateway_1akozmn" targetRef="Activity_1i4ks53" />
+    <bpmn:sequenceFlow id="Flow_0opbpz6" sourceRef="Activity_0lqgtac" targetRef="Activity_04ybgkf" />
+    <bpmn:sequenceFlow id="Flow_0rwt7ak" sourceRef="Activity_0ztxu93" targetRef="Activity_0tl1ro3" />
+    <bpmn:sequenceFlow id="Flow_0v9pywt" sourceRef="StartEvent_1" targetRef="Activity_1rugmnc" />
+    <bpmn:sequenceFlow id="Flow_0wkt56h" sourceRef="Activity_04ybgkf" targetRef="Activity_0ztxu93" />
+    <bpmn:sequenceFlow id="Flow_0xlcdjb" sourceRef="Activity_07qs932" targetRef="Gateway_1akozmn" />
+    <bpmn:sequenceFlow id="Flow_0ytrens" sourceRef="Activity_0tl1ro3" targetRef="Activity_1sasq83" />
+    <bpmn:sequenceFlow id="Flow_0z8hapn" sourceRef="Gateway_1q40nd7" targetRef="Activity_1n2stb6">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferInProjekt="1"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0zy0mnk" sourceRef="Gateway_178kyci" targetRef="Event_065uzic" />
+    <bpmn:sequenceFlow id="Flow_105vuxv" sourceRef="Event_1byb43r" targetRef="Activity_04tc80y" />
+    <bpmn:sequenceFlow id="Flow_1151p7y" sourceRef="Activity_1kd1pek" targetRef="Gateway_0s722x8" />
+    <bpmn:sequenceFlow id="Flow_15clqef" sourceRef="Activity_09slwuv" targetRef="Gateway_0dkuq2e" />
+    <bpmn:sequenceFlow id="Flow_15zycj8" sourceRef="Activity_176kvzt" targetRef="Gateway_178kyci" />
+    <bpmn:sequenceFlow id="Flow_1648zwq" sourceRef="Gateway_0cn5bf8" targetRef="Gateway_0ggwm2t" />
+    <bpmn:sequenceFlow id="Flow_17s6a5o" sourceRef="Activity_0rc29g6" targetRef="Gateway_1exicq0" />
+    <bpmn:sequenceFlow id="Flow_17t89pb" sourceRef="Activity_1ud1lkl" targetRef="Gateway_12v7haz" />
+    <bpmn:sequenceFlow id="Flow_1b4mu23" sourceRef="Activity_1sasq83" targetRef="Activity_0bdf6i8" />
+    <bpmn:sequenceFlow id="Flow_1bydp9c" sourceRef="Gateway_0xdmeu8" targetRef="Gateway_0dkuq2e">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=AntwortVorhanden="0"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1byh78v" sourceRef="Activity_1n2stb6" targetRef="Gateway_0xdmeu8" />
+    <bpmn:sequenceFlow id="Flow_1cumpie" sourceRef="Activity_04tc80y" targetRef="Gateway_0oi9s3k" />
+    <bpmn:sequenceFlow id="Flow_1dbfnei" sourceRef="Gateway_0kr54y3" targetRef="Activity_1kd1pek" />
+    <bpmn:sequenceFlow id="Flow_1g9b4ky" sourceRef="Activity_0ohbvu5" targetRef="Gateway_1t6jnoh" />
+    <bpmn:sequenceFlow id="Flow_1gti6uq" sourceRef="Gateway_134927e" targetRef="Activity_1t7l9zz" />
+    <bpmn:sequenceFlow id="Flow_1if3uhg" sourceRef="Activity_11obj82" targetRef="Gateway_0cn5bf8" />
+    <bpmn:sequenceFlow id="Flow_1j8kovk" sourceRef="Activity_1t7l9zz" targetRef="Activity_1kylabx" />
+    <bpmn:sequenceFlow id="Flow_1jxw774" sourceRef="Gateway_04zxwz9" targetRef="Event_033e339" />
+    <bpmn:sequenceFlow id="Flow_1klqonf" sourceRef="Gateway_0xdmeu8" targetRef="Gateway_12v7haz" />
+    <bpmn:sequenceFlow id="Flow_1l0avzi" sourceRef="Activity_0ixs62r" targetRef="Gateway_1q40nd7" />
+    <bpmn:sequenceFlow id="Flow_1o8x3xu" sourceRef="Gateway_0oi9s3k" targetRef="Gateway_04zxwz9" />
+    <bpmn:sequenceFlow id="Flow_1pdfbzc" sourceRef="Gateway_0s722x8" targetRef="Activity_09slwuv" />
+    <bpmn:sequenceFlow id="Flow_1rbt5j2" sourceRef="Activity_0z3z710" targetRef="Gateway_04zxwz9" />
+    <bpmn:sequenceFlow id="Flow_1suit0v" sourceRef="Activity_1kylabx" targetRef="Activity_15lfh44" />
+    <bpmn:sequenceFlow id="Flow_1vaej7m" sourceRef="Activity_15lfh44" targetRef="Activity_11obj82" />
+    <bpmn:sequenceFlow id="Flow_1xr74k8" sourceRef="Gateway_1t6jnoh" targetRef="Activity_07qs932" />
+    <bpmn:userTask id="Activity_0ztxu93" name="Fragebogen auswählen">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cs6cph" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0wkt56h</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rwt7ak</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_04ybgkf" name="Fragebögen laden">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="fragebogen-laden" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0opbpz6</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wkt56h</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_04zxwz9">
+      <bpmn:incoming>Flow_1rbt5j2</bpmn:incoming>
+      <bpmn:incoming>Flow_1o8x3xu</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jxw774</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_0dkuq2e">
+      <bpmn:incoming>Flow_15clqef</bpmn:incoming>
+      <bpmn:incoming>Flow_1bydp9c</bpmn:incoming>
+      <bpmn:outgoing>Flow_0bpb2up</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_0ggwm2t">
+      <bpmn:incoming>Flow_01wgron</bpmn:incoming>
+      <bpmn:incoming>Flow_1648zwq</bpmn:incoming>
+      <bpmn:outgoing>Flow_0bdikrz</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_0s722x8">
+      <bpmn:incoming>Flow_0jhtvrl</bpmn:incoming>
+      <bpmn:incoming>Flow_1151p7y</bpmn:incoming>
+      <bpmn:outgoing>Flow_1pdfbzc</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_12v7haz">
+      <bpmn:incoming>Flow_17t89pb</bpmn:incoming>
+      <bpmn:incoming>Flow_1klqonf</bpmn:incoming>
+      <bpmn:outgoing>Flow_099egq8</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_134927e">
+      <bpmn:incoming>Flow_06piv31</bpmn:incoming>
+      <bpmn:incoming>Flow_099by04</bpmn:incoming>
+      <bpmn:outgoing>Flow_1gti6uq</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_178kyci" default="Flow_0zy0mnk">
+      <bpmn:incoming>Flow_15zycj8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0zy0mnk</bpmn:outgoing>
+      <bpmn:outgoing>Flow_016av8y</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_1akozmn">
+      <bpmn:incoming>Flow_0xlcdjb</bpmn:incoming>
+      <bpmn:incoming>Flow_1h8ni2z</bpmn:incoming>
+      <bpmn:outgoing>Flow_0mzna6l</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:parallelGateway id="Gateway_1t6jnoh">
+      <bpmn:incoming>Flow_1g9b4ky</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xr74k8</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0483lep</bpmn:outgoing>
+    </bpmn:parallelGateway>
     <bpmn:userTask id="Activity_1kylabx" name="Im Fragebogen auswählen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_156cmh1" />
@@ -1126,51 +1225,25 @@
       <bpmn:incoming>Flow_1j8kovk</bpmn:incoming>
       <bpmn:outgoing>Flow_1suit0v</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="Activity_1t7l9zz" name="Antworten laden">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="antworten-laden1" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1gti6uq</bpmn:incoming>
-      <bpmn:outgoing>Flow_1j8kovk</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:startEvent id="StartEvent_1" name="Anmelden">
-      <bpmn:outgoing>Flow_0v9pywt</bpmn:outgoing>
-    </bpmn:startEvent>
-    <bpmn:exclusiveGateway id="Gateway_0kr54y3" name="Projekt ausgewählt?" default="Flow_1dbfnei">
-      <bpmn:incoming>Flow_04yx8i8</bpmn:incoming>
-      <bpmn:outgoing>Flow_080tn30</bpmn:outgoing>
-      <bpmn:outgoing>Flow_1dbfnei</bpmn:outgoing>
+    <bpmn:exclusiveGateway id="Gateway_0cn5bf8" name="Ist der Fragebogen vollständig?" default="Flow_1648zwq">
+      <bpmn:incoming>Flow_1if3uhg</bpmn:incoming>
+      <bpmn:outgoing>Flow_1648zwq</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0zpqzrl</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Activity_0lqgtac" name="Projekt anlegen">
+    <bpmn:exclusiveGateway id="Gateway_0oi9s3k" name="Ist der Fragebogen vollständig?" default="Flow_1o8x3xu">
+      <bpmn:incoming>Flow_1cumpie</bpmn:incoming>
+      <bpmn:outgoing>Flow_1c40so9</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1o8x3xu</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_016av8y" name="Ja" sourceRef="Gateway_178kyci" targetRef="Activity_17mneq2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=SollAngepasst="1"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="Activity_1sasq83" name="K.O. Kriterien festlegen">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_09qrfoc" />
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1pk3qu8" />
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_080tn30</bpmn:incoming>
-      <bpmn:outgoing>Flow_0opbpz6</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:endEvent id="Event_065uzic">
-      <bpmn:incoming>Flow_0zy0mnk</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:userTask id="Activity_176kvzt" name="Ranking und Antworten vom gewählten Lieferanten  angucken">
-      <bpmn:extensionElements>
-        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cp118s" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_099egq8</bpmn:incoming>
-      <bpmn:outgoing>Flow_15zycj8</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:sendTask id="Activity_07qs932" name="Zugänge für Lieferanten verschicken">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="zugange-fur-lieferanten-verschicken" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1xr74k8</bpmn:incoming>
-      <bpmn:outgoing>Flow_0xlcdjb</bpmn:outgoing>
-    </bpmn:sendTask>
-    <bpmn:userTask id="Activity_0ztxu93" name="Fragebogen auswählen">
-      <bpmn:extensionElements>
-        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cs6cph" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0wkt56h</bpmn:incoming>
-      <bpmn:outgoing>Flow_0rwt7ak</bpmn:outgoing>
+      <bpmn:incoming>Flow_0ytrens</bpmn:incoming>
+      <bpmn:outgoing>Flow_1b4mu23</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="Activity_0bdf6i8" name="Kategorien gewichten">
       <bpmn:extensionElements>
@@ -1179,20 +1252,94 @@
       <bpmn:incoming>Flow_1b4mu23</bpmn:incoming>
       <bpmn:outgoing>Flow_08m1i2c</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_1sasq83" name="K.O. Kriterien festlegen">
+    <bpmn:userTask id="Activity_17mneq2" name="Kategorien gewichten">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1pk3qu8" />
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_0e7sd86" />
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0ytrens</bpmn:incoming>
-      <bpmn:outgoing>Flow_1b4mu23</bpmn:outgoing>
+      <bpmn:incoming>Flow_016av8y</bpmn:incoming>
+      <bpmn:outgoing>Flow_0eube0w</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="Activity_1rugmnc" name="Projekte laden">
+    <bpmn:userTask id="Activity_1ai3uix" name="Lieferant auswählen">
       <bpmn:extensionElements>
-        <zeebe:taskDefinition type="projekte-laden" />
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cq3s87" />
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0v9pywt</bpmn:incoming>
-      <bpmn:outgoing>Flow_0mic7ib</bpmn:outgoing>
+      <bpmn:incoming>Flow_0bpb2up</bpmn:incoming>
+      <bpmn:outgoing>Flow_04nhs1g</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sendTask id="Activity_1xsbdpr" name="Lieferant über Unvollständigkeit informieren">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="lieferant-uber-unvollstandigkeit-informieren" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0zpqzrl</bpmn:incoming>
+      <bpmn:outgoing>Flow_099by04</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:serviceTask id="Activity_0ixs62r" name="Lieferant überprüfen">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="lieferant-uberprufen" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_04nhs1g</bpmn:incoming>
+      <bpmn:outgoing>Flow_1l0avzi</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0ohbvu5" name="Lieferant zum Projekt hinzufügen">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="lieferant-zum-projekt-hinzufugen" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ftovjp</bpmn:incoming>
+      <bpmn:outgoing>Flow_1g9b4ky</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_09slwuv" name="Lieferanten laden">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="lieferanten-laden" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1pdfbzc</bpmn:incoming>
+      <bpmn:outgoing>Flow_15clqef</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0zpqzrl" name="Nein" sourceRef="Gateway_0cn5bf8" targetRef="Activity_1xsbdpr">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1h8ni2z" name="Nein" sourceRef="Gateway_1exicq0" targetRef="Gateway_1akozmn">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=AnmeldeKorrekt="0"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_080tn30" name="Nein" sourceRef="Gateway_0kr54y3" targetRef="Activity_0lqgtac">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1ftovjp" name="Nein" sourceRef="Gateway_1q40nd7" targetRef="Activity_0ohbvu5">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferInProjekt="0"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1c40so9" name="Nein" sourceRef="Gateway_0oi9s3k" targetRef="Activity_0z3z710">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=Fragebogenvollstandig="0"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="Gateway_1q40nd7" name="Neuer Lieferant ausgewählt">
+      <bpmn:incoming>Flow_1l0avzi</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ftovjp</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0z8hapn</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sendTask id="Activity_1ud1lkl" name="neues Ranking liegt vor">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="neues-ranking-liegt-vor" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0gksss0</bpmn:incoming>
+      <bpmn:outgoing>Flow_17t89pb</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:serviceTask id="Activity_0deisjr" name="Nutzwertanalyse durchführen und speichern">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="nutzwertanalyse-durchfuhren-und-speichern" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0bdikrz</bpmn:incoming>
+      <bpmn:outgoing>Flow_0gksss0</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_0lqgtac" name="Projekt anlegen">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_09qrfoc" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_080tn30</bpmn:incoming>
+      <bpmn:outgoing>Flow_0opbpz6</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_0kr54y3" name="Projekt ausgewählt?" default="Flow_1dbfnei">
+      <bpmn:incoming>Flow_04yx8i8</bpmn:incoming>
+      <bpmn:outgoing>Flow_080tn30</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1dbfnei</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
     <bpmn:userTask id="Activity_171v9fh" name="Projekt auswählen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_26cbut7" />
@@ -1207,99 +1354,6 @@
       <bpmn:incoming>Flow_08m1i2c</bpmn:incoming>
       <bpmn:outgoing>Flow_0jhtvrl</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_04ybgkf" name="Fragebögen laden">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="fragebogen-laden" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0opbpz6</bpmn:incoming>
-      <bpmn:outgoing>Flow_0wkt56h</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_0tl1ro3" name="Daten zum Fragebogen laden">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="daten-zum-fragebogen-laden" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0rwt7ak</bpmn:incoming>
-      <bpmn:outgoing>Flow_0ytrens</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:exclusiveGateway id="Gateway_0s722x8">
-      <bpmn:incoming>Flow_0jhtvrl</bpmn:incoming>
-      <bpmn:incoming>Flow_1151p7y</bpmn:incoming>
-      <bpmn:outgoing>Flow_1pdfbzc</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Activity_1kd1pek" name="Daten zum Projekt laden">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="daten-zum-projekt-laden" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1dbfnei</bpmn:incoming>
-      <bpmn:outgoing>Flow_1151p7y</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_09slwuv" name="Lieferanten laden">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="lieferanten-laden" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1pdfbzc</bpmn:incoming>
-      <bpmn:outgoing>Flow_15clqef</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:exclusiveGateway id="Gateway_1q40nd7" name="Neuer Lieferant ausgewählt">
-      <bpmn:incoming>Flow_1l0avzi</bpmn:incoming>
-      <bpmn:outgoing>Flow_1ftovjp</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0z8hapn</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Activity_0ohbvu5" name="Lieferant zum Projekt hinzufügen">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="lieferant-zum-projekt-hinzufugen" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1ftovjp</bpmn:incoming>
-      <bpmn:outgoing>Flow_1g9b4ky</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:userTask id="Activity_1ai3uix" name="Lieferant auswählen">
-      <bpmn:extensionElements>
-        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cq3s87" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0bpb2up</bpmn:incoming>
-      <bpmn:outgoing>Flow_04nhs1g</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:serviceTask id="Activity_0ixs62r" name="Lieferant überprüfen">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="lieferant-uberprufen" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_04nhs1g</bpmn:incoming>
-      <bpmn:outgoing>Flow_1l0avzi</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:exclusiveGateway id="Gateway_12v7haz">
-      <bpmn:incoming>Flow_17t89pb</bpmn:incoming>
-      <bpmn:incoming>Flow_1klqonf</bpmn:incoming>
-      <bpmn:outgoing>Flow_099egq8</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Activity_1n2stb6" name="Daten vom Lieferanten laden">
-      <bpmn:extensionElements>
-        <zeebe:taskDefinition type="daten-vom-lieferanten-laden" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0z8hapn</bpmn:incoming>
-      <bpmn:outgoing>Flow_1byh78v</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:exclusiveGateway id="Gateway_0xdmeu8" name="Antwort vorhanden?" default="Flow_1klqonf">
-      <bpmn:incoming>Flow_1byh78v</bpmn:incoming>
-      <bpmn:outgoing>Flow_1klqonf</bpmn:outgoing>
-      <bpmn:outgoing>Flow_1bydp9c</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway id="Gateway_0dkuq2e">
-      <bpmn:incoming>Flow_15clqef</bpmn:incoming>
-      <bpmn:incoming>Flow_1bydp9c</bpmn:incoming>
-      <bpmn:outgoing>Flow_0bpb2up</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway id="Gateway_178kyci" default="Flow_0zy0mnk">
-      <bpmn:incoming>Flow_15zycj8</bpmn:incoming>
-      <bpmn:outgoing>Flow_0zy0mnk</bpmn:outgoing>
-      <bpmn:outgoing>Flow_016av8y</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Activity_17mneq2" name="Kategorien gewichten">
-      <bpmn:extensionElements>
-        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_0e7sd86" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_016av8y</bpmn:incoming>
-      <bpmn:outgoing>Flow_0eube0w</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:serviceTask id="Activity_1b468q6" name="Projekt speichern">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="projekt-speichern2" />
@@ -1307,38 +1361,20 @@
       <bpmn:incoming>Flow_0eube0w</bpmn:incoming>
       <bpmn:outgoing>Flow_01wgron</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:parallelGateway id="Gateway_1t6jnoh">
-      <bpmn:incoming>Flow_1g9b4ky</bpmn:incoming>
-      <bpmn:outgoing>Flow_1xr74k8</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0483lep</bpmn:outgoing>
-    </bpmn:parallelGateway>
-    <bpmn:intermediateCatchEvent id="Event_1byb43r" name="2 Wochen warten">
-      <bpmn:incoming>Flow_0483lep</bpmn:incoming>
-      <bpmn:outgoing>Flow_105vuxv</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_06f5u3j">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P2W</bpmn:timeDuration>
-      </bpmn:timerEventDefinition>
-    </bpmn:intermediateCatchEvent>
-    <bpmn:sendTask id="Activity_0z3z710" name="E-Mail senden">
+    <bpmn:serviceTask id="Activity_1rugmnc" name="Projekte laden">
       <bpmn:extensionElements>
-        <zeebe:taskDefinition type="email-senden" />
+        <zeebe:taskDefinition type="projekte-laden" />
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1c40so9</bpmn:incoming>
-      <bpmn:outgoing>Flow_1rbt5j2</bpmn:outgoing>
-    </bpmn:sendTask>
-    <bpmn:endEvent id="Event_033e339">
-      <bpmn:incoming>Flow_1jxw774</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:exclusiveGateway id="Gateway_0oi9s3k" name="Ist der Fragebogen vollständig?" default="Flow_1o8x3xu">
-      <bpmn:incoming>Flow_1cumpie</bpmn:incoming>
-      <bpmn:outgoing>Flow_1c40so9</bpmn:outgoing>
-      <bpmn:outgoing>Flow_1o8x3xu</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway id="Gateway_04zxwz9">
-      <bpmn:incoming>Flow_1rbt5j2</bpmn:incoming>
-      <bpmn:incoming>Flow_1o8x3xu</bpmn:incoming>
-      <bpmn:outgoing>Flow_1jxw774</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
+      <bpmn:incoming>Flow_0v9pywt</bpmn:incoming>
+      <bpmn:outgoing>Flow_0mic7ib</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_11obj82" name="Prüfung auf Vollständigkeit">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="prufung-auf-vollstandigkeit2" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1vaej7m</bpmn:incoming>
+      <bpmn:outgoing>Flow_1if3uhg</bpmn:outgoing>
+    </bpmn:serviceTask>
     <bpmn:serviceTask id="Activity_04tc80y" name="Prüfung auf Vollständigkeit">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="prufung-auf-vollstandigkeit1" />
@@ -1346,55 +1382,20 @@
       <bpmn:incoming>Flow_105vuxv</bpmn:incoming>
       <bpmn:outgoing>Flow_1cumpie</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_0v9pywt" sourceRef="StartEvent_1" targetRef="Activity_1rugmnc" />
-    <bpmn:sequenceFlow id="Flow_04yx8i8" sourceRef="Activity_171v9fh" targetRef="Gateway_0kr54y3" />
-    <bpmn:sequenceFlow id="Flow_080tn30" name="Nein" sourceRef="Gateway_0kr54y3" targetRef="Activity_0lqgtac">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=true</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1dbfnei" sourceRef="Gateway_0kr54y3" targetRef="Activity_1kd1pek" />
-    <bpmn:sequenceFlow id="Flow_0opbpz6" sourceRef="Activity_0lqgtac" targetRef="Activity_04ybgkf" />
-    <bpmn:sequenceFlow id="Flow_0zy0mnk" sourceRef="Gateway_178kyci" targetRef="Event_065uzic" />
-    <bpmn:sequenceFlow id="Flow_099egq8" sourceRef="Gateway_12v7haz" targetRef="Activity_176kvzt" />
-    <bpmn:sequenceFlow id="Flow_15zycj8" sourceRef="Activity_176kvzt" targetRef="Gateway_178kyci" />
-    <bpmn:sequenceFlow id="Flow_1xr74k8" sourceRef="Gateway_1t6jnoh" targetRef="Activity_07qs932" />
-    <bpmn:sequenceFlow id="Flow_0wkt56h" sourceRef="Activity_04ybgkf" targetRef="Activity_0ztxu93" />
-    <bpmn:sequenceFlow id="Flow_0rwt7ak" sourceRef="Activity_0ztxu93" targetRef="Activity_0tl1ro3" />
-    <bpmn:sequenceFlow id="Flow_1b4mu23" sourceRef="Activity_1sasq83" targetRef="Activity_0bdf6i8" />
-    <bpmn:sequenceFlow id="Flow_08m1i2c" sourceRef="Activity_0bdf6i8" targetRef="Activity_07d95uh" />
-    <bpmn:sequenceFlow id="Flow_0ytrens" sourceRef="Activity_0tl1ro3" targetRef="Activity_1sasq83" />
-    <bpmn:sequenceFlow id="Flow_0mic7ib" sourceRef="Activity_1rugmnc" targetRef="Activity_171v9fh" />
-    <bpmn:sequenceFlow id="Flow_0jhtvrl" sourceRef="Activity_07d95uh" targetRef="Gateway_0s722x8" />
-    <bpmn:sequenceFlow id="Flow_1151p7y" sourceRef="Activity_1kd1pek" targetRef="Gateway_0s722x8" />
-    <bpmn:sequenceFlow id="Flow_1pdfbzc" sourceRef="Gateway_0s722x8" targetRef="Activity_09slwuv" />
-    <bpmn:sequenceFlow id="Flow_15clqef" sourceRef="Activity_09slwuv" targetRef="Gateway_0dkuq2e" />
-    <bpmn:sequenceFlow id="Flow_1l0avzi" sourceRef="Activity_0ixs62r" targetRef="Gateway_1q40nd7" />
-    <bpmn:sequenceFlow id="Flow_1ftovjp" name="Nein" sourceRef="Gateway_1q40nd7" targetRef="Activity_0ohbvu5">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferInProjekt="0"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0z8hapn" sourceRef="Gateway_1q40nd7" targetRef="Activity_1n2stb6">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferInProjekt="1"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1g9b4ky" sourceRef="Activity_0ohbvu5" targetRef="Gateway_1t6jnoh" />
-    <bpmn:sequenceFlow id="Flow_0bpb2up" sourceRef="Gateway_0dkuq2e" targetRef="Activity_1ai3uix" />
-    <bpmn:sequenceFlow id="Flow_04nhs1g" sourceRef="Activity_1ai3uix" targetRef="Activity_0ixs62r" />
-    <bpmn:sequenceFlow id="Flow_1klqonf" sourceRef="Gateway_0xdmeu8" targetRef="Gateway_12v7haz" />
-    <bpmn:sequenceFlow id="Flow_1byh78v" sourceRef="Activity_1n2stb6" targetRef="Gateway_0xdmeu8" />
-    <bpmn:sequenceFlow id="Flow_1bydp9c" sourceRef="Gateway_0xdmeu8" targetRef="Gateway_0dkuq2e">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=AntwortVorhanden="0"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_016av8y" name="Ja" sourceRef="Gateway_178kyci" targetRef="Activity_17mneq2">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=SollAngepasst="1"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0eube0w" sourceRef="Activity_17mneq2" targetRef="Activity_1b468q6" />
-    <bpmn:sequenceFlow id="Flow_0483lep" sourceRef="Gateway_1t6jnoh" targetRef="Event_1byb43r" />
-    <bpmn:sequenceFlow id="Flow_105vuxv" sourceRef="Event_1byb43r" targetRef="Activity_04tc80y" />
-    <bpmn:sequenceFlow id="Flow_1c40so9" name="Nein" sourceRef="Gateway_0oi9s3k" targetRef="Activity_0z3z710">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=Fragebogenvollstandig="0"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1rbt5j2" sourceRef="Activity_0z3z710" targetRef="Gateway_04zxwz9" />
-    <bpmn:sequenceFlow id="Flow_1jxw774" sourceRef="Gateway_04zxwz9" targetRef="Event_033e339" />
-    <bpmn:sequenceFlow id="Flow_1cumpie" sourceRef="Activity_04tc80y" targetRef="Gateway_0oi9s3k" />
-    <bpmn:sequenceFlow id="Flow_1o8x3xu" sourceRef="Gateway_0oi9s3k" targetRef="Gateway_04zxwz9" />
+    <bpmn:userTask id="Activity_176kvzt" name="Ranking und Antworten vom gewählten Lieferanten  angucken">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cp118s" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_099egq8</bpmn:incoming>
+      <bpmn:outgoing>Flow_15zycj8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sendTask id="Activity_07qs932" name="Zugänge für Lieferanten verschicken">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="zugange-fur-lieferanten-verschicken" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1xr74k8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0xlcdjb</bpmn:outgoing>
+    </bpmn:sendTask>
     <bpmn:textAnnotation id="TextAnnotation_16kwl95">
       <bpmn:text>Nur ID und Beschreibung</bpmn:text>
     </bpmn:textAnnotation>
@@ -1919,14 +1920,14 @@
         <di:waypoint x="1929" y="316" />
         <di:waypoint x="1951" y="285" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0joigln_di" bpmnElement="Association_0joigln">
-        <di:waypoint x="2700" y="470" />
-        <di:waypoint x="2720" y="470" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_0gnbwdq_di" bpmnElement="TextAnnotation_0gnbwdq">
         <dc:Bounds x="2720" y="455" width="100.00000678671123" height="29.99444145728607" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0joigln_di" bpmnElement="Association_0joigln">
+        <di:waypoint x="2700" y="470" />
+        <di:waypoint x="2720" y="470" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
