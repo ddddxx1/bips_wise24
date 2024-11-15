@@ -10,4 +10,8 @@ public class KategorieService {
     public KategorieService(KategorieRepository kategorieRepository) {
         this.kategorieRepository = kategorieRepository;
     }
+
+    public KategorieRepository getRepository() {
+        return kategorieRepository;
+    }
 }

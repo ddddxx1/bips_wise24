@@ -73,5 +73,13 @@ public class ProjektHasLieferant {
         public void setLieferant(Lieferant lieferant) {
             this.lieferant = lieferant;
         }
+
+        @Override
+        public String toString() {
+            return "Id{" +
+                    "projekt=" + projekt +
+                    ", lieferant=" + lieferant +
+                    '}';
+        }
     }
 }

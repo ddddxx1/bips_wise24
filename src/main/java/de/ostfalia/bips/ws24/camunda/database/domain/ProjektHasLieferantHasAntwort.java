@@ -77,5 +77,15 @@ public class ProjektHasLieferantHasAntwort {
         public void setAntwort(Antwort antwort) {
             this.antwort = antwort;
         }
+
+        @Override
+        public String toString() {
+            return "Id{" +
+                    "projekt=" + projekt +
+                    ", lieferant=" + lieferant +
+                    ", frage=" + frage +
+                    ", antwort=" + antwort +
+                    '}';
+        }
     }
 }

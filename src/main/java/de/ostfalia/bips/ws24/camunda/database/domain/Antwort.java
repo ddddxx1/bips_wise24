@@ -40,4 +40,13 @@ public class Antwort {
     public Integer getPunkte() {
         return punkte;
     }
+
+    @Override
+    public String toString() {
+        return "Antwort{" +
+                "idAntwort=" + idAntwort +
+                ", antwortText='" + antwortText + '\'' +
+                ", punkte=" + punkte +
+                '}';
+    }
 }

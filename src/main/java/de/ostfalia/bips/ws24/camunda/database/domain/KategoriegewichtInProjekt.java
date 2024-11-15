@@ -62,5 +62,13 @@ public class KategoriegewichtInProjekt {
         public void setProjekt(Projekt projekt) {
             this.projekt = projekt;
         }
+
+        @Override
+        public String toString() {
+            return "Id{" +
+                    "kategorie=" + kategorie +
+                    ", projekt=" + projekt +
+                    '}';
+        }
     }
 }

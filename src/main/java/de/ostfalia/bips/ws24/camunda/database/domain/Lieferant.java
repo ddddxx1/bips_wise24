@@ -53,4 +53,14 @@ public class Lieferant {
     public String getPasswort() {
         return passwort;
     }
+
+    @Override
+    public String toString() {
+        return "Lieferant{" +
+                "idLieferant=" + idLieferant +
+                ", name='" + name + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", passwort='" + passwort + '\'' +
+                '}';
+    }
 }

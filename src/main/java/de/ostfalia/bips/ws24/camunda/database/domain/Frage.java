@@ -29,4 +29,12 @@ public class Frage {
     public void setFrageText(String frageText) {
         this.frageText = frageText;
     }
+
+    @Override
+    public String toString() {
+        return "Frage{" +
+                "idFrage=" + idFrage +
+                ", frageText='" + frageText + '\'' +
+                '}';
+    }
 }

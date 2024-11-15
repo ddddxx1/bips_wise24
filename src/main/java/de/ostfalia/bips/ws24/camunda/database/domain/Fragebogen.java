@@ -28,4 +28,12 @@ public class Fragebogen {
     public String getBeschreibung() {
         return beschreibung;
     }
+
+    @Override
+    public String toString() {
+        return "Fragebogen{" +
+                "idFragebogen=" + idFragebogen +
+                ", beschreibung='" + beschreibung + '\'' +
+                '}';
+    }
 }

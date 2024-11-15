@@ -30,4 +30,12 @@ public class Kategorie {
     public String getBeschreibung() {
         return beschreibung;
     }
+
+    @Override
+    public String toString() {
+        return "Kategorie{" +
+                "idKategorie=" + idKategorie +
+                ", beschreibung='" + beschreibung + '\'' +
+                '}';
+    }
 }

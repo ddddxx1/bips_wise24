@@ -51,5 +51,13 @@ public class FragebogenHasFrage {
         public void setFrage(Frage frage) {
             this.frage = frage;
         }
+
+        @Override
+        public String toString() {
+            return "Id{" +
+                    "fragebogen=" + fragebogen +
+                    ", frage=" + frage +
+                    '}';
+        }
     }
 }

@@ -10,4 +10,8 @@ public class FragebogenService {
     public FragebogenService(FragebogenRepository fragebogenRepository) {
         this.fragebogenRepository = fragebogenRepository;
     }
+
+    public FragebogenRepository getRepository() {
+        return fragebogenRepository;
+    }
 }

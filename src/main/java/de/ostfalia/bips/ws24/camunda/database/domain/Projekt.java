@@ -1,9 +1,6 @@
 package de.ostfalia.bips.ws24.camunda.database.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "projekt")
@@ -15,8 +12,15 @@ public class Projekt {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "komponente", nullable = false)
+    @Column(name = "id_komponente", nullable = false)
     private String komponente;
+
+    @ManyToOne(targetEntity = Fragebogen.class, optional = false)
+    @JoinColumn(name = "id_fragebogen", referencedColumnName = "id_fragebogen", nullable = false)
+    private Fragebogen fragebogen;
+
+//    todo
+//    @Column(name = "id_komponente", nullable = false)
 
     public void setIdProjekt(Integer idProjekt) {
         this.idProjekt = idProjekt;
@@ -40,5 +44,23 @@ public class Projekt {
 
     public String getKomponente() {
         return komponente;
+    }
+
+    public Fragebogen getFragebogen() {
+        return fragebogen;
+    }
+
+    public void setFragebogen(Fragebogen fragebogen) {
+        this.fragebogen = fragebogen;
+    }
+
+    @Override
+    public String toString() {
+        return "Projekt{" +
+                "idProjekt=" + idProjekt +
+                ", name='" + name + '\'' +
+                ", komponente='" + komponente + '\'' +
+                ", fragebogen=" + fragebogen +
+                '}';
     }
 }

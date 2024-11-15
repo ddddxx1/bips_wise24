@@ -75,5 +75,14 @@ public class ProjektHasAntwort {
         public void setFrage(Frage frage) {
             this.frage = frage;
         }
+
+        @Override
+        public String toString() {
+            return "Id{" +
+                    "projekt=" + projekt +
+                    ", antwort=" + antwort +
+                    ", frage=" + frage +
+                    '}';
+        }
     }
 }
