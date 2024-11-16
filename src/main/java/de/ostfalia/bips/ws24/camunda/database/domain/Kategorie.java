@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "katagorie")
+@Table(name = "kategorie")
 public class Kategorie {
     @Id
     @Column(name = "id_kategorie", nullable = false)
@@ -15,7 +15,7 @@ public class Kategorie {
     @Column(name = "beschreibung", nullable = false)
     private String beschreibung;
 
-    public void setIdKatagorie(Integer idKategorie) {
+    public void setIdKategorie(Integer idKategorie) {
         this.idKategorie = idKategorie;
     }
 

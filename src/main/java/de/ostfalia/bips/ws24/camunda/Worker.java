@@ -5,7 +5,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import de.ostfalia.bips.ws24.camunda.database.domain.*;
-import de.ostfalia.bips.ws24.camunda.database.repository.KategoriegewichtInProjektRepository;
 import de.ostfalia.bips.ws24.camunda.database.service.*;
 import io.camunda.zeebe.client.api.response.ActivatedJob;
 import org.slf4j.Logger;
@@ -185,7 +184,7 @@ public class Worker {
         final KategoriegewichtInProjekt kategoriegewichtInProjekt1 = new KategoriegewichtInProjekt();
         final Kategorie kategorie1 = new Kategorie();
         final Projekt projekt1 = new Projekt();
-        kategorie1.setIdKatagorie(parseInt(kategorieID1_ge.toString()));
+        kategorie1.setIdKategorie(parseInt(kategorieID1_ge.toString()));
         projekt1.setIdProjekt(parseInt(projektID_ge.toString()));
         kategoriegewichtInProjekt1.setGewicht((float) parseDouble(gewicht1_ge.toString()));
         kategoriegewichtInProjekt1.getId().setKategorie(kategorie1);
@@ -195,7 +194,7 @@ public class Worker {
         final KategoriegewichtInProjekt kategoriegewichtInProjekt2 = new KategoriegewichtInProjekt();
         final Kategorie kategorie2 = new Kategorie();
         final Projekt projekt2 = new Projekt();
-        kategorie2.setIdKatagorie(parseInt(kategorieID2_ge.toString()));
+        kategorie2.setIdKategorie(parseInt(kategorieID2_ge.toString()));
         projekt2.setIdProjekt(parseInt(projektID_ge.toString()));
         kategoriegewichtInProjekt2.setGewicht((float) parseDouble(gewicht2_ge.toString()));
         kategoriegewichtInProjekt2.getId().setKategorie(kategorie2);
@@ -205,7 +204,7 @@ public class Worker {
         final KategoriegewichtInProjekt kategoriegewichtInProjekt3 = new KategoriegewichtInProjekt();
         final Kategorie kategorie3 = new Kategorie();
         final Projekt projekt3 = new Projekt();
-        kategorie3.setIdKatagorie(parseInt(kategorieID3_ge.toString()));
+        kategorie3.setIdKategorie(parseInt(kategorieID3_ge.toString()));
         projekt3.setIdProjekt(parseInt(projektID_ge.toString()));
         kategoriegewichtInProjekt3.setGewicht((float) parseDouble(gewicht3_ge.toString()));
         kategoriegewichtInProjekt3.getId().setKategorie(kategorie3);
@@ -215,7 +214,7 @@ public class Worker {
         final KategoriegewichtInProjekt kategoriegewichtInProjekt4 = new KategoriegewichtInProjekt();
         final Kategorie kategorie4 = new Kategorie();
         final Projekt projekt4 = new Projekt();
-        kategorie4.setIdKatagorie(parseInt(kategorieID4_ge.toString()));
+        kategorie4.setIdKategorie(parseInt(kategorieID4_ge.toString()));
         projekt4.setIdProjekt(parseInt(projektID_ge.toString()));
         kategoriegewichtInProjekt4.setGewicht((float) parseDouble(gewicht4_ge.toString()));
         kategoriegewichtInProjekt4.getId().setKategorie(kategorie4);
@@ -235,7 +234,7 @@ public class Worker {
         return variables;
     }
 
-    @JobWorker(type = "daten-zu-projekt-laden")
+    @JobWorker(type = "daten-zum-projekt-laden")
     public Map<String, Object> datenZumProjektLaden(final ActivatedJob job) {
         LOGGER.info("Daten_ZumProjekt_Laden");
         final Object projektId = job.getVariablesAsMap().get("projekt_auswahl");
@@ -300,7 +299,7 @@ public class Worker {
 
         String lieferantInProjektString = lieferantInProjekt ? "1" : "0";
         variables.put("id", projektIdInt);
-        variables.put("lieferantInProjekt", lieferantInProjektString);
+        variables.put("LieferantInProjekt", lieferantInProjektString);
         return variables;
     }
 
