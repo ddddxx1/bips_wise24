@@ -10,6 +10,19 @@ import org.springframework.stereotype.Repository;
 
 
 public interface LieferantRepository extends JpaRepository<Lieferant, Integer>, JpaSpecificationExecutor<Lieferant> {
+
+    @Query("SELECT l.passwort from Lieferant l " +
+            "WHERE UPPER(l.name) = UPPER(:name)")
+    String findPasswordByUsername(@Param("name") String name);
+
+    @Query("SELECT l from Lieferant l " +
+            "WHERE UPPER(l.name) = UPPER(:name)")
+    Lieferant findLiferantByUsername(@Param("name") String name);
+
+    @Query("SELECT l.name from Lieferant l " +
+            "WHERE l.idLieferant = :idLieferant")
+    String findLieferantNameById(@Param("idLieferant") Integer idLieferant);
+
     @Query("SELECT l.name FROM Lieferant l WHERE  l.idLieferant = :idLieferant")
     String findLieferantByIdLieferant( @Param("idLieferant") int idLieferant);
 }

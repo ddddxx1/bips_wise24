@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 
 public interface FrageRepository extends JpaRepository<Frage, Integer>, JpaSpecificationExecutor<Frage> {
+
     @Query("SELECT f.frageText FROM Frage f WHERE f.idFrage = :idFrage")
     String findFrageTextByIdFrage(@Param("idFrage") Integer idFrage);
 

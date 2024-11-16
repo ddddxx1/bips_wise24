@@ -3,8 +3,6 @@ package de.ostfalia.bips.ws24.camunda.database.service;
 import de.ostfalia.bips.ws24.camunda.database.repository.ProjektHasAntwortRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Properties;
-
 @Service
 public class ProjektHasAntwortService {
     private final ProjektHasAntwortRepository projektHasAntwortRepository;

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 
 public interface KategoriegewichtInProjektRepository extends JpaRepository<KategoriegewichtInProjekt, Integer>, JpaSpecificationExecutor<KategoriegewichtInProjekt> {
+
     @Query("SELECT kgip.gewicht FROM KategoriegewichtInProjekt kgip WHERE kgip.id.projekt.idProjekt = :idProjekt AND kgip.id.kategorie.idKategorie = :idKategorie")
     float findGewichtByIdProjektAndIdKategorie(@Param("idProjekt") Integer idProjekt, @Param("idKategorie") Integer idKategorie);
 

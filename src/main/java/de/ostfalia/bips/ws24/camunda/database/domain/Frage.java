@@ -13,10 +13,9 @@ public class Frage {
     @Column(name = "fragetext", nullable = false)
     private String frageText;
 
-    @ManyToOne(targetEntity = Kategorie.class, optional = false)
+    @OneToOne(targetEntity = Kategorie.class, optional = false)
     @JoinColumn(name = "id_kategorie", referencedColumnName = "id_kategorie", nullable = false)
     private Kategorie kategorie;
-
 
     public Integer getIdFrage() {
         return idFrage;
@@ -34,11 +33,20 @@ public class Frage {
         this.frageText = frageText;
     }
 
+    public Kategorie getKategorie() {
+        return kategorie;
+    }
+
+    public void setKategorie(Kategorie kategorie) {
+        this.kategorie = kategorie;
+    }
+
     @Override
     public String toString() {
         return "Frage{" +
                 "idFrage=" + idFrage +
                 ", frageText='" + frageText + '\'' +
+                ", kategorie=" + kategorie +
                 '}';
     }
 }
