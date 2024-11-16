@@ -16,6 +16,10 @@ public class Antwort {
     @Column(name = "punkte", nullable = false)
     private Integer punkte;
 
+    @ManyToOne(targetEntity = Frage.class, optional = false)
+    @JoinColumn(name = "id_frage", referencedColumnName = "id_frage", nullable = false)
+    private Frage frage;
+
 
     public void setIdAntwort(Integer idAntwort) {
         this.idAntwort = idAntwort;

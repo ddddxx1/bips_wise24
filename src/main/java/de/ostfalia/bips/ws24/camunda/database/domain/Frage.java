@@ -13,6 +13,10 @@ public class Frage {
     @Column(name = "fragetext", nullable = false)
     private String frageText;
 
+    @ManyToOne(targetEntity = Kategorie.class, optional = false)
+    @JoinColumn(name = "id_kategorie", referencedColumnName = "id_kategorie", nullable = false)
+    private Kategorie kategorie;
+
 
     public Integer getIdFrage() {
         return idFrage;

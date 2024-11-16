@@ -11,4 +11,8 @@ public class FragebogenHasFrageService {
     public FragebogenHasFrageService(FragebogenHasFrageRepository fragebogenHasFrageRepository) {
         this.fragebogenHasFrageRepository = fragebogenHasFrageRepository;
     }
+
+    public FragebogenHasFrageRepository getRepository() {
+        return fragebogenHasFrageRepository;
+    }
 }
