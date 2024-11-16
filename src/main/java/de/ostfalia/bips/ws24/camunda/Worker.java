@@ -12,12 +12,12 @@ import de.ostfalia.bips.ws24.camunda.database.service.*;
 import io.camunda.zeebe.client.api.response.ActivatedJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+//import org.springframework.boot.SpringApplication;
+//import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
 import io.camunda.zeebe.spring.client.annotation.JobWorker;
-import io.camunda.zeebe.spring.client.annotation.Variable;
+//import io.camunda.zeebe.spring.client.annotation.Variable;
 
 import de.ostfalia.bips.ws24.camunda.database.repository.UserRepository;
 
@@ -117,6 +117,17 @@ public class Worker {
 
         projekt.setFragebogen(fragebogen);
         fragebogen.setIdFragebogen(parseInt(frageboge.toString()));
+
+        projekt.setName(projektName.toString());
+        projekt.setIdProjekt(newProjektId);
+        projekt.setKomponente(String.valueOf(newProjektId));
+
+        projektService.getRepository().save(projekt);
+        LOGGER.info("newProjektId" + newProjektId);
+
+        final List<Option<Integer>> Projekt = projektService.getRepository().findProjektByIdProjekt(newProjektId).stream()
+                .map(e -> new Option<>(e.getName(), e.getIdProjekt()))
+                .collect(Collectors.toList());
 //        todo
         return Map.of("projektData", projekt);
     }
@@ -179,7 +190,7 @@ public class Worker {
     public Map<String, Object> emailSenden(final ActivatedJob job) {
         return Map.of();
     }
-
+//-----------------
     @JobWorker(type = "zugange-fur-lieferanten-verschicken")
     public Map<String, Object> zugangeFurLieferantenVerschicken(final ActivatedJob job) {
         return Map.of();

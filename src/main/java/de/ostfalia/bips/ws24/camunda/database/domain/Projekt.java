@@ -12,15 +12,13 @@ public class Projekt {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "id_komponente", nullable = false)
+    @Column(name = "komponente", nullable = false)
     private String komponente;
 
     @ManyToOne(targetEntity = Fragebogen.class, optional = false)
     @JoinColumn(name = "id_fragebogen", referencedColumnName = "id_fragebogen", nullable = false)
     private Fragebogen fragebogen;
 
-//    todo
-//    @Column(name = "id_komponente", nullable = false)
 
     public void setIdProjekt(Integer idProjekt) {
         this.idProjekt = idProjekt;
@@ -63,4 +61,5 @@ public class Projekt {
                 ", fragebogen=" + fragebogen +
                 '}';
     }
+
 }
