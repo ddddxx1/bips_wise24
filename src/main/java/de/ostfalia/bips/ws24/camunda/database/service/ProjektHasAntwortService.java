@@ -10,4 +10,8 @@ public class ProjektHasAntwortService {
     public ProjektHasAntwortService(ProjektHasAntwortRepository projektHasAntwortRepository) {
         this.projektHasAntwortRepository = projektHasAntwortRepository;
     }
+
+    public boolean existsByProjektIdAndAntwortId(int idProjekt, int idAntwort) {
+        return projektHasAntwortRepository.existsByProjektIdAndAntwortId(idProjekt,idAntwort);
+    }
 }

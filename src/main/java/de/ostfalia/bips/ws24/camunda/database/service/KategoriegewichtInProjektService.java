@@ -10,4 +10,8 @@ public class KategoriegewichtInProjektService {
     public KategoriegewichtInProjektService(KategoriegewichtInProjektRepository kategoriegewichtInProjektRepository) {
         this.kategoriegewichtInProjektRepository = kategoriegewichtInProjektRepository;
     }
+
+    public float findGewichtByIdProjektAndIdKategorie(int idProjekt, int idKategorie) {
+        return kategoriegewichtInProjektRepository.findGewichtByIdProjektAndIdKategorie(idProjekt, idKategorie);
+    }
 }

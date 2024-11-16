@@ -10,4 +10,12 @@ public class LieferantService {
     public LieferantService(LieferantRepository lieferantRepository) {
         this.lieferantRepository = lieferantRepository;
     }
+
+    public String getLieferantNameById(int idLieferant) {
+        return lieferantRepository.findLieferantNameById(idLieferant);
+    }
+
+    public LieferantRepository getRepository() {
+        return lieferantRepository;
+    }
 }

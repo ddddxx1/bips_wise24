@@ -10,4 +10,12 @@ public class ProjektHasLieferantService {
     public ProjektHasLieferantService(ProjektHasLieferantRepository projektHasLieferantRepository) {
         this.projektHasLieferantRepository = projektHasLieferantRepository;
     }
+
+    public float findScoreByProjectIdAndAntwortId(int idProjekt, int idLieferant) {
+        return projektHasLieferantRepository.findScoreByProjectIdAndAntwortId(idProjekt, idLieferant);
+    }
+
+    public ProjektHasLieferantRepository getRepository() {
+        return projektHasLieferantRepository;
+    }
 }

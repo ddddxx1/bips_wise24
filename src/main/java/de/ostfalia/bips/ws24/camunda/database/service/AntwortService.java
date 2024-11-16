@@ -10,4 +10,20 @@ public class AntwortService {
     public AntwortService(AntwortRepository antwortRepository) {
         this.antwortRepository = antwortRepository;
     }
+
+    public Integer findidFrageByidAntwort(Integer idAntwort) {
+        return antwortRepository.findidFrageByidAntwort(idAntwort);
+    }
+
+    public String findAntowrtTextByidAntwort(Integer idAntwort) {
+        return antwortRepository.findAntowrtTextByidAntwort(idAntwort);
+    }
+
+    public int findPunktByidAntwort(Integer idAntwort) {
+        return antwortRepository.findPunktByidAntwort(idAntwort);
+    }
+
+    public AntwortRepository getRepository() {
+        return antwortRepository;
+    }
 }

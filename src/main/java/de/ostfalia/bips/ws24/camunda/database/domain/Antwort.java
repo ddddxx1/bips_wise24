@@ -10,6 +10,10 @@ public class Antwort {
     @Column(name = "id_antwort", nullable = false)
     private Integer idAntwort;
 
+    @OneToOne(targetEntity = Frage.class, optional = false)
+    @JoinColumn(name = "id_frage", referencedColumnName = "id_frage", nullable = false)
+    private Frage frage;
+
     @Column(name = "antworttext", nullable = false)
     private String antwortText;
 
@@ -19,6 +23,14 @@ public class Antwort {
 
     public void setIdAntwort(Integer idAntwort) {
         this.idAntwort = idAntwort;
+    }
+
+    public Frage getFrage() {
+        return frage;
+    }
+
+    public void setFrage(Frage frage) {
+        this.frage = frage;
     }
 
     public void setAntwortText(String antwortText) {
@@ -45,6 +57,7 @@ public class Antwort {
     public String toString() {
         return "Antwort{" +
                 "idAntwort=" + idAntwort +
+                ", frage=" + frage +
                 ", antwortText='" + antwortText + '\'' +
                 ", punkte=" + punkte +
                 '}';

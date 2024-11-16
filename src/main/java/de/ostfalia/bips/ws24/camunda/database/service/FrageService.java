@@ -10,4 +10,12 @@ public class FrageService {
     public FrageService(FrageRepository frageRepository) {
         this.frageRepository = frageRepository;
     }
+
+    public String findFrageTextByIdFrage(Integer idFrage) {
+        return frageRepository.findFrageTextByIdFrage(idFrage);
+    }
+
+    public int findKategorieIdByIdFrage(Integer IdFrage) {
+        return frageRepository.findKategorieIdByIdFrage(IdFrage);
+    }
 }
