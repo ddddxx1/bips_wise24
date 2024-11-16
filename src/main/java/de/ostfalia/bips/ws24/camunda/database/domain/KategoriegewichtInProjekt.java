@@ -13,6 +13,10 @@ public class KategoriegewichtInProjekt {
     @Column(name = "gewicht", nullable = false)
     private float gewicht;
 
+    public KategoriegewichtInProjekt() {
+        this.id = new Id();
+    }
+
     public void setId(Id id) {
         this.id = id;
     }

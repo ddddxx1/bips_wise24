@@ -13,6 +13,10 @@ public class ProjektHasAntwort {
     @Column(name = "ist_ko_kriterium", nullable = false)
     private boolean istKoKriterium;
 
+    public ProjektHasAntwort() {
+        this.id = new Id();
+    }
+
     public void setId(Id id) {
         this.id = id;
     }

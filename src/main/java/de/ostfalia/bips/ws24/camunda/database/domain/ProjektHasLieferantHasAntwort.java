@@ -10,6 +10,10 @@ public class ProjektHasLieferantHasAntwort {
     @EmbeddedId
     private Id id;
 
+    public ProjektHasLieferantHasAntwort() {
+        this.id = new Id();
+    }
+
     public void setId(Id id) {
         this.id = id;
     }

@@ -16,6 +16,10 @@ public class ProjektHasLieferant {
     @Column(name = "rank", nullable = true)
     private Integer rank;
 
+    public ProjektHasLieferant() {
+        this.id = new Id();
+    }
+
     public void setId(Id id) {
         this.id = id;
     }
