@@ -1304,7 +1304,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=false</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1ftovjp" name="Nein" sourceRef="Gateway_1q40nd7" targetRef="Activity_0ohbvu5">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferInProjekt="0"</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferantInProjekt="0"</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1c40so9" name="Nein" sourceRef="Gateway_0oi9s3k" targetRef="Activity_0z3z710">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=Fragebogenvollstandig="0"</bpmn:conditionExpression>
