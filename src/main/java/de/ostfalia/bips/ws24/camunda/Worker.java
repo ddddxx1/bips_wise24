@@ -91,6 +91,7 @@ public class Worker {
 
     @JobWorker(type = "fragebogen-laden")
     public Map<String, Object> fragebogenLaden(final ActivatedJob job) {
+//        fixme: fragebogen auswahlen为空
         LOGGER.info("Fragebogen laden");
         final List<Option<Integer>> fragebogen_laden = fragebogenService.getRepository().findAll().stream()
                 .map(e -> new Option<>(e.getBeschreibung(), e.getIdFragebogen()))
@@ -239,7 +240,7 @@ public class Worker {
         LOGGER.info("Daten_ZumProjekt_Laden");
         final Object projektId = job.getVariablesAsMap().get("projekt_auswahl");
 
-        int id = parseInt(projektId.toString());
+        int id = Integer.parseInt(projektId.toString());
         Projekt projekt = projektService.getProjektById(id);
 
         final List<Option<Integer>> Katergorien = kategorieService.getRepository().findAll().stream()

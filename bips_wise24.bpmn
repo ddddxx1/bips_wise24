@@ -84,7 +84,7 @@
       },
       "id": "Field_0na5211",
       "key": "frageboge",
-      "valuesKey": "fragebogen_lade",
+      "valuesKey": "fragebogen-lade",
       "validate": {
         "required": true
       }
@@ -1129,7 +1129,7 @@
     <bpmn:sequenceFlow id="Flow_0xlcdjb" sourceRef="Activity_07qs932" targetRef="Gateway_1akozmn" />
     <bpmn:sequenceFlow id="Flow_0ytrens" sourceRef="Activity_0tl1ro3" targetRef="Activity_1sasq83" />
     <bpmn:sequenceFlow id="Flow_0z8hapn" sourceRef="Gateway_1q40nd7" targetRef="Activity_1n2stb6">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferInProjekt="1"</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferantInProjekt="1"</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0zy0mnk" sourceRef="Gateway_178kyci" targetRef="Event_065uzic" />
     <bpmn:sequenceFlow id="Flow_105vuxv" sourceRef="Event_1byb43r" targetRef="Activity_04tc80y" />
@@ -1301,7 +1301,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=AnmeldeKorrekt="0"</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_080tn30" name="Nein" sourceRef="Gateway_0kr54y3" targetRef="Activity_0lqgtac">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=false</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=projekt_auswahl&lt;="0"</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1ftovjp" name="Nein" sourceRef="Gateway_1q40nd7" targetRef="Activity_0ohbvu5">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferantInProjekt="0"</bpmn:conditionExpression>
