@@ -84,7 +84,7 @@
       },
       "id": "Field_0na5211",
       "key": "frageboge",
-      "valuesKey": "fragebogen-lade",
+      "valuesKey": "fragebogen_laden",
       "validate": {
         "required": true
       }

@@ -91,11 +91,16 @@ public class Worker {
 
     @JobWorker(type = "fragebogen-laden")
     public Map<String, Object> fragebogenLaden(final ActivatedJob job) {
-//        fixme: fragebogen auswahlen为空
         LOGGER.info("Fragebogen laden");
         final List<Option<Integer>> fragebogen_laden = fragebogenService.getRepository().findAll().stream()
                 .map(e -> new Option<>(e.getBeschreibung(), e.getIdFragebogen()))
                 .collect(Collectors.toList());
+
+//        if (fragebogen_laden.isEmpty()) {
+//            LOGGER.info("Fragebogen laden is empty");
+//        } else {
+//            LOGGER.info("Found {} fragebogen", fragebogen_laden.size());
+//        }
 
         final HashMap<String, Object> variables = new HashMap<>();
         variables.put("fragebogen_laden", fragebogen_laden);
@@ -503,11 +508,11 @@ public class Worker {
 
     @JobWorker(type = "lieferant-zum-projekt-hinzufugen")
     public Map<String, Object> lieferantZumProjektHinzufugen(final ActivatedJob job) {
+//        fixme:SQL语法有错
         LOGGER.info("Lieferant_ZumProjekt_Hinzufugen");
 
 
-
-        final Object projektID_liefpro_temp= job.getVariablesAsMap().get("projekt_auswahl");
+        final Object projektID_liefpro_temp = job.getVariablesAsMap().get("projekt_auswahl");
         int projekt_test = parseInt(projektID_liefpro_temp.toString());
 
         final Object projektID_liefpro;
@@ -516,18 +521,16 @@ public class Worker {
         if (projekt_test > 0) {
             projektID_liefpro = job.getVariablesAsMap().get("projekt_auswahl");
 
-        }else {
+        } else {
             projektID_liefpro = job.getVariablesAsMap().get("projekt_auswahl2");
         }
 
-        final Object lieferantID_liefpro= job.getVariablesAsMap().get("lieferanter_auswahl");
-
-
+        final Object lieferantID_liefpro = job.getVariablesAsMap().get("lieferanter_auswahl");
 
 
         final ProjektHasLieferant projektHasLieferant = new ProjektHasLieferant();
-        final Projekt projekt=new Projekt();
-        final Lieferant lieferant=new Lieferant();
+        final Projekt projekt = new Projekt();
+        final Lieferant lieferant = new Lieferant();
 
 
         projekt.setIdProjekt(parseInt(projektID_liefpro.toString()));
