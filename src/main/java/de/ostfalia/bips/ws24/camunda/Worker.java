@@ -149,21 +149,32 @@ public class Worker {
                         .map(antwort -> new Option<>(antwort.getAntwortText(), antwort.getIdAntwort())))
                 .collect(Collectors.toList());  // 根据Fragebogen中的Fragen获取到了对应的Antworten（40个）  From中存在20个框
 
+        final List<Option<Integer>> Projekte2 = projektService.getRepository().findProjektByProjektID(newProjektId).stream()
+                .map(e -> new Option<>(e.getName(), e.getIdProjekt()))
+                .collect(Collectors.toList());
+
+        final List<Option<Integer>> Kategorien = kategorieService.getRepository().findAll().stream()
+                .map(e -> new Option<>(e.getBeschreibung(), e.getIdKategorie()))
+                .collect(Collectors.toList());  // 这里加载了所有的Kategorien
+
         final HashMap<String, Object> variables = new HashMap<>();
         variables.put("newIdProjekt", projekt.getIdProjekt());
         variables.put("newIdFragebogen", projekt.getFragebogen());
         variables.put("Projekt", Projekt);
         variables.put("Fragen", Fragen);
         variables.put("Antworten", Antworten);
+        variables.put("Kategorien", Kategorien);
+        variables.put("Projekte2", Projekte2);
 
         return variables;
     }
 
     @JobWorker(type = "projekt-speichern1")
     public Map<String, Object> projektSpeichern1(final ActivatedJob job) {
-        LOGGER.info("Projekt_Speichern1");
 
-        final Object projektID_KO = job.getVariablesAsMap().get("projekt_auswahl1");
+        LOGGER.info("Projekt_Speichern1");
+//        fixme: antwort_auswahl在流程中被改为KO中的antwort_auswahl1 antwort_auswahl2并在此处被识别为null
+        final Object projektID_KO = job.getVariablesAsMap().get("projekt_auswahl");
         final Object antwortID_KO= job.getVariablesAsMap().get("antwort_auswahl");
         final Object frageID_KO= job.getVariablesAsMap().get("frage_auswahl");
         final Object ergebnisKO_KO= job.getVariablesAsMap().get("ergebnisKO");
@@ -173,7 +184,8 @@ public class Worker {
         final Frage frage = new Frage();
         final Antwort antwort = new Antwort();
 
-        projekt.setIdProjekt(parseInt(projektID_KO.toString()));
+        //fixme: projektID_KO为空
+        projekt.setIdProjekt(parseInt(projektID_KO.toString()));    //设置idProjekt
         antwort.setIdAntwort(parseInt(antwortID_KO.toString()));
         frage.setIdFrage(parseInt(frageID_KO.toString()));
 
