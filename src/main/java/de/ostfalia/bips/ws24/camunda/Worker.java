@@ -19,6 +19,7 @@ import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import de.ostfalia.bips.ws24.camunda.database.repository.UserRepository;
 
 import de.ostfalia.bips.ws24.camunda.database.Model.Option;
+import scala.Int;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
@@ -135,13 +136,25 @@ public class Worker {
 
         final List<Option<Integer>> Fragen = frageService.getRepository().findAll().stream()
                 .map(e -> new Option<>(e.getFrageText(), e.getIdFrage()))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());  // 这里加载了所有的Frage而不是根据Fragebogen进行加载
+
+        final List<Option<Integer>> FragenVonFragobogen = fragebogenHasFrageService.getRepository().findAllFrageOderById(parseInt(frageboge.toString())).stream()
+                .map(e -> new Option<>(e.getFrageText(), e.getIdFrage()))
+                .collect(Collectors.toList());  // 根据Fragebogen加载Frage
+
+
+        LOGGER.info("Antworten in Fragebogen laden");
+        final List<Option<Integer>> Antworten = FragenVonFragobogen.stream()
+                .flatMap(frage -> antwortService.getRepository().findAntwortIdsByFrageId(frage.getValue()).stream()
+                        .map(antwort -> new Option<>(antwort.getAntwortText(), antwort.getIdAntwort())))
+                .collect(Collectors.toList());  // 根据Fragebogen中的Fragen获取到了对应的Antworten（40个）  From中存在20个框
 
         final HashMap<String, Object> variables = new HashMap<>();
         variables.put("newIdProjekt", projekt.getIdProjekt());
         variables.put("newIdFragebogen", projekt.getFragebogen());
         variables.put("Projekt", Projekt);
         variables.put("Fragen", Fragen);
+        variables.put("Antworten", Antworten);
 
         return variables;
     }
