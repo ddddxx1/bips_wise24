@@ -72,99 +72,116 @@ public class Worker {
 
     @JobWorker(type = "projekte-laden")
     public Map<String, Object> projekteLaden(final ActivatedJob job) {
-        LOGGER.info("Projekte laden");
+        LOGGER.info("Lade_Stichpunkte");
+        final List<Option<Integer>> projekt_lade = projektService.getRepository().findAll().stream()
+                .map(e -> new Option<>(e.getName(), e.getIdProjekt()))
+                .collect(Collectors.toList());
 
-//        repository从数据库加载数据
-        List<Projekt> projekte = projektService.getRepository().findAll();
-
-        List<Map<String, Object>> projectList = new ArrayList<>();
-        for (Projekt projekt : projekte) {
-            Map<String, Object> projectData = new HashMap<>();
-            projectData.put("id", projekt.getIdProjekt());
-            projectData.put("name", projekt.getName());
-            projectList.add(projectData);
-        }
-        Map<String, Object> result = new HashMap<>();
-        result.put("projekte", projectList);
-        return result;
+        // Probably add some process variables
+        final HashMap<String, Object> variables = new HashMap<>();
+        variables.put("projekt_lade", projekt_lade);
+        return variables;
 
     }
 
     @JobWorker(type = "fragebogen-laden")
     public Map<String, Object> fragebogenLaden(final ActivatedJob job) {
-        LOGGER.info("Fragebogen laden");
-        final List<Option<Integer>> fragebogen_laden = fragebogenService.getRepository().findAll().stream()
+        LOGGER.info("Lade_Fragebogen");
+        final List<Option<Integer>> fragebogen_lade = fragebogenService.getRepository().findAll().stream()
                 .map(e -> new Option<>(e.getBeschreibung(), e.getIdFragebogen()))
                 .collect(Collectors.toList());
 
-//        if (fragebogen_laden.isEmpty()) {
-//            LOGGER.info("Fragebogen laden is empty");
-//        } else {
-//            LOGGER.info("Found {} fragebogen", fragebogen_laden.size());
-//        }
+        final List<Option<Integer>> Fragen = frageService.getRepository().findAll().stream()
+                .map(e -> new Option<>(e.getFrageText(), e.getIdFrage()))
+                .collect(Collectors.toList());
 
+        // Probably add some process variables
         final HashMap<String, Object> variables = new HashMap<>();
-        variables.put("fragebogen_laden", fragebogen_laden);
+        variables.put("fragebogen_lade", fragebogen_lade);
+        variables.put("Fragen", Fragen);
         return variables;
     }
 
     @JobWorker(type = "daten-zum-fragebogen-laden")
     public Map<String, Object> datenZumFragebogenLaden(final ActivatedJob job) {
         LOGGER.info("Daten_Zum_Fragebogen_Laden");
-        final Object projektName = job.getVariablesAsMap().get(("projekt_name"));
-        final Object frageboge = job.getVariablesAsMap().get("frageboge");
 
-        Integer maxProjektId = projektService.getRepository().countAllRecords();
-        Integer newProjektId = maxProjektId + 1;
+        //final Object projekte = job.getVariablesAsMap().get("projekt_lade");
+        final Object projektName= job.getVariablesAsMap().get("projekt_name");
+        final Object frageboge= job.getVariablesAsMap().get("frageboge");
 
-        final Projekt projekt = new Projekt();
-        final Fragebogen fragebogen = new Fragebogen();
+        //List<Object[]> resultList = countRecordsByProjektId();//diese drei zeile muss man noch anpassen
+
+        Integer maxIdProjekt = projektService.getRepository().countAllRecords();
+
+        Integer newIdProjekt = maxIdProjekt+1;
+
+
+        final Projekt projekt=new Projekt();
+        final Fragebogen fragebogen=new Fragebogen();
 
         projekt.setFragebogen(fragebogen);
         fragebogen.setIdFragebogen(parseInt(frageboge.toString()));
-
+        //projekt.setName(projektService.getRepository().findById(parseInt(projektName.toString())).get().getName());
         projekt.setName(projektName.toString());
-        projekt.setIdProjekt(newProjektId);
-        projekt.setKomponente(String.valueOf(newProjektId));
+        projekt.setIdProjekt(newIdProjekt);
+        projekt.setKomponente(String.valueOf(newIdProjekt));
 
         projektService.getRepository().save(projekt);
-        LOGGER.info("newProjektId" + newProjektId);
+        LOGGER.info("newIDProjekt"+ newIdProjekt);
 
-        final List<Option<Integer>> Projekt = projektService.getRepository().findProjektByProjektID(newProjektId).stream()
+        //Projekt Projekte = projektService.getRepository().findProjektByProjektID(newIdProjekt);
+
+        final List<Option<Integer>> Projekte = projektService.getRepository().findProjektByProjektID(newIdProjekt).stream()
                 .map(e -> new Option<>(e.getName(), e.getIdProjekt()))
                 .collect(Collectors.toList());
+// 改动
+//        final List<Option<Integer>> Fragen = frageService.getRepository().findAll().stream()
+//                .map(e -> new Option<>(e.getFrageText(), e.getIdFrage()))
+//                .collect(Collectors.toList());
 
-        final List<Option<Integer>> Fragen = frageService.getRepository().findAll().stream()
-                .map(e -> new Option<>(e.getFrageText(), e.getIdFrage()))
-                .collect(Collectors.toList());  // 这里加载了所有的Frage而不是根据Fragebogen进行加载
-
-        final List<Option<Integer>> FragenVonFragobogen = fragebogenHasFrageService.getRepository().findAllFrageOderById(parseInt(frageboge.toString())).stream()
-                .map(e -> new Option<>(e.getFrageText(), e.getIdFrage()))
-                .collect(Collectors.toList());  // 根据Fragebogen加载Frage
-
-
-        LOGGER.info("Antworten in Fragebogen laden");
-        final List<Option<Integer>> Antworten = FragenVonFragobogen.stream()
-                .flatMap(frage -> antwortService.getRepository().findAntwortIdsByFrageId(frage.getValue()).stream()
-                        .map(antwort -> new Option<>(antwort.getAntwortText(), antwort.getIdAntwort())))
-                .collect(Collectors.toList());  // 根据Fragebogen中的Fragen获取到了对应的Antworten（40个）  From中存在20个框
-
-        final List<Option<Integer>> Projekte2 = projektService.getRepository().findProjektByProjektID(newProjektId).stream()
-                .map(e -> new Option<>(e.getName(), e.getIdProjekt()))
-                .collect(Collectors.toList());
-
-        final List<Option<Integer>> Kategorien = kategorieService.getRepository().findAll().stream()
-                .map(e -> new Option<>(e.getBeschreibung(), e.getIdKategorie()))
-                .collect(Collectors.toList());  // 这里加载了所有的Kategorien
+//        final List<Option<Integer>> Antworten = antwortService.getRepository().findAntwortIdsByFrageId(Fragen.).stream()
+//                .map(e -> new Option<>(e.getFrageText(), e.getIdFrage()))
+//                .collect(Collectors.toList());
 
         final HashMap<String, Object> variables = new HashMap<>();
         variables.put("newIdProjekt", projekt.getIdProjekt());
         variables.put("newIdFragebogen", projekt.getFragebogen());
-        variables.put("Projekt", Projekt);
-        variables.put("Fragen", Fragen);
+        variables.put("Projekte", Projekte);
+//        改动
+//        variables.put("Fragen", Fragen);
+
+//        ---------------------------------
+        LOGGER.info("Antworten_Laden");
+
+        variables.put("frage_auswahl", 1);  // todo: test
+
+        //final Object projekte = job.getVariablesAsMap().get("projekt_lade");
+        final Object frage= job.getVariablesAsMap().get("frage_auswahl");
+        final Object projekt_id= job.getVariablesAsMap().get("newIdProjekt");
+
+
+        final List<Option<Integer>> Antworten = antwortService.getRepository().findAntwortIdsByFrageId(parseInt(frage.toString())).stream()
+                .map(e -> new Option<>(e.getAntwortText(), e.getIdAntwort()))
+                .collect(Collectors.toList());
+
+        //Projekt Projekte2 = projektService.getRepository().findProjektByProjektID(parseInt(projekt_id.toString()));
+
+        final List<Option<Integer>> Projekte2 = projektService.getRepository().findProjektByProjektID(parseInt(projekt.getIdProjekt().toString())).stream()
+                .map(e -> new Option<>(e.getName(), e.getIdProjekt()))
+                .collect(Collectors.toList());
+
+        final List<Option<Integer>> Katergorien = kategorieService.getRepository().findAll().stream()
+                .map(e -> new Option<>(e.getBeschreibung(), e.getIdKategorie()))
+                .collect(Collectors.toList());
+
+
+//        final HashMap<String, Object> variables = new HashMap<>();
         variables.put("Antworten", Antworten);
-        variables.put("Kategorien", Kategorien);
         variables.put("Projekte2", Projekte2);
+        variables.put("Katergorien", Katergorien);
+
+
 
         return variables;
     }
@@ -173,36 +190,46 @@ public class Worker {
     public Map<String, Object> projektSpeichern1(final ActivatedJob job) {
 
         LOGGER.info("Projekt_Speichern1");
-//        fixme: antwort_auswahl在流程中被改为KO中的antwort_auswahl1 antwort_auswahl2并在此处被识别为null
-        final Object projektID_KO = job.getVariablesAsMap().get("projekt_auswahl");
+
+        //Daten Eintragung in DB"projekt_has_antwort"
+//        final Object projektID_KO= job.getVariablesAsMap().get("projekt_auswahl1");
+        final Object projektID_KO = ((List<Map<String, Object>>) job.getVariablesAsMap().get("Projekte")).get(0).get("value");
         final Object antwortID_KO= job.getVariablesAsMap().get("antwort_auswahl");
         final Object frageID_KO= job.getVariablesAsMap().get("frage_auswahl");
         final Object ergebnisKO_KO= job.getVariablesAsMap().get("ergebnisKO");
 
-        final ProjektHasAntwort projektHasAntwort = new ProjektHasAntwort();
-        final Projekt projekt = new Projekt();
-        final Frage frage = new Frage();
-        final Antwort antwort = new Antwort();
 
-        projekt.setIdProjekt(parseInt(projektID_KO.toString()));    //向对象中设置idProjekt
+
+
+        final ProjektHasAntwort projektHasAntwort = new ProjektHasAntwort();
+        final Projekt projekt=new Projekt();
+        final Frage frage=new Frage();
+        final Antwort antwort=new Antwort();
+
+
+        projekt.setIdProjekt(parseInt(projektID_KO.toString()));
         antwort.setIdAntwort(parseInt(antwortID_KO.toString()));
         frage.setIdFrage(parseInt(frageID_KO.toString()));
 
-        projektHasAntwort.setIstKoKriterium(true);
+        projektHasAntwort.setIst_ko_kriterium(1);
         projektHasAntwort.getId().setProjekt(projekt);
         projektHasAntwort.getId().setAntwort(antwort);
         projektHasAntwort.getId().setFrage(frage);
 
         projektHasAntwortService.getRepository().save(projektHasAntwort);
 
+
         final HashMap<String, Object> variables = new HashMap<>();
         variables.put("projektID_KO", projektHasAntwort.getId().getProjekt().getIdProjekt());
         variables.put("antwortID_KO", projektHasAntwort.getId().getAntwort().getIdAntwort());
         variables.put("frageID_KO", projektHasAntwort.getId().getFrage().getIdFrage());
-        variables.put("istKO_KO", projektHasAntwort.isIstKoKriterium());
+        variables.put("istKO_KO", projektHasAntwort.getIst_ko_kriterium());
 
-        final Object kategorieID1_ge = job.getVariablesAsMap().get("kategorie_auswahl1");
-        final Object kategorieID2_ge = job.getVariablesAsMap().get("kategorie_auswahl2");
+
+        //Daten Eintragung in DB"kategoriegewicht_in_projekt"
+
+        final Object kategorieID1_ge= job.getVariablesAsMap().get("katergorie_auswahl1");
+        final Object kategorieID2_ge= job.getVariablesAsMap().get("katergorie_auswahl2");
         final Object kategorieID3_ge= job.getVariablesAsMap().get("katergorie_auswahl3");
         final Object kategorieID4_ge= job.getVariablesAsMap().get("katergorie_auswahl4");
         final Object projektID_ge= job.getVariablesAsMap().get("projekt_auswahl2");
@@ -211,45 +238,50 @@ public class Worker {
         final Object gewicht3_ge= job.getVariablesAsMap().get("gewicht_eingeben3");
         final Object gewicht4_ge= job.getVariablesAsMap().get("gewicht_eingeben4");
 
+
+
+
         final KategoriegewichtInProjekt kategoriegewichtInProjekt1 = new KategoriegewichtInProjekt();
-        final Kategorie kategorie1 = new Kategorie();
-        final Projekt projekt1 = new Projekt();
+        final Kategorie kategorie1=new Kategorie();
+        final Projekt projekt1=new Projekt();
         kategorie1.setIdKategorie(parseInt(kategorieID1_ge.toString()));
         projekt1.setIdProjekt(parseInt(projektID_ge.toString()));
-        kategoriegewichtInProjekt1.setGewicht((float) parseDouble(gewicht1_ge.toString()));
+        kategoriegewichtInProjekt1.setGewicht(parseDouble(gewicht1_ge.toString()));
         kategoriegewichtInProjekt1.getId().setKategorie(kategorie1);
         kategoriegewichtInProjekt1.getId().setProjekt(projekt1);
         kategoriegewichtInProjektService.getRepository().save(kategoriegewichtInProjekt1);
 
         final KategoriegewichtInProjekt kategoriegewichtInProjekt2 = new KategoriegewichtInProjekt();
-        final Kategorie kategorie2 = new Kategorie();
-        final Projekt projekt2 = new Projekt();
+        final Kategorie kategorie2=new Kategorie();
+        final Projekt projekt2=new Projekt();
         kategorie2.setIdKategorie(parseInt(kategorieID2_ge.toString()));
         projekt2.setIdProjekt(parseInt(projektID_ge.toString()));
-        kategoriegewichtInProjekt2.setGewicht((float) parseDouble(gewicht2_ge.toString()));
+        kategoriegewichtInProjekt2.setGewicht(parseDouble(gewicht2_ge.toString()));
         kategoriegewichtInProjekt2.getId().setKategorie(kategorie2);
         kategoriegewichtInProjekt2.getId().setProjekt(projekt2);
         kategoriegewichtInProjektService.getRepository().save(kategoriegewichtInProjekt2);
 
         final KategoriegewichtInProjekt kategoriegewichtInProjekt3 = new KategoriegewichtInProjekt();
-        final Kategorie kategorie3 = new Kategorie();
-        final Projekt projekt3 = new Projekt();
+        final Kategorie kategorie3=new Kategorie();
+        final Projekt projekt3=new Projekt();
         kategorie3.setIdKategorie(parseInt(kategorieID3_ge.toString()));
         projekt3.setIdProjekt(parseInt(projektID_ge.toString()));
-        kategoriegewichtInProjekt3.setGewicht((float) parseDouble(gewicht3_ge.toString()));
+        kategoriegewichtInProjekt3.setGewicht(parseDouble(gewicht3_ge.toString()));
         kategoriegewichtInProjekt3.getId().setKategorie(kategorie3);
         kategoriegewichtInProjekt3.getId().setProjekt(projekt3);
         kategoriegewichtInProjektService.getRepository().save(kategoriegewichtInProjekt3);
 
         final KategoriegewichtInProjekt kategoriegewichtInProjekt4 = new KategoriegewichtInProjekt();
-        final Kategorie kategorie4 = new Kategorie();
-        final Projekt projekt4 = new Projekt();
+        final Kategorie kategorie4=new Kategorie();
+        final Projekt projekt4=new Projekt();
         kategorie4.setIdKategorie(parseInt(kategorieID4_ge.toString()));
         projekt4.setIdProjekt(parseInt(projektID_ge.toString()));
-        kategoriegewichtInProjekt4.setGewicht((float) parseDouble(gewicht4_ge.toString()));
+        kategoriegewichtInProjekt4.setGewicht(parseDouble(gewicht4_ge.toString()));
         kategoriegewichtInProjekt4.getId().setKategorie(kategorie4);
         kategoriegewichtInProjekt4.getId().setProjekt(projekt4);
         kategoriegewichtInProjektService.getRepository().save(kategoriegewichtInProjekt4);
+
+
 
         variables.put("projektID_ge", kategoriegewichtInProjekt1.getId().getProjekt().getIdProjekt());
         variables.put("kategorieID1_ge", kategoriegewichtInProjekt1.getId().getKategorie().getIdKategorie());
@@ -260,6 +292,8 @@ public class Worker {
         variables.put("gewicht3_ge", kategoriegewichtInProjekt3.getGewicht());
         variables.put("kategorieID4_ge", kategoriegewichtInProjekt4.getId().getKategorie().getIdKategorie());
         variables.put("gewicht4_ge", kategoriegewichtInProjekt4.getGewicht());
+
+
 
         return variables;
     }
@@ -287,13 +321,13 @@ public class Worker {
     public Map<String, Object> lieferantenLaden(final ActivatedJob job) {
         LOGGER.info("Lieferanten_Laden");
 
+
         final List<Option<Integer>> lieferanten_laden = lieferantService.getRepository().findAll().stream()
                 .map(e -> new Option<>(e.getName(), e.getIdLieferant()))
                 .collect(Collectors.toList());
 
         final HashMap<String, Object> variables = new HashMap<>();
         variables.put("lieferanten_laden", lieferanten_laden);
-
         return variables;
     }
 
@@ -305,7 +339,9 @@ public class Worker {
 
         final Object projektId;
 
+
         final Object lieferantId = job.getVariablesAsMap().get("lieferanter_auswahl");
+
 
         if (projektIdInt1 > 0) {
             projektId = job.getVariablesAsMap().get("projekt_auswahl");
@@ -313,29 +349,37 @@ public class Worker {
             projektId = job.getVariablesAsMap().get("projekt_auswahl2");
         }
 
+
+
         int projektIdInt = Integer.parseInt(projektId.toString());
         int lieferantIdInt = Integer.parseInt(lieferantId.toString());
 
+
+
+
         boolean isLieferantInProjekt = projektHasLieferantHasAntwortService.isLieferantInProjekt(projektIdInt, lieferantIdInt);
-        boolean lieferantInProjekt;
+        boolean lieferInProjekt;
 
         HashMap<String, Object> variables = new HashMap<>();
 
-        if (isLieferantInProjekt) {
-            lieferantInProjekt = true;
-        } else {
-            lieferantInProjekt = false;
-        }
+        if ((isLieferantInProjekt))
+            lieferInProjekt =true;
+        else lieferInProjekt = false;
 
-        String lieferantInProjektString = lieferantInProjekt ? "1" : "0";
-        variables.put("id", projektIdInt);
-        variables.put("LieferantInProjekt", lieferantInProjektString);
+        String lieferInProjektStr = lieferInProjekt ? "1" : "0";
+
+        variables.put("id",projektIdInt);
+
+        variables.put("LieferInProjekt", lieferInProjektStr);
+
+
         return variables;
     }
 
     @JobWorker(type = "daten-vom-lieferanten-laden")
     public Map<String, Object> datenVomLieferantenLaden(final ActivatedJob job) {
-        LOGGER.info("Daten_Vom_Lieferanten_Laden");
+        LOGGER.info("Daten_VomLieferanten_Laden");
+
         final Object projektId = job.getVariablesAsMap().get("projekt_auswahl");
 
         final Object lieferantId = job.getVariablesAsMap().get("lieferanter_auswahl");
@@ -343,6 +387,8 @@ public class Worker {
         int projektIdInt = Integer.parseInt(projektId.toString());
 
         int lieferantIdInt = Integer.parseInt(lieferantId.toString());
+
+
 
         List<Integer> frageIds = projektHasLieferantHasAntwortService.findFrageIdsByProjektAndLieferant(projektIdInt, lieferantIdInt);
         List<Integer> antwortIds = projektHasLieferantHasAntwortService.findAntwortIdsByProjektAndLieferant(projektIdInt, lieferantIdInt);
@@ -374,41 +420,40 @@ public class Worker {
 
         List<String> KO_Kriterien = new ArrayList<>();
 
+
         boolean ispunktEmpty = projektHasLieferantService.existScoreByProjectIdAndAntwortId(projektIdInt,lieferantIdInt);
-        boolean isrankEmpty = projektHasLieferantService.existRankByProjectIdAndAntwortId(projektIdInt, lieferantIdInt);
+        boolean isrankEmpty = projektHasLieferantService.existRankByProjectIdAndAntwortId(projektIdInt,lieferantIdInt);
 
-        if (!ispunktEmpty || !isrankEmpty) {
+        if( !ispunktEmpty|| !isrankEmpty ){
+
             List<Integer> lieferantids = projektHasLieferantHasAntwortService.findlLieferantIdsByProjekt(projektIdInt);
-
-            for (Integer lieferantid : lieferantids) {
+            for(Integer lieferantid : lieferantids){
                 int i = 0;
                 float sum = 0;
                 List<Integer> antwortids = projektHasLieferantHasAntwortService.findAntwortIdsByProjektAndLieferant(projektIdInt, lieferantid);
-
                 for (Integer antwortid : antwortids) {
                     Integer frageid = antwortService.findidFrageByidAntwort(antwortid);
                     int idKategorie = frageService.findKategorieIdByIdFrage(frageid);
                     float gewicht = kategoriegewichtInProjektService.findGewichtByIdProjektAndIdKategorie(projektIdInt, idKategorie);
                     int punktValue = antwortService.findPunktByidAntwort(antwortid);
                     sum += punktValue * gewicht;
-                    isLieferant_KO_auswahlen = projektHasAntwortService.existsByProjektIdAndAntwortId(projektIdInt, antwortid);
+                    isLieferant_KO_auswahlen = projektHasAntwortService.existsByProjektIdAndAntwortId(projektIdInt,antwortid);
                     String ko = isLieferant_KO_auswahlen ? "1" : "0";
-                    i = i + parseInt(ko);
+                    i = i+ parseInt(ko);
                 }
-
-                if (i > 0) {
+                if(i > 0){
                     KO = "Dieser Leiferant hat sich für die K.O. Kriterien auswählen";
-                } else {
-                    KO = "Alles gut!";
-                }
+                }else { KO = "Alles gute!!!";}
                 String lieferants = lieferantService.getLieferantNameById(lieferantid);
+
 
                 DecimalFormat decimalFormat = new DecimalFormat("#.0");
                 float punkt = Float.parseFloat(decimalFormat.format(sum));
 
+
                 ProjektHasLieferant projektHasLieferant = new ProjektHasLieferant();
-                Projekt projekt = new Projekt();
-                Lieferant lieferant = new Lieferant();
+                Projekt projekt=new Projekt();
+                Lieferant lieferant=new Lieferant();
 
                 projekt.setIdProjekt(projektIdInt);
                 lieferant.setIdLieferant(lieferantid);
@@ -422,18 +467,21 @@ public class Worker {
                 Punkt.add(punkt);
                 Punkt1.add(punkt);
                 KO_Kriterien.add(KO);
+
             }
+
 
             Collections.sort(Punkt1, Collections.reverseOrder());
 
-            for (Integer lieferantid : lieferantids) {
-                punkt1 = projektHasLieferantService.findScoreByProjectIdAndAntwortId(projektIdInt, lieferantid);
+
+            for(Integer lieferantid : lieferantids){
+                punkt1 = projektHasLieferantService.findScoreByProjectIdAndAntwortId(projektIdInt,lieferantid);
                 rankOfPunkt1 = Punkt1.indexOf(punkt1) + 1;
                 Rank.add(rankOfPunkt1);
 
                 ProjektHasLieferant projektHasLieferant = new ProjektHasLieferant();
-                Projekt projekt = new Projekt();
-                Lieferant lieferant = new Lieferant();
+                Projekt projekt=new Projekt();
+                Lieferant lieferant=new Lieferant();
 
                 projekt.setIdProjekt(projektIdInt);
                 lieferant.setIdLieferant(lieferantid);
@@ -445,7 +493,9 @@ public class Worker {
 
                 projektHasLieferantService.getRepository().save(projektHasLieferant);
             }
-        } else {
+
+
+        }else{
             punkt1 = projektHasLieferantService.findScoreByProjectIdAndAntwortId(projektIdInt,lieferantIdInt);
             rankOfPunkt1 = projektHasLieferantService.findRankByProjectIdAndAntwortId(projektIdInt,lieferantIdInt);
             int i = 0;
@@ -463,6 +513,9 @@ public class Worker {
             Rank.add(rankOfPunkt1);
             KO_Kriterien.add(KO);
         }
+
+
+
 
         final HashMap<String, Object> variables = new HashMap<>();
         variables.put("FragenUndAntworten", fragenUndAntworten);
@@ -532,7 +585,7 @@ public class Worker {
 
     @JobWorker(type = "lieferant-zum-projekt-hinzufugen")
     public Map<String, Object> lieferantZumProjektHinzufugen(final ActivatedJob job) {
-//        fixme:SQL语法有错
+//        fixme:SQL语法有错 Operater中的所有参数一一对应，但是提示Sql语句中rank,score,id_lieferant,id_projekt) values (null,null,4,8)
         LOGGER.info("Lieferant_ZumProjekt_Hinzufugen");
 
 

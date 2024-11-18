@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 
 public interface ProjektHasAntwortRepository extends JpaRepository<ProjektHasAntwort, Integer>, JpaSpecificationExecutor<ProjektHasAntwort> {
 
-    @Query("SELECT COUNT(pa.istKoKriterium) > 0 FROM ProjektHasAntwort pa WHERE pa.id.projekt.idProjekt = :idProjekt AND pa.id.antwort.idAntwort = :idAntwort")
+    @Query("SELECT COUNT(pa.ist_ko_kriterium) > 0 FROM ProjektHasAntwort pa WHERE pa.id.projekt.idProjekt = :idProjekt AND pa.id.antwort.idAntwort = :idAntwort")
     boolean existsByProjektIdAndAntwortId(@Param("idProjekt") int idProjekt, @Param("idAntwort") int idAntwort);
 }

@@ -3,6 +3,9 @@
   <bpmn:collaboration id="Collaboration_1rwiuqm">
     <bpmn:extensionElements />
     <bpmn:participant id="Participant_1lv6edr" processRef="bips_wise24" />
+    <bpmn:textAnnotation id="TextAnnotation_0gnbwdq">
+      <bpmn:text>todo：修改form</bpmn:text>
+    </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_16kwl95">
       <bpmn:text>Nur ID und Beschreibung</bpmn:text>
     </bpmn:textAnnotation>
@@ -18,15 +21,16 @@
     <bpmn:textAnnotation id="TextAnnotation_1qyydnx">
       <bpmn:text>z. B. -1 wenn neu angelegt werden soll</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:textAnnotation id="TextAnnotation_0flii58">
-      <bpmn:text>Projekt auswahlen为空</bpmn:text>
-    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0joigln" associationDirection="None" sourceRef="Activity_17mneq2" targetRef="TextAnnotation_0gnbwdq" />
     <bpmn:association id="Association_022lf4z" sourceRef="Activity_04ybgkf" targetRef="TextAnnotation_16kwl95" />
     <bpmn:association id="Association_1gs92ij" sourceRef="Activity_0ixs62r" targetRef="TextAnnotation_1fr6f92" />
     <bpmn:association id="Association_1jg3868" sourceRef="Activity_176kvzt" targetRef="TextAnnotation_11oy7u1" />
     <bpmn:association id="Association_0iqt12v" sourceRef="Activity_1rugmnc" targetRef="TextAnnotation_1r8psj5" />
     <bpmn:association id="Association_0i4djzi" sourceRef="Gateway_0kr54y3" targetRef="TextAnnotation_1qyydnx" />
-    <bpmn:association id="Association_12zf3el" associationDirection="None" sourceRef="Activity_0bdf6i8" targetRef="TextAnnotation_0flii58" />
+    <bpmn:textAnnotation id="TextAnnotation_0jilvkc">
+      <bpmn:text>缺少参数frage_auswahl</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_03wih01" associationDirection="None" sourceRef="Activity_0tl1ro3" targetRef="TextAnnotation_0jilvkc" />
   </bpmn:collaboration>
   <bpmn:process id="bips_wise24" isExecutable="true">
     <bpmn:extensionElements>
@@ -104,7 +108,81 @@
       },
       "id": "Field_0na5211",
       "key": "frageboge",
-      "valuesKey": "fragebogen_laden",
+      "valuesKey": "fragebogen_lade",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Fragen Auswählen",
+      "type": "select",
+      "layout": {
+        "row": "Row_029w3kz",
+        "columns": null
+      },
+      "id": "Field_0d8fyz0",
+      "key": "frage_auswahl",
+      "validate": {
+        "required": true
+      },
+      "valuesKey": "Fragen"
+    }
+  ],
+  "type": "default",
+  "id": "Form_1wz8vi6",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.3.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.28.0"
+  },
+  "schemaVersion": 16
+}</zeebe:userTaskForm>
+      <zeebe:userTaskForm id="UserTaskForm_1pk3qu8">{
+  "components": [
+    {
+      "text": "&lt;h1&gt;Bitte K.O. Kreterium festlegen&lt;/h1&gt;",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": null,
+        "columns": null
+      },
+      "id": "Field_1awhhe1"
+    },
+    {
+      "label": "Antwort Auswählen",
+      "type": "select",
+      "layout": {
+        "row": "Row_0myaauv",
+        "columns": null
+      },
+      "id": "Field_1g8g9ed",
+      "key": "antwort_auswahl",
+      "valuesKey": "Antworten",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "values": [
+        {
+          "label": "Ja",
+          "value": "1"
+        },
+        {
+          "label": "Nein",
+          "value": "0"
+        }
+      ],
+      "label": "K.O. Kreterium Festlegen",
+      "type": "radio",
+      "layout": {
+        "row": "Row_0yg5pnw",
+        "columns": null
+      },
+      "id": "Field_1r8d24m",
+      "key": "ergebnisKO",
       "validate": {
         "required": true
       }
@@ -119,769 +197,6 @@
     "version": "5.16.0"
   },
   "schemaVersion": 11
-}</zeebe:userTaskForm>
-      <zeebe:userTaskForm id="UserTaskForm_1pk3qu8">{
-  "components": [
-    {
-      "text": "&lt;h1&gt;Bitte K.O. Kreterium festlegen&lt;/h1&gt;",
-      "label": "Text view",
-      "type": "text",
-      "layout": {
-        "row": "Row_0l3ikdd",
-        "columns": null
-      },
-      "id": "Field_1awhhe1"
-    },
-    {
-      "label": "Antwort Auswählen 1",
-      "type": "select",
-      "layout": {
-        "row": "Row_0myaauv",
-        "columns": null
-      },
-      "id": "Field_1g8g9ed",
-      "key": "antwort_auswahl_1",
-      "valuesKey": "Antworten",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_1okf3tb",
-        "columns": null
-      },
-      "id": "Field_1r8d24m",
-      "key": "ergebnisKO",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 2",
-      "type": "select",
-      "layout": {
-        "row": "Row_1fq9vqr",
-        "columns": null
-      },
-      "id": "Field_0cxb4il",
-      "key": "antwort_auswahl_2",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_14l8hct",
-        "columns": null
-      },
-      "id": "Field_1h8zgse",
-      "key": "ergebnisKO2",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 3",
-      "type": "select",
-      "layout": {
-        "row": "Row_0pdvr12",
-        "columns": null
-      },
-      "id": "Field_1yu0ewa",
-      "key": "antwort_auswahl_3",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_0ms1sud",
-        "columns": null
-      },
-      "id": "Field_0q1ixd8",
-      "key": "ergebnisKO3",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 4",
-      "type": "select",
-      "layout": {
-        "row": "Row_116v8kf",
-        "columns": null
-      },
-      "id": "Field_184l0is",
-      "key": "antwort_auswahl_4",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_1idv7jh",
-        "columns": null
-      },
-      "id": "Field_1b42uex",
-      "key": "ergebnisKO4",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 5",
-      "type": "select",
-      "layout": {
-        "row": "Row_0ert4yi",
-        "columns": null
-      },
-      "id": "Field_1amd8zf",
-      "key": "antwort_auswahl_5",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_18sodvh",
-        "columns": null
-      },
-      "id": "Field_1dlcm9d",
-      "key": "ergebnisKO5",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 6",
-      "type": "select",
-      "layout": {
-        "row": "Row_147uime",
-        "columns": null
-      },
-      "id": "Field_1cf67lw",
-      "key": "antwort_auswahl_6",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_14g6l5f",
-        "columns": null
-      },
-      "id": "Field_0fmuev0",
-      "key": "ergebnisKO6",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 7",
-      "type": "select",
-      "layout": {
-        "row": "Row_0eg8wkb",
-        "columns": null
-      },
-      "id": "Field_05nodbb",
-      "key": "antwort_auswahl_7",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_0cc3wsf",
-        "columns": null
-      },
-      "id": "Field_15hvl09",
-      "key": "ergebnisKO7",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 8",
-      "type": "select",
-      "layout": {
-        "row": "Row_0ruveje",
-        "columns": null
-      },
-      "id": "Field_1ewfws0",
-      "key": "antwort_auswahl_8",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_0g8u4aq",
-        "columns": null
-      },
-      "id": "Field_143l5k6",
-      "key": "ergebnisKO8",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 9",
-      "type": "select",
-      "layout": {
-        "row": "Row_0lnk3ll",
-        "columns": null
-      },
-      "id": "Field_1yme94f",
-      "key": "antwort_auswahl_9",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_121yowm",
-        "columns": null
-      },
-      "id": "Field_181nh0v",
-      "key": "ergebnisKO9",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 10",
-      "type": "select",
-      "layout": {
-        "row": "Row_09tdhsm",
-        "columns": null
-      },
-      "id": "Field_1rql2ca",
-      "key": "antwort_auswahl_10",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_0k3udez",
-        "columns": null
-      },
-      "id": "Field_114b2wk",
-      "key": "ergebnisKO10",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 11",
-      "type": "select",
-      "layout": {
-        "row": "Row_0fm4u0j",
-        "columns": null
-      },
-      "id": "Field_1dzo2i8",
-      "key": "antwort_auswahl_11",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_0kdfiea",
-        "columns": null
-      },
-      "id": "Field_0anckf2",
-      "key": "ergebnisKO11",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 12",
-      "type": "select",
-      "layout": {
-        "row": "Row_14t76wv",
-        "columns": null
-      },
-      "id": "Field_0ucwfej",
-      "key": "antwort_auswahl_12",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_02spn6n",
-        "columns": null
-      },
-      "id": "Field_1n79iym",
-      "key": "ergebnisKO12",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 13",
-      "type": "select",
-      "layout": {
-        "row": "Row_0fanvs8",
-        "columns": null
-      },
-      "id": "Field_1wmknz1",
-      "key": "antwort_auswahl_13",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_1dtmqp2",
-        "columns": null
-      },
-      "id": "Field_14x0bpy",
-      "key": "ergebnisKO13",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 14",
-      "type": "select",
-      "layout": {
-        "row": "Row_0dqqvp1",
-        "columns": null
-      },
-      "id": "Field_0ils225",
-      "key": "antwort_auswahl_14",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_0vq2z1s",
-        "columns": null
-      },
-      "id": "Field_0i5nojn",
-      "key": "ergebnisKO14",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 15",
-      "type": "select",
-      "layout": {
-        "row": "Row_1h2c1y5",
-        "columns": null
-      },
-      "id": "Field_16hc4o3",
-      "key": "antwort_auswahl_15",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_0c21ync",
-        "columns": null
-      },
-      "id": "Field_02w4lsw",
-      "key": "ergebnisKO15",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 16",
-      "type": "select",
-      "layout": {
-        "row": "Row_1w25rnf",
-        "columns": null
-      },
-      "id": "Field_0s7liat",
-      "key": "antwort_auswahl_16",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_13jjhsm",
-        "columns": null
-      },
-      "id": "Field_0hw2k9t",
-      "key": "ergebnisKO16",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 17",
-      "type": "select",
-      "layout": {
-        "row": "Row_0qdjipw",
-        "columns": null
-      },
-      "id": "Field_1mqdajg",
-      "key": "antwort_auswahl_17",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_0mvbh2c",
-        "columns": null
-      },
-      "id": "Field_169lliq",
-      "key": "ergebnisKO17",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 18",
-      "type": "select",
-      "layout": {
-        "row": "Row_1tch55h",
-        "columns": null
-      },
-      "id": "Field_1j686xn",
-      "key": "antwort_auswahl_18",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_1f1et1l",
-        "columns": null
-      },
-      "id": "Field_19x167i",
-      "key": "ergebnisKO18",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 19",
-      "type": "select",
-      "layout": {
-        "row": "Row_04i7oau",
-        "columns": null
-      },
-      "id": "Field_1r9pssu",
-      "key": "antwort_auswahl_19",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_0bj6tq5",
-        "columns": null
-      },
-      "id": "Field_0za5udk",
-      "key": "ergebnisKO19",
-      "validate": {
-        "required": false
-      }
-    },
-    {
-      "label": "Antwort Auswählen 20",
-      "type": "select",
-      "layout": {
-        "row": "Row_1ybcwgc",
-        "columns": null
-      },
-      "id": "Field_04kzzhe",
-      "key": "antwort_auswahl_20",
-      "validate": {
-        "required": false
-      },
-      "valuesKey": "Antworten"
-    },
-    {
-      "values": [
-        {
-          "label": "Ja",
-          "value": "1"
-        },
-        {
-          "label": "Nein",
-          "value": "0"
-        }
-      ],
-      "label": "K.O. Kreterium Festlegen",
-      "type": "radio",
-      "layout": {
-        "row": "Row_1ybcwgc",
-        "columns": 14
-      },
-      "id": "Field_06wc3ca",
-      "key": "ergebnisKO20",
-      "validate": {
-        "required": false
-      }
-    }
-  ],
-  "type": "default",
-  "id": "Form_1wz8vi6",
-  "executionPlatform": "Camunda Cloud",
-  "executionPlatformVersion": "8.3.0",
-  "exporter": {
-    "name": "Camunda Modeler",
-    "version": "5.28.0"
-  },
-  "schemaVersion": 16
 }</zeebe:userTaskForm>
       <zeebe:userTaskForm id="UserTaskForm_3e98cjj">{
   "components": [
@@ -918,7 +233,7 @@
       },
       "id": "Field_0twyga0",
       "key": "katergorie_auswahl1",
-      "valuesKey": "Kategorien",
+      "valuesKey": "Katergorien",
       "validate": {
         "required": true
       }
@@ -945,7 +260,7 @@
       },
       "id": "Field_0sie0i8",
       "key": "katergorie_auswahl2",
-      "valuesKey": "Kategorien",
+      "valuesKey": "Katergorien",
       "validate": {
         "required": true
       }
@@ -972,7 +287,7 @@
       },
       "id": "Field_0x85iav",
       "key": "katergorie_auswahl3",
-      "valuesKey": "Kategorien",
+      "valuesKey": "Katergorien",
       "validate": {
         "required": true
       }
@@ -999,7 +314,7 @@
       },
       "id": "Field_10qql29",
       "key": "katergorie_auswahl4",
-      "valuesKey": "Kategorien",
+      "valuesKey": "Katergorien",
       "validate": {
         "required": true
       }
@@ -1024,9 +339,9 @@
   "executionPlatformVersion": "8.3.0",
   "exporter": {
     "name": "Camunda Modeler",
-    "version": "5.28.0"
+    "version": "5.16.0"
   },
-  "schemaVersion": 16
+  "schemaVersion": 11
 }</zeebe:userTaskForm>
       <zeebe:userTaskForm id="UserTaskForm_1cq3s87">{
   "components": [
@@ -1769,7 +1084,6 @@
     <bpmn:userTask id="Activity_1i4ks53" name="Anmelden">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_24e7b63" />
-        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0mzna6l</bpmn:incoming>
       <bpmn:outgoing>Flow_02qvf5g</bpmn:outgoing>
@@ -1830,63 +1144,9 @@
     <bpmn:endEvent id="Event_065uzic">
       <bpmn:incoming>Flow_0zy0mnk</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_01wgron" sourceRef="Activity_1b468q6" targetRef="Gateway_0ggwm2t" />
-    <bpmn:sequenceFlow id="Flow_02qvf5g" sourceRef="Activity_1i4ks53" targetRef="Activity_0rc29g6" />
-    <bpmn:sequenceFlow id="Flow_0483lep" sourceRef="Gateway_1t6jnoh" targetRef="Event_1byb43r" />
-    <bpmn:sequenceFlow id="Flow_04nhs1g" sourceRef="Activity_1ai3uix" targetRef="Activity_0ixs62r" />
-    <bpmn:sequenceFlow id="Flow_04yx8i8" sourceRef="Activity_171v9fh" targetRef="Gateway_0kr54y3" />
-    <bpmn:sequenceFlow id="Flow_06piv31" sourceRef="Gateway_1exicq0" targetRef="Gateway_134927e" />
-    <bpmn:sequenceFlow id="Flow_08m1i2c" sourceRef="Activity_0bdf6i8" targetRef="Activity_07d95uh" />
-    <bpmn:sequenceFlow id="Flow_099by04" sourceRef="Activity_1xsbdpr" targetRef="Gateway_134927e" />
-    <bpmn:sequenceFlow id="Flow_099egq8" sourceRef="Gateway_12v7haz" targetRef="Activity_176kvzt" />
-    <bpmn:sequenceFlow id="Flow_0bdikrz" sourceRef="Gateway_0ggwm2t" targetRef="Activity_0deisjr" />
-    <bpmn:sequenceFlow id="Flow_0bpb2up" sourceRef="Gateway_0dkuq2e" targetRef="Activity_1ai3uix" />
-    <bpmn:sequenceFlow id="Flow_0eube0w" sourceRef="Activity_17mneq2" targetRef="Activity_1b468q6" />
-    <bpmn:sequenceFlow id="Flow_0gksss0" sourceRef="Activity_0deisjr" targetRef="Activity_1ud1lkl" />
-    <bpmn:sequenceFlow id="Flow_0jhtvrl" sourceRef="Activity_07d95uh" targetRef="Gateway_0s722x8" />
-    <bpmn:sequenceFlow id="Flow_0mic7ib" sourceRef="Activity_1rugmnc" targetRef="Activity_171v9fh" />
-    <bpmn:sequenceFlow id="Flow_0mzna6l" sourceRef="Gateway_1akozmn" targetRef="Activity_1i4ks53" />
-    <bpmn:sequenceFlow id="Flow_0opbpz6" sourceRef="Activity_0lqgtac" targetRef="Activity_04ybgkf" />
-    <bpmn:sequenceFlow id="Flow_0rwt7ak" sourceRef="Activity_0ztxu93" targetRef="Activity_0tl1ro3" />
-    <bpmn:sequenceFlow id="Flow_0v9pywt" sourceRef="StartEvent_1" targetRef="Activity_1rugmnc" />
-    <bpmn:sequenceFlow id="Flow_0wkt56h" sourceRef="Activity_04ybgkf" targetRef="Activity_0ztxu93" />
-    <bpmn:sequenceFlow id="Flow_0xlcdjb" sourceRef="Activity_07qs932" targetRef="Gateway_1akozmn" />
-    <bpmn:sequenceFlow id="Flow_0ytrens" sourceRef="Activity_0tl1ro3" targetRef="Activity_1sasq83" />
-    <bpmn:sequenceFlow id="Flow_0z8hapn" sourceRef="Gateway_1q40nd7" targetRef="Activity_1n2stb6">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferantInProjekt="1"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0zy0mnk" sourceRef="Gateway_178kyci" targetRef="Event_065uzic" />
-    <bpmn:sequenceFlow id="Flow_105vuxv" sourceRef="Event_1byb43r" targetRef="Activity_04tc80y" />
-    <bpmn:sequenceFlow id="Flow_1151p7y" sourceRef="Activity_1kd1pek" targetRef="Gateway_0s722x8" />
-    <bpmn:sequenceFlow id="Flow_15clqef" sourceRef="Activity_09slwuv" targetRef="Gateway_0dkuq2e" />
-    <bpmn:sequenceFlow id="Flow_15zycj8" sourceRef="Activity_176kvzt" targetRef="Gateway_178kyci" />
-    <bpmn:sequenceFlow id="Flow_1648zwq" sourceRef="Gateway_0cn5bf8" targetRef="Gateway_0ggwm2t" />
-    <bpmn:sequenceFlow id="Flow_17s6a5o" sourceRef="Activity_0rc29g6" targetRef="Gateway_1exicq0" />
-    <bpmn:sequenceFlow id="Flow_17t89pb" sourceRef="Activity_1ud1lkl" targetRef="Gateway_12v7haz" />
-    <bpmn:sequenceFlow id="Flow_1b4mu23" sourceRef="Activity_1sasq83" targetRef="Activity_0bdf6i8" />
-    <bpmn:sequenceFlow id="Flow_1bydp9c" sourceRef="Gateway_0xdmeu8" targetRef="Gateway_0dkuq2e">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=AntwortVorhanden="0"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1byh78v" sourceRef="Activity_1n2stb6" targetRef="Gateway_0xdmeu8" />
-    <bpmn:sequenceFlow id="Flow_1cumpie" sourceRef="Activity_04tc80y" targetRef="Gateway_0oi9s3k" />
-    <bpmn:sequenceFlow id="Flow_1dbfnei" sourceRef="Gateway_0kr54y3" targetRef="Activity_1kd1pek" />
-    <bpmn:sequenceFlow id="Flow_1g9b4ky" sourceRef="Activity_0ohbvu5" targetRef="Gateway_1t6jnoh" />
-    <bpmn:sequenceFlow id="Flow_1gti6uq" sourceRef="Gateway_134927e" targetRef="Activity_1t7l9zz" />
-    <bpmn:sequenceFlow id="Flow_1if3uhg" sourceRef="Activity_11obj82" targetRef="Gateway_0cn5bf8" />
-    <bpmn:sequenceFlow id="Flow_1j8kovk" sourceRef="Activity_1t7l9zz" targetRef="Activity_1kylabx" />
-    <bpmn:sequenceFlow id="Flow_1jxw774" sourceRef="Gateway_04zxwz9" targetRef="Event_033e339" />
-    <bpmn:sequenceFlow id="Flow_1klqonf" sourceRef="Gateway_0xdmeu8" targetRef="Gateway_12v7haz" />
-    <bpmn:sequenceFlow id="Flow_1l0avzi" sourceRef="Activity_0ixs62r" targetRef="Gateway_1q40nd7" />
-    <bpmn:sequenceFlow id="Flow_1o8x3xu" sourceRef="Gateway_0oi9s3k" targetRef="Gateway_04zxwz9" />
-    <bpmn:sequenceFlow id="Flow_1pdfbzc" sourceRef="Gateway_0s722x8" targetRef="Activity_09slwuv" />
-    <bpmn:sequenceFlow id="Flow_1rbt5j2" sourceRef="Activity_0z3z710" targetRef="Gateway_04zxwz9" />
-    <bpmn:sequenceFlow id="Flow_1suit0v" sourceRef="Activity_1kylabx" targetRef="Activity_15lfh44" />
-    <bpmn:sequenceFlow id="Flow_1vaej7m" sourceRef="Activity_15lfh44" targetRef="Activity_11obj82" />
-    <bpmn:sequenceFlow id="Flow_1xr74k8" sourceRef="Gateway_1t6jnoh" targetRef="Activity_07qs932" />
     <bpmn:userTask id="Activity_0ztxu93" name="Fragebogen auswählen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cs6cph" />
-        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0wkt56h</bpmn:incoming>
       <bpmn:outgoing>Flow_0rwt7ak</bpmn:outgoing>
@@ -1946,7 +1206,6 @@
     <bpmn:userTask id="Activity_1kylabx" name="Im Fragebogen auswählen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_156cmh1" />
-        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1j8kovk</bpmn:incoming>
       <bpmn:outgoing>Flow_1suit0v</bpmn:outgoing>
@@ -1961,13 +1220,9 @@
       <bpmn:outgoing>Flow_1c40so9</bpmn:outgoing>
       <bpmn:outgoing>Flow_1o8x3xu</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_016av8y" name="Ja" sourceRef="Gateway_178kyci" targetRef="Activity_17mneq2">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=SollAngepasst="1"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
     <bpmn:userTask id="Activity_1sasq83" name="K.O. Kriterien festlegen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1pk3qu8" />
-        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0ytrens</bpmn:incoming>
       <bpmn:outgoing>Flow_1b4mu23</bpmn:outgoing>
@@ -1975,7 +1230,6 @@
     <bpmn:userTask id="Activity_0bdf6i8" name="Kategorien gewichten">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_3e98cjj" />
-        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1b4mu23</bpmn:incoming>
       <bpmn:outgoing>Flow_08m1i2c</bpmn:outgoing>
@@ -1983,7 +1237,6 @@
     <bpmn:userTask id="Activity_17mneq2" name="Kategorien gewichten">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_0e7sd86" />
-        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_016av8y</bpmn:incoming>
       <bpmn:outgoing>Flow_0eube0w</bpmn:outgoing>
@@ -1991,16 +1244,10 @@
     <bpmn:userTask id="Activity_1ai3uix" name="Lieferant auswählen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cq3s87" />
-        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0bpb2up</bpmn:incoming>
       <bpmn:outgoing>Flow_04nhs1g</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:exclusiveGateway id="Gateway_1q40nd7" name="Lieferant in Projekt">
-      <bpmn:incoming>Flow_1l0avzi</bpmn:incoming>
-      <bpmn:outgoing>Flow_1ftovjp</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0z8hapn</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
     <bpmn:sendTask id="Activity_1xsbdpr" name="Lieferant über Unvollständigkeit informieren">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="lieferant-uber-unvollstandigkeit-informieren" />
@@ -2029,21 +1276,11 @@
       <bpmn:incoming>Flow_1pdfbzc</bpmn:incoming>
       <bpmn:outgoing>Flow_15clqef</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_1h8ni2z" name="Nein" sourceRef="Gateway_1exicq0" targetRef="Gateway_1akozmn">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=AnmeldeKorrekt="0"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1c40so9" name="Nein" sourceRef="Gateway_0oi9s3k" targetRef="Activity_0z3z710">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=Fragebogenvollstandig="0"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0zpqzrl" name="Nein" sourceRef="Gateway_0cn5bf8" targetRef="Activity_1xsbdpr">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=false</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1ftovjp" name="Nein" sourceRef="Gateway_1q40nd7" targetRef="Activity_0ohbvu5">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferantInProjekt="0"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_080tn30" name="Nein" sourceRef="Gateway_0kr54y3" targetRef="Activity_0lqgtac">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=projekt_auswahl&lt;="0"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="Gateway_1q40nd7" name="Neuer Lieferant ausgewählt">
+      <bpmn:incoming>Flow_1l0avzi</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ftovjp</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0z8hapn</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
     <bpmn:sendTask id="Activity_1ud1lkl" name="neues Ranking liegt vor">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="neues-ranking-liegt-vor" />
@@ -2061,7 +1298,6 @@
     <bpmn:userTask id="Activity_0lqgtac" name="Projekt anlegen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_09qrfoc" />
-        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_080tn30</bpmn:incoming>
       <bpmn:outgoing>Flow_0opbpz6</bpmn:outgoing>
@@ -2074,7 +1310,6 @@
     <bpmn:userTask id="Activity_171v9fh" name="Projekt auswählen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_26cbut7" />
-        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0mic7ib</bpmn:incoming>
       <bpmn:outgoing>Flow_04yx8i8</bpmn:outgoing>
@@ -2117,7 +1352,6 @@
     <bpmn:userTask id="Activity_176kvzt" name="Ranking und Antworten vom gewählten Lieferanten  angucken">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cp118s" />
-        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_099egq8</bpmn:incoming>
       <bpmn:outgoing>Flow_15zycj8</bpmn:outgoing>
@@ -2129,6 +1363,77 @@
       <bpmn:incoming>Flow_1xr74k8</bpmn:incoming>
       <bpmn:outgoing>Flow_0xlcdjb</bpmn:outgoing>
     </bpmn:sendTask>
+    <bpmn:sequenceFlow id="Flow_0483lep" sourceRef="Gateway_1t6jnoh" targetRef="Event_1byb43r" />
+    <bpmn:sequenceFlow id="Flow_105vuxv" sourceRef="Event_1byb43r" targetRef="Activity_04tc80y" />
+    <bpmn:sequenceFlow id="Flow_17s6a5o" sourceRef="Activity_0rc29g6" targetRef="Gateway_1exicq0" />
+    <bpmn:sequenceFlow id="Flow_06piv31" sourceRef="Gateway_1exicq0" targetRef="Gateway_134927e" />
+    <bpmn:sequenceFlow id="Flow_1h8ni2z" name="Nein" sourceRef="Gateway_1exicq0" targetRef="Gateway_1akozmn">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=AnmeldeKorrekt="0"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_02qvf5g" sourceRef="Activity_1i4ks53" targetRef="Activity_0rc29g6" />
+    <bpmn:sequenceFlow id="Flow_0mzna6l" sourceRef="Gateway_1akozmn" targetRef="Activity_1i4ks53" />
+    <bpmn:sequenceFlow id="Flow_0v9pywt" sourceRef="StartEvent_1" targetRef="Activity_1rugmnc" />
+    <bpmn:sequenceFlow id="Flow_1byh78v" sourceRef="Activity_1n2stb6" targetRef="Gateway_0xdmeu8" />
+    <bpmn:sequenceFlow id="Flow_1bydp9c" sourceRef="Gateway_0xdmeu8" targetRef="Gateway_0dkuq2e">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=AntwortVorhanden="0"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1klqonf" sourceRef="Gateway_0xdmeu8" targetRef="Gateway_12v7haz" />
+    <bpmn:sequenceFlow id="Flow_1gti6uq" sourceRef="Gateway_134927e" targetRef="Activity_1t7l9zz" />
+    <bpmn:sequenceFlow id="Flow_1j8kovk" sourceRef="Activity_1t7l9zz" targetRef="Activity_1kylabx" />
+    <bpmn:sequenceFlow id="Flow_1suit0v" sourceRef="Activity_1kylabx" targetRef="Activity_15lfh44" />
+    <bpmn:sequenceFlow id="Flow_1vaej7m" sourceRef="Activity_15lfh44" targetRef="Activity_11obj82" />
+    <bpmn:sequenceFlow id="Flow_0z8hapn" sourceRef="Gateway_1q40nd7" targetRef="Activity_1n2stb6">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferInProjekt="1"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0rwt7ak" sourceRef="Activity_0ztxu93" targetRef="Activity_0tl1ro3" />
+    <bpmn:sequenceFlow id="Flow_0ytrens" sourceRef="Activity_0tl1ro3" targetRef="Activity_1sasq83" />
+    <bpmn:sequenceFlow id="Flow_1dbfnei" sourceRef="Gateway_0kr54y3" targetRef="Activity_1kd1pek" />
+    <bpmn:sequenceFlow id="Flow_1151p7y" sourceRef="Activity_1kd1pek" targetRef="Gateway_0s722x8" />
+    <bpmn:sequenceFlow id="Flow_1c40so9" name="Nein" sourceRef="Gateway_0oi9s3k" targetRef="Activity_0z3z710">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=Fragebogenvollstandig="0"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1rbt5j2" sourceRef="Activity_0z3z710" targetRef="Gateway_04zxwz9" />
+    <bpmn:sequenceFlow id="Flow_1jxw774" sourceRef="Gateway_04zxwz9" targetRef="Event_033e339" />
+    <bpmn:sequenceFlow id="Flow_0zy0mnk" sourceRef="Gateway_178kyci" targetRef="Event_065uzic" />
+    <bpmn:sequenceFlow id="Flow_0wkt56h" sourceRef="Activity_04ybgkf" targetRef="Activity_0ztxu93" />
+    <bpmn:sequenceFlow id="Flow_0opbpz6" sourceRef="Activity_0lqgtac" targetRef="Activity_04ybgkf" />
+    <bpmn:sequenceFlow id="Flow_1o8x3xu" sourceRef="Gateway_0oi9s3k" targetRef="Gateway_04zxwz9" />
+    <bpmn:sequenceFlow id="Flow_15clqef" sourceRef="Activity_09slwuv" targetRef="Gateway_0dkuq2e" />
+    <bpmn:sequenceFlow id="Flow_0bpb2up" sourceRef="Gateway_0dkuq2e" targetRef="Activity_1ai3uix" />
+    <bpmn:sequenceFlow id="Flow_01wgron" sourceRef="Activity_1b468q6" targetRef="Gateway_0ggwm2t" />
+    <bpmn:sequenceFlow id="Flow_1648zwq" sourceRef="Gateway_0cn5bf8" targetRef="Gateway_0ggwm2t" />
+    <bpmn:sequenceFlow id="Flow_0bdikrz" sourceRef="Gateway_0ggwm2t" targetRef="Activity_0deisjr" />
+    <bpmn:sequenceFlow id="Flow_0jhtvrl" sourceRef="Activity_07d95uh" targetRef="Gateway_0s722x8" />
+    <bpmn:sequenceFlow id="Flow_1pdfbzc" sourceRef="Gateway_0s722x8" targetRef="Activity_09slwuv" />
+    <bpmn:sequenceFlow id="Flow_17t89pb" sourceRef="Activity_1ud1lkl" targetRef="Gateway_12v7haz" />
+    <bpmn:sequenceFlow id="Flow_099egq8" sourceRef="Gateway_12v7haz" targetRef="Activity_176kvzt" />
+    <bpmn:sequenceFlow id="Flow_099by04" sourceRef="Activity_1xsbdpr" targetRef="Gateway_134927e" />
+    <bpmn:sequenceFlow id="Flow_15zycj8" sourceRef="Activity_176kvzt" targetRef="Gateway_178kyci" />
+    <bpmn:sequenceFlow id="Flow_016av8y" name="Ja" sourceRef="Gateway_178kyci" targetRef="Activity_17mneq2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=SollAngepasst="1"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0xlcdjb" sourceRef="Activity_07qs932" targetRef="Gateway_1akozmn" />
+    <bpmn:sequenceFlow id="Flow_1g9b4ky" sourceRef="Activity_0ohbvu5" targetRef="Gateway_1t6jnoh" />
+    <bpmn:sequenceFlow id="Flow_1xr74k8" sourceRef="Gateway_1t6jnoh" targetRef="Activity_07qs932" />
+    <bpmn:sequenceFlow id="Flow_1if3uhg" sourceRef="Activity_11obj82" targetRef="Gateway_0cn5bf8" />
+    <bpmn:sequenceFlow id="Flow_0zpqzrl" name="Nein" sourceRef="Gateway_0cn5bf8" targetRef="Activity_1xsbdpr">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1cumpie" sourceRef="Activity_04tc80y" targetRef="Gateway_0oi9s3k" />
+    <bpmn:sequenceFlow id="Flow_1b4mu23" sourceRef="Activity_1sasq83" targetRef="Activity_0bdf6i8" />
+    <bpmn:sequenceFlow id="Flow_08m1i2c" sourceRef="Activity_0bdf6i8" targetRef="Activity_07d95uh" />
+    <bpmn:sequenceFlow id="Flow_0eube0w" sourceRef="Activity_17mneq2" targetRef="Activity_1b468q6" />
+    <bpmn:sequenceFlow id="Flow_04nhs1g" sourceRef="Activity_1ai3uix" targetRef="Activity_0ixs62r" />
+    <bpmn:sequenceFlow id="Flow_1l0avzi" sourceRef="Activity_0ixs62r" targetRef="Gateway_1q40nd7" />
+    <bpmn:sequenceFlow id="Flow_1ftovjp" name="Nein" sourceRef="Gateway_1q40nd7" targetRef="Activity_0ohbvu5">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferInProjekt="0"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0gksss0" sourceRef="Activity_0deisjr" targetRef="Activity_1ud1lkl" />
+    <bpmn:sequenceFlow id="Flow_080tn30" name="Nein" sourceRef="Gateway_0kr54y3" targetRef="Activity_0lqgtac">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=projekt_auswahl&lt;="0"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_04yx8i8" sourceRef="Activity_171v9fh" targetRef="Gateway_0kr54y3" />
+    <bpmn:sequenceFlow id="Flow_0mic7ib" sourceRef="Activity_1rugmnc" targetRef="Activity_171v9fh" />
   </bpmn:process>
   <bpmn:message id="Message_1s92l7q" name="Message_1s92l7q" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -2272,12 +1577,6 @@
       <bpmndi:BPMNShape id="Activity_03njb3r_di" bpmnElement="Activity_1ai3uix">
         <dc:Bounds x="1720" y="396" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1q40nd7_di" bpmnElement="Gateway_1q40nd7" isMarkerVisible="true">
-        <dc:Bounds x="2005" y="411" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2004" y="374" width="55" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1diq2wv_di" bpmnElement="Activity_1xsbdpr">
         <dc:Bounds x="1770" y="1210" width="100" height="80" />
         <bpmndi:BPMNLabel />
@@ -2293,6 +1592,12 @@
       <bpmndi:BPMNShape id="Activity_1ay3048_di" bpmnElement="Activity_09slwuv">
         <dc:Bounds x="1500" y="396" width="100" height="80" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1q40nd7_di" bpmnElement="Gateway_1q40nd7" isMarkerVisible="true">
+        <dc:Bounds x="2005" y="411" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1992" y="374" width="77" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1rnae1a_di" bpmnElement="Activity_1ud1lkl">
         <dc:Bounds x="2350" y="1210" width="100" height="80" />
@@ -2343,218 +1648,21 @@
         <dc:Bounds x="1040" y="530" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_01wgron_di" bpmnElement="Flow_01wgron">
-        <di:waypoint x="2650" y="700" />
-        <di:waypoint x="2650" y="1350" />
-        <di:waypoint x="2120" y="1350" />
-        <di:waypoint x="2120" y="1275" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_02qvf5g_di" bpmnElement="Flow_02qvf5g">
-        <di:waypoint x="1250" y="860" />
-        <di:waypoint x="1300" y="860" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0483lep_di" bpmnElement="Flow_0483lep">
         <di:waypoint x="1230" y="595" />
         <di:waypoint x="1230" y="642" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_04nhs1g_di" bpmnElement="Flow_04nhs1g">
-        <di:waypoint x="1820" y="436" />
-        <di:waypoint x="1850" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_04yx8i8_di" bpmnElement="Flow_04yx8i8">
-        <di:waypoint x="510" y="436" />
-        <di:waypoint x="555" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_06piv31_di" bpmnElement="Flow_06piv31">
-        <di:waypoint x="1485" y="860" />
-        <di:waypoint x="1525" y="860" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_08m1i2c_di" bpmnElement="Flow_08m1i2c">
-        <di:waypoint x="1340" y="300" />
-        <di:waypoint x="1380" y="300" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_099by04_di" bpmnElement="Flow_099by04">
-        <di:waypoint x="1770" y="1250" />
-        <di:waypoint x="1550" y="1250" />
-        <di:waypoint x="1550" y="885" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_099egq8_di" bpmnElement="Flow_099egq8">
-        <di:waypoint x="2425" y="436" />
-        <di:waypoint x="2460" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0bdikrz_di" bpmnElement="Flow_0bdikrz">
-        <di:waypoint x="2145" y="1250" />
-        <di:waypoint x="2200" y="1250" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0bpb2up_di" bpmnElement="Flow_0bpb2up">
-        <di:waypoint x="1685" y="436" />
-        <di:waypoint x="1720" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0eube0w_di" bpmnElement="Flow_0eube0w">
-        <di:waypoint x="2650" y="590" />
-        <di:waypoint x="2650" y="620" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0gksss0_di" bpmnElement="Flow_0gksss0">
-        <di:waypoint x="2300" y="1250" />
-        <di:waypoint x="2350" y="1250" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0jhtvrl_di" bpmnElement="Flow_0jhtvrl">
-        <di:waypoint x="1430" y="340" />
-        <di:waypoint x="1430" y="411" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0mic7ib_di" bpmnElement="Flow_0mic7ib">
-        <di:waypoint x="370" y="436" />
-        <di:waypoint x="410" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0mzna6l_di" bpmnElement="Flow_0mzna6l">
-        <di:waypoint x="1115" y="860" />
-        <di:waypoint x="1150" y="860" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0opbpz6_di" bpmnElement="Flow_0opbpz6">
-        <di:waypoint x="630" y="300" />
-        <di:waypoint x="680" y="300" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0rwt7ak_di" bpmnElement="Flow_0rwt7ak">
-        <di:waypoint x="920" y="300" />
-        <di:waypoint x="960" y="300" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0v9pywt_di" bpmnElement="Flow_0v9pywt">
-        <di:waypoint x="238" y="436" />
-        <di:waypoint x="270" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0wkt56h_di" bpmnElement="Flow_0wkt56h">
-        <di:waypoint x="780" y="300" />
-        <di:waypoint x="820" y="300" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0xlcdjb_di" bpmnElement="Flow_0xlcdjb">
-        <di:waypoint x="1090" y="610" />
-        <di:waypoint x="1090" y="835" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0ytrens_di" bpmnElement="Flow_0ytrens">
-        <di:waypoint x="1060" y="300" />
-        <di:waypoint x="1100" y="300" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0z8hapn_di" bpmnElement="Flow_0z8hapn">
-        <di:waypoint x="2055" y="436" />
-        <di:waypoint x="2120" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0zy0mnk_di" bpmnElement="Flow_0zy0mnk">
-        <di:waypoint x="2675" y="436" />
-        <di:waypoint x="2752" y="436" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_105vuxv_di" bpmnElement="Flow_105vuxv">
         <di:waypoint x="1248" y="660" />
         <di:waypoint x="1280" y="660" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1151p7y_di" bpmnElement="Flow_1151p7y">
-        <di:waypoint x="780" y="436" />
-        <di:waypoint x="1405" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_15clqef_di" bpmnElement="Flow_15clqef">
-        <di:waypoint x="1600" y="436" />
-        <di:waypoint x="1635" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_15zycj8_di" bpmnElement="Flow_15zycj8">
-        <di:waypoint x="2560" y="436" />
-        <di:waypoint x="2625" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1648zwq_di" bpmnElement="Flow_1648zwq">
-        <di:waypoint x="1995" y="1250" />
-        <di:waypoint x="2095" y="1250" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2035" y="1147" width="9" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_17s6a5o_di" bpmnElement="Flow_17s6a5o">
         <di:waypoint x="1400" y="860" />
         <di:waypoint x="1435" y="860" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_17t89pb_di" bpmnElement="Flow_17t89pb">
-        <di:waypoint x="2400" y="1210" />
-        <di:waypoint x="2400" y="461" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1b4mu23_di" bpmnElement="Flow_1b4mu23">
-        <di:waypoint x="1200" y="300" />
-        <di:waypoint x="1240" y="300" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1bydp9c_di" bpmnElement="Flow_1bydp9c">
-        <di:waypoint x="2290" y="411" />
-        <di:waypoint x="2290" y="270" />
-        <di:waypoint x="1660" y="270" />
-        <di:waypoint x="1660" y="410" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1byh78v_di" bpmnElement="Flow_1byh78v">
-        <di:waypoint x="2220" y="436" />
-        <di:waypoint x="2265" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1cumpie_di" bpmnElement="Flow_1cumpie">
-        <di:waypoint x="1380" y="660" />
-        <di:waypoint x="1425" y="660" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1dbfnei_di" bpmnElement="Flow_1dbfnei">
-        <di:waypoint x="605" y="436" />
-        <di:waypoint x="680" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1g9b4ky_di" bpmnElement="Flow_1g9b4ky">
-        <di:waypoint x="1980" y="570" />
-        <di:waypoint x="1255" y="570" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1gti6uq_di" bpmnElement="Flow_1gti6uq">
-        <di:waypoint x="1575" y="860" />
-        <di:waypoint x="1620" y="860" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1if3uhg_di" bpmnElement="Flow_1if3uhg">
-        <di:waypoint x="1970" y="1160" />
-        <di:waypoint x="1970" y="1225" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1j8kovk_di" bpmnElement="Flow_1j8kovk">
-        <di:waypoint x="1720" y="860" />
-        <di:waypoint x="1770" y="860" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1jxw774_di" bpmnElement="Flow_1jxw774">
-        <di:waypoint x="1725" y="660" />
-        <di:waypoint x="1792" y="660" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1klqonf_di" bpmnElement="Flow_1klqonf">
-        <di:waypoint x="2315" y="436" />
-        <di:waypoint x="2375" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1l0avzi_di" bpmnElement="Flow_1l0avzi">
-        <di:waypoint x="1950" y="436" />
-        <di:waypoint x="2005" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1o8x3xu_di" bpmnElement="Flow_1o8x3xu">
-        <di:waypoint x="1450" y="635" />
-        <di:waypoint x="1450" y="590" />
-        <di:waypoint x="1700" y="590" />
-        <di:waypoint x="1700" y="635" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1pdfbzc_di" bpmnElement="Flow_1pdfbzc">
-        <di:waypoint x="1455" y="436" />
-        <di:waypoint x="1500" y="436" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1rbt5j2_di" bpmnElement="Flow_1rbt5j2">
-        <di:waypoint x="1630" y="660" />
-        <di:waypoint x="1675" y="660" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1suit0v_di" bpmnElement="Flow_1suit0v">
-        <di:waypoint x="1870" y="860" />
-        <di:waypoint x="1920" y="860" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1vaej7m_di" bpmnElement="Flow_1vaej7m">
-        <di:waypoint x="1970" y="900" />
-        <di:waypoint x="1970" y="1080" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1xr74k8_di" bpmnElement="Flow_1xr74k8">
-        <di:waypoint x="1205" y="570" />
-        <di:waypoint x="1140" y="570" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_016av8y_di" bpmnElement="Flow_016av8y">
-        <di:waypoint x="2650" y="461" />
-        <di:waypoint x="2650" y="510" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2660" y="483" width="12" height="14" />
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNEdge id="Flow_06piv31_di" bpmnElement="Flow_06piv31">
+        <di:waypoint x="1485" y="860" />
+        <di:waypoint x="1525" y="860" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1h8ni2z_di" bpmnElement="Flow_1h8ni2z">
         <di:waypoint x="1460" y="885" />
@@ -2565,12 +1673,173 @@
           <dc:Bounds x="1264" y="932" width="23" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02qvf5g_di" bpmnElement="Flow_02qvf5g">
+        <di:waypoint x="1250" y="860" />
+        <di:waypoint x="1300" y="860" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0mzna6l_di" bpmnElement="Flow_0mzna6l">
+        <di:waypoint x="1115" y="860" />
+        <di:waypoint x="1150" y="860" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0v9pywt_di" bpmnElement="Flow_0v9pywt">
+        <di:waypoint x="238" y="436" />
+        <di:waypoint x="270" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1byh78v_di" bpmnElement="Flow_1byh78v">
+        <di:waypoint x="2220" y="436" />
+        <di:waypoint x="2265" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bydp9c_di" bpmnElement="Flow_1bydp9c">
+        <di:waypoint x="2290" y="411" />
+        <di:waypoint x="2290" y="270" />
+        <di:waypoint x="1660" y="270" />
+        <di:waypoint x="1660" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1klqonf_di" bpmnElement="Flow_1klqonf">
+        <di:waypoint x="2315" y="436" />
+        <di:waypoint x="2375" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1gti6uq_di" bpmnElement="Flow_1gti6uq">
+        <di:waypoint x="1575" y="860" />
+        <di:waypoint x="1620" y="860" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1j8kovk_di" bpmnElement="Flow_1j8kovk">
+        <di:waypoint x="1720" y="860" />
+        <di:waypoint x="1770" y="860" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1suit0v_di" bpmnElement="Flow_1suit0v">
+        <di:waypoint x="1870" y="860" />
+        <di:waypoint x="1920" y="860" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vaej7m_di" bpmnElement="Flow_1vaej7m">
+        <di:waypoint x="1970" y="900" />
+        <di:waypoint x="1970" y="1080" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0z8hapn_di" bpmnElement="Flow_0z8hapn">
+        <di:waypoint x="2055" y="436" />
+        <di:waypoint x="2120" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rwt7ak_di" bpmnElement="Flow_0rwt7ak">
+        <di:waypoint x="920" y="300" />
+        <di:waypoint x="960" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ytrens_di" bpmnElement="Flow_0ytrens">
+        <di:waypoint x="1060" y="300" />
+        <di:waypoint x="1100" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1dbfnei_di" bpmnElement="Flow_1dbfnei">
+        <di:waypoint x="605" y="436" />
+        <di:waypoint x="680" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1151p7y_di" bpmnElement="Flow_1151p7y">
+        <di:waypoint x="780" y="436" />
+        <di:waypoint x="1405" y="436" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1c40so9_di" bpmnElement="Flow_1c40so9">
         <di:waypoint x="1475" y="660" />
         <di:waypoint x="1530" y="660" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1491" y="642" width="23" height="14" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rbt5j2_di" bpmnElement="Flow_1rbt5j2">
+        <di:waypoint x="1630" y="660" />
+        <di:waypoint x="1675" y="660" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jxw774_di" bpmnElement="Flow_1jxw774">
+        <di:waypoint x="1725" y="660" />
+        <di:waypoint x="1792" y="660" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0zy0mnk_di" bpmnElement="Flow_0zy0mnk">
+        <di:waypoint x="2675" y="436" />
+        <di:waypoint x="2752" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wkt56h_di" bpmnElement="Flow_0wkt56h">
+        <di:waypoint x="780" y="300" />
+        <di:waypoint x="820" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0opbpz6_di" bpmnElement="Flow_0opbpz6">
+        <di:waypoint x="630" y="300" />
+        <di:waypoint x="680" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1o8x3xu_di" bpmnElement="Flow_1o8x3xu">
+        <di:waypoint x="1450" y="635" />
+        <di:waypoint x="1450" y="590" />
+        <di:waypoint x="1700" y="590" />
+        <di:waypoint x="1700" y="635" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15clqef_di" bpmnElement="Flow_15clqef">
+        <di:waypoint x="1600" y="436" />
+        <di:waypoint x="1635" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0bpb2up_di" bpmnElement="Flow_0bpb2up">
+        <di:waypoint x="1685" y="436" />
+        <di:waypoint x="1720" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_01wgron_di" bpmnElement="Flow_01wgron">
+        <di:waypoint x="2650" y="700" />
+        <di:waypoint x="2650" y="1350" />
+        <di:waypoint x="2120" y="1350" />
+        <di:waypoint x="2120" y="1275" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1648zwq_di" bpmnElement="Flow_1648zwq">
+        <di:waypoint x="1995" y="1250" />
+        <di:waypoint x="2095" y="1250" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2035" y="1147" width="9" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0bdikrz_di" bpmnElement="Flow_0bdikrz">
+        <di:waypoint x="2145" y="1250" />
+        <di:waypoint x="2200" y="1250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jhtvrl_di" bpmnElement="Flow_0jhtvrl">
+        <di:waypoint x="1430" y="340" />
+        <di:waypoint x="1430" y="411" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1pdfbzc_di" bpmnElement="Flow_1pdfbzc">
+        <di:waypoint x="1455" y="436" />
+        <di:waypoint x="1500" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17t89pb_di" bpmnElement="Flow_17t89pb">
+        <di:waypoint x="2400" y="1210" />
+        <di:waypoint x="2400" y="461" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_099egq8_di" bpmnElement="Flow_099egq8">
+        <di:waypoint x="2425" y="436" />
+        <di:waypoint x="2460" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_099by04_di" bpmnElement="Flow_099by04">
+        <di:waypoint x="1770" y="1250" />
+        <di:waypoint x="1550" y="1250" />
+        <di:waypoint x="1550" y="885" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15zycj8_di" bpmnElement="Flow_15zycj8">
+        <di:waypoint x="2560" y="436" />
+        <di:waypoint x="2625" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_016av8y_di" bpmnElement="Flow_016av8y">
+        <di:waypoint x="2650" y="461" />
+        <di:waypoint x="2650" y="510" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2660" y="483" width="12" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xlcdjb_di" bpmnElement="Flow_0xlcdjb">
+        <di:waypoint x="1090" y="610" />
+        <di:waypoint x="1090" y="835" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1g9b4ky_di" bpmnElement="Flow_1g9b4ky">
+        <di:waypoint x="1980" y="570" />
+        <di:waypoint x="1255" y="570" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xr74k8_di" bpmnElement="Flow_1xr74k8">
+        <di:waypoint x="1205" y="570" />
+        <di:waypoint x="1140" y="570" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1if3uhg_di" bpmnElement="Flow_1if3uhg">
+        <di:waypoint x="1970" y="1160" />
+        <di:waypoint x="1970" y="1225" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0zpqzrl_di" bpmnElement="Flow_0zpqzrl">
         <di:waypoint x="1945" y="1250" />
@@ -2579,12 +1848,40 @@
           <dc:Bounds x="1891" y="1227" width="23" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cumpie_di" bpmnElement="Flow_1cumpie">
+        <di:waypoint x="1380" y="660" />
+        <di:waypoint x="1425" y="660" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1b4mu23_di" bpmnElement="Flow_1b4mu23">
+        <di:waypoint x="1200" y="300" />
+        <di:waypoint x="1240" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08m1i2c_di" bpmnElement="Flow_08m1i2c">
+        <di:waypoint x="1340" y="300" />
+        <di:waypoint x="1380" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0eube0w_di" bpmnElement="Flow_0eube0w">
+        <di:waypoint x="2650" y="590" />
+        <di:waypoint x="2650" y="620" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04nhs1g_di" bpmnElement="Flow_04nhs1g">
+        <di:waypoint x="1820" y="436" />
+        <di:waypoint x="1850" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1l0avzi_di" bpmnElement="Flow_1l0avzi">
+        <di:waypoint x="1950" y="436" />
+        <di:waypoint x="2005" y="436" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ftovjp_di" bpmnElement="Flow_1ftovjp">
         <di:waypoint x="2030" y="461" />
         <di:waypoint x="2030" y="530" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="2048" y="491" width="23" height="14" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gksss0_di" bpmnElement="Flow_0gksss0">
+        <di:waypoint x="2300" y="1250" />
+        <di:waypoint x="2350" y="1250" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_1kpa5xz" bpmnElement="Flow_080tn30">
         <di:waypoint x="580" y="411" />
@@ -2593,6 +1890,22 @@
           <dc:Bounds x="584" y="373" width="23" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04yx8i8_di" bpmnElement="Flow_04yx8i8">
+        <di:waypoint x="510" y="436" />
+        <di:waypoint x="555" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0mic7ib_di" bpmnElement="Flow_0mic7ib">
+        <di:waypoint x="370" y="436" />
+        <di:waypoint x="410" y="436" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_03wih01_di" bpmnElement="Association_03wih01">
+        <di:waypoint x="1021" y="260" />
+        <di:waypoint x="1053" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0gnbwdq_di" bpmnElement="TextAnnotation_0gnbwdq">
+        <dc:Bounds x="2720" y="535" width="100" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_16kwl95_di" bpmnElement="TextAnnotation_16kwl95">
         <dc:Bounds x="780" y="200" width="285" height="30" />
         <bpmndi:BPMNLabel />
@@ -2613,10 +1926,10 @@
         <dc:Bounds x="660" y="500" width="244" height="27" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_0flii58_di" bpmnElement="TextAnnotation_0flii58">
-        <dc:Bounds x="1270" y="80" width="100" height="41" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0joigln_di" bpmnElement="Association_0joigln">
+        <di:waypoint x="2700" y="550" />
+        <di:waypoint x="2720" y="550" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_022lf4z_di" bpmnElement="Association_022lf4z">
         <di:waypoint x="754" y="260" />
         <di:waypoint x="780" y="215" />
@@ -2637,10 +1950,10 @@
         <di:waypoint x="593" y="448" />
         <di:waypoint x="660" y="513" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_12zf3el_di" bpmnElement="Association_12zf3el">
-        <di:waypoint x="1296" y="260" />
-        <di:waypoint x="1316" y="121" />
-      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0jilvkc_di" bpmnElement="TextAnnotation_0jilvkc">
+        <dc:Bounds x="1010" y="110" width="99.99999794078421" height="40.48582995951417" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
