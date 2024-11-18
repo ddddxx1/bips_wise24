@@ -184,8 +184,7 @@ public class Worker {
         final Frage frage = new Frage();
         final Antwort antwort = new Antwort();
 
-        //fixme: projektID_KO为空
-        projekt.setIdProjekt(parseInt(projektID_KO.toString()));    //设置idProjekt
+        projekt.setIdProjekt(parseInt(projektID_KO.toString()));    //向对象中设置idProjekt
         antwort.setIdAntwort(parseInt(antwortID_KO.toString()));
         frage.setIdFrage(parseInt(frageID_KO.toString()));
 
