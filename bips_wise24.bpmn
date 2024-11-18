@@ -1773,6 +1773,7 @@
     <bpmn:userTask id="Activity_1i4ks53" name="Anmelden">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_24e7b63" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0mzna6l</bpmn:incoming>
       <bpmn:outgoing>Flow_02qvf5g</bpmn:outgoing>
@@ -1833,9 +1834,63 @@
     <bpmn:endEvent id="Event_065uzic">
       <bpmn:incoming>Flow_0zy0mnk</bpmn:incoming>
     </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_01wgron" sourceRef="Activity_1b468q6" targetRef="Gateway_0ggwm2t" />
+    <bpmn:sequenceFlow id="Flow_02qvf5g" sourceRef="Activity_1i4ks53" targetRef="Activity_0rc29g6" />
+    <bpmn:sequenceFlow id="Flow_0483lep" sourceRef="Gateway_1t6jnoh" targetRef="Event_1byb43r" />
+    <bpmn:sequenceFlow id="Flow_04nhs1g" sourceRef="Activity_1ai3uix" targetRef="Activity_0ixs62r" />
+    <bpmn:sequenceFlow id="Flow_04yx8i8" sourceRef="Activity_171v9fh" targetRef="Gateway_0kr54y3" />
+    <bpmn:sequenceFlow id="Flow_06piv31" sourceRef="Gateway_1exicq0" targetRef="Gateway_134927e" />
+    <bpmn:sequenceFlow id="Flow_08m1i2c" sourceRef="Activity_0bdf6i8" targetRef="Activity_07d95uh" />
+    <bpmn:sequenceFlow id="Flow_099by04" sourceRef="Activity_1xsbdpr" targetRef="Gateway_134927e" />
+    <bpmn:sequenceFlow id="Flow_099egq8" sourceRef="Gateway_12v7haz" targetRef="Activity_176kvzt" />
+    <bpmn:sequenceFlow id="Flow_0bdikrz" sourceRef="Gateway_0ggwm2t" targetRef="Activity_0deisjr" />
+    <bpmn:sequenceFlow id="Flow_0bpb2up" sourceRef="Gateway_0dkuq2e" targetRef="Activity_1ai3uix" />
+    <bpmn:sequenceFlow id="Flow_0eube0w" sourceRef="Activity_17mneq2" targetRef="Activity_1b468q6" />
+    <bpmn:sequenceFlow id="Flow_0gksss0" sourceRef="Activity_0deisjr" targetRef="Activity_1ud1lkl" />
+    <bpmn:sequenceFlow id="Flow_0jhtvrl" sourceRef="Activity_07d95uh" targetRef="Gateway_0s722x8" />
+    <bpmn:sequenceFlow id="Flow_0mic7ib" sourceRef="Activity_1rugmnc" targetRef="Activity_171v9fh" />
+    <bpmn:sequenceFlow id="Flow_0mzna6l" sourceRef="Gateway_1akozmn" targetRef="Activity_1i4ks53" />
+    <bpmn:sequenceFlow id="Flow_0opbpz6" sourceRef="Activity_0lqgtac" targetRef="Activity_04ybgkf" />
+    <bpmn:sequenceFlow id="Flow_0rwt7ak" sourceRef="Activity_0ztxu93" targetRef="Activity_0tl1ro3" />
+    <bpmn:sequenceFlow id="Flow_0v9pywt" sourceRef="StartEvent_1" targetRef="Activity_1rugmnc" />
+    <bpmn:sequenceFlow id="Flow_0wkt56h" sourceRef="Activity_04ybgkf" targetRef="Activity_0ztxu93" />
+    <bpmn:sequenceFlow id="Flow_0xlcdjb" sourceRef="Activity_07qs932" targetRef="Gateway_1akozmn" />
+    <bpmn:sequenceFlow id="Flow_0ytrens" sourceRef="Activity_0tl1ro3" targetRef="Activity_1sasq83" />
+    <bpmn:sequenceFlow id="Flow_0z8hapn" sourceRef="Gateway_1q40nd7" targetRef="Activity_1n2stb6">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferantInProjekt="1"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0zy0mnk" sourceRef="Gateway_178kyci" targetRef="Event_065uzic" />
+    <bpmn:sequenceFlow id="Flow_105vuxv" sourceRef="Event_1byb43r" targetRef="Activity_04tc80y" />
+    <bpmn:sequenceFlow id="Flow_1151p7y" sourceRef="Activity_1kd1pek" targetRef="Gateway_0s722x8" />
+    <bpmn:sequenceFlow id="Flow_15clqef" sourceRef="Activity_09slwuv" targetRef="Gateway_0dkuq2e" />
+    <bpmn:sequenceFlow id="Flow_15zycj8" sourceRef="Activity_176kvzt" targetRef="Gateway_178kyci" />
+    <bpmn:sequenceFlow id="Flow_1648zwq" sourceRef="Gateway_0cn5bf8" targetRef="Gateway_0ggwm2t" />
+    <bpmn:sequenceFlow id="Flow_17s6a5o" sourceRef="Activity_0rc29g6" targetRef="Gateway_1exicq0" />
+    <bpmn:sequenceFlow id="Flow_17t89pb" sourceRef="Activity_1ud1lkl" targetRef="Gateway_12v7haz" />
+    <bpmn:sequenceFlow id="Flow_1b4mu23" sourceRef="Activity_1sasq83" targetRef="Activity_0bdf6i8" />
+    <bpmn:sequenceFlow id="Flow_1bydp9c" sourceRef="Gateway_0xdmeu8" targetRef="Gateway_0dkuq2e">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=AntwortVorhanden="0"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1byh78v" sourceRef="Activity_1n2stb6" targetRef="Gateway_0xdmeu8" />
+    <bpmn:sequenceFlow id="Flow_1cumpie" sourceRef="Activity_04tc80y" targetRef="Gateway_0oi9s3k" />
+    <bpmn:sequenceFlow id="Flow_1dbfnei" sourceRef="Gateway_0kr54y3" targetRef="Activity_1kd1pek" />
+    <bpmn:sequenceFlow id="Flow_1g9b4ky" sourceRef="Activity_0ohbvu5" targetRef="Gateway_1t6jnoh" />
+    <bpmn:sequenceFlow id="Flow_1gti6uq" sourceRef="Gateway_134927e" targetRef="Activity_1t7l9zz" />
+    <bpmn:sequenceFlow id="Flow_1if3uhg" sourceRef="Activity_11obj82" targetRef="Gateway_0cn5bf8" />
+    <bpmn:sequenceFlow id="Flow_1j8kovk" sourceRef="Activity_1t7l9zz" targetRef="Activity_1kylabx" />
+    <bpmn:sequenceFlow id="Flow_1jxw774" sourceRef="Gateway_04zxwz9" targetRef="Event_033e339" />
+    <bpmn:sequenceFlow id="Flow_1klqonf" sourceRef="Gateway_0xdmeu8" targetRef="Gateway_12v7haz" />
+    <bpmn:sequenceFlow id="Flow_1l0avzi" sourceRef="Activity_0ixs62r" targetRef="Gateway_1q40nd7" />
+    <bpmn:sequenceFlow id="Flow_1o8x3xu" sourceRef="Gateway_0oi9s3k" targetRef="Gateway_04zxwz9" />
+    <bpmn:sequenceFlow id="Flow_1pdfbzc" sourceRef="Gateway_0s722x8" targetRef="Activity_09slwuv" />
+    <bpmn:sequenceFlow id="Flow_1rbt5j2" sourceRef="Activity_0z3z710" targetRef="Gateway_04zxwz9" />
+    <bpmn:sequenceFlow id="Flow_1suit0v" sourceRef="Activity_1kylabx" targetRef="Activity_15lfh44" />
+    <bpmn:sequenceFlow id="Flow_1vaej7m" sourceRef="Activity_15lfh44" targetRef="Activity_11obj82" />
+    <bpmn:sequenceFlow id="Flow_1xr74k8" sourceRef="Gateway_1t6jnoh" targetRef="Activity_07qs932" />
     <bpmn:userTask id="Activity_0ztxu93" name="Fragebogen auswählen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cs6cph" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0wkt56h</bpmn:incoming>
       <bpmn:outgoing>Flow_0rwt7ak</bpmn:outgoing>
@@ -1895,6 +1950,7 @@
     <bpmn:userTask id="Activity_1kylabx" name="Im Fragebogen auswählen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_156cmh1" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1j8kovk</bpmn:incoming>
       <bpmn:outgoing>Flow_1suit0v</bpmn:outgoing>
@@ -1909,9 +1965,13 @@
       <bpmn:outgoing>Flow_1c40so9</bpmn:outgoing>
       <bpmn:outgoing>Flow_1o8x3xu</bpmn:outgoing>
     </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_016av8y" name="Ja" sourceRef="Gateway_178kyci" targetRef="Activity_17mneq2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=SollAngepasst="1"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:userTask id="Activity_1sasq83" name="K.O. Kriterien festlegen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1pk3qu8" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0ytrens</bpmn:incoming>
       <bpmn:outgoing>Flow_1b4mu23</bpmn:outgoing>
@@ -1919,6 +1979,7 @@
     <bpmn:userTask id="Activity_0bdf6i8" name="Kategorien gewichten">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_3e98cjj" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1b4mu23</bpmn:incoming>
       <bpmn:outgoing>Flow_08m1i2c</bpmn:outgoing>
@@ -1926,6 +1987,7 @@
     <bpmn:userTask id="Activity_17mneq2" name="Kategorien gewichten">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_0e7sd86" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_016av8y</bpmn:incoming>
       <bpmn:outgoing>Flow_0eube0w</bpmn:outgoing>
@@ -1933,6 +1995,7 @@
     <bpmn:userTask id="Activity_1ai3uix" name="Lieferant auswählen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cq3s87" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0bpb2up</bpmn:incoming>
       <bpmn:outgoing>Flow_04nhs1g</bpmn:outgoing>
@@ -1965,6 +2028,21 @@
       <bpmn:incoming>Flow_1pdfbzc</bpmn:incoming>
       <bpmn:outgoing>Flow_15clqef</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1h8ni2z" name="Nein" sourceRef="Gateway_1exicq0" targetRef="Gateway_1akozmn">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=AnmeldeKorrekt="0"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1c40so9" name="Nein" sourceRef="Gateway_0oi9s3k" targetRef="Activity_0z3z710">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=Fragebogenvollstandig="0"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0zpqzrl" name="Nein" sourceRef="Gateway_0cn5bf8" targetRef="Activity_1xsbdpr">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1ftovjp" name="Nein" sourceRef="Gateway_1q40nd7" targetRef="Activity_0ohbvu5">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferantInProjekt="0"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_080tn30" name="Nein" sourceRef="Gateway_0kr54y3" targetRef="Activity_0lqgtac">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=projekt_auswahl&lt;="0"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:exclusiveGateway id="Gateway_1q40nd7" name="Neuer Lieferant ausgewählt">
       <bpmn:incoming>Flow_1l0avzi</bpmn:incoming>
       <bpmn:outgoing>Flow_1ftovjp</bpmn:outgoing>
@@ -1987,6 +2065,7 @@
     <bpmn:userTask id="Activity_0lqgtac" name="Projekt anlegen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_09qrfoc" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_080tn30</bpmn:incoming>
       <bpmn:outgoing>Flow_0opbpz6</bpmn:outgoing>
@@ -1999,6 +2078,7 @@
     <bpmn:userTask id="Activity_171v9fh" name="Projekt auswählen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_26cbut7" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0mic7ib</bpmn:incoming>
       <bpmn:outgoing>Flow_04yx8i8</bpmn:outgoing>
@@ -2041,6 +2121,7 @@
     <bpmn:userTask id="Activity_176kvzt" name="Ranking und Antworten vom gewählten Lieferanten  angucken">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cp118s" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_099egq8</bpmn:incoming>
       <bpmn:outgoing>Flow_15zycj8</bpmn:outgoing>
@@ -2052,77 +2133,6 @@
       <bpmn:incoming>Flow_1xr74k8</bpmn:incoming>
       <bpmn:outgoing>Flow_0xlcdjb</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:sequenceFlow id="Flow_0483lep" sourceRef="Gateway_1t6jnoh" targetRef="Event_1byb43r" />
-    <bpmn:sequenceFlow id="Flow_105vuxv" sourceRef="Event_1byb43r" targetRef="Activity_04tc80y" />
-    <bpmn:sequenceFlow id="Flow_17s6a5o" sourceRef="Activity_0rc29g6" targetRef="Gateway_1exicq0" />
-    <bpmn:sequenceFlow id="Flow_06piv31" sourceRef="Gateway_1exicq0" targetRef="Gateway_134927e" />
-    <bpmn:sequenceFlow id="Flow_1h8ni2z" name="Nein" sourceRef="Gateway_1exicq0" targetRef="Gateway_1akozmn">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=AnmeldeKorrekt="0"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_02qvf5g" sourceRef="Activity_1i4ks53" targetRef="Activity_0rc29g6" />
-    <bpmn:sequenceFlow id="Flow_0mzna6l" sourceRef="Gateway_1akozmn" targetRef="Activity_1i4ks53" />
-    <bpmn:sequenceFlow id="Flow_0v9pywt" sourceRef="StartEvent_1" targetRef="Activity_1rugmnc" />
-    <bpmn:sequenceFlow id="Flow_1byh78v" sourceRef="Activity_1n2stb6" targetRef="Gateway_0xdmeu8" />
-    <bpmn:sequenceFlow id="Flow_1bydp9c" sourceRef="Gateway_0xdmeu8" targetRef="Gateway_0dkuq2e">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=AntwortVorhanden="0"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1klqonf" sourceRef="Gateway_0xdmeu8" targetRef="Gateway_12v7haz" />
-    <bpmn:sequenceFlow id="Flow_1gti6uq" sourceRef="Gateway_134927e" targetRef="Activity_1t7l9zz" />
-    <bpmn:sequenceFlow id="Flow_1j8kovk" sourceRef="Activity_1t7l9zz" targetRef="Activity_1kylabx" />
-    <bpmn:sequenceFlow id="Flow_1suit0v" sourceRef="Activity_1kylabx" targetRef="Activity_15lfh44" />
-    <bpmn:sequenceFlow id="Flow_1vaej7m" sourceRef="Activity_15lfh44" targetRef="Activity_11obj82" />
-    <bpmn:sequenceFlow id="Flow_0z8hapn" sourceRef="Gateway_1q40nd7" targetRef="Activity_1n2stb6">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferantInProjekt="1"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0rwt7ak" sourceRef="Activity_0ztxu93" targetRef="Activity_0tl1ro3" />
-    <bpmn:sequenceFlow id="Flow_0ytrens" sourceRef="Activity_0tl1ro3" targetRef="Activity_1sasq83" />
-    <bpmn:sequenceFlow id="Flow_1dbfnei" sourceRef="Gateway_0kr54y3" targetRef="Activity_1kd1pek" />
-    <bpmn:sequenceFlow id="Flow_1151p7y" sourceRef="Activity_1kd1pek" targetRef="Gateway_0s722x8" />
-    <bpmn:sequenceFlow id="Flow_1c40so9" name="Nein" sourceRef="Gateway_0oi9s3k" targetRef="Activity_0z3z710">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=Fragebogenvollstandig="0"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1rbt5j2" sourceRef="Activity_0z3z710" targetRef="Gateway_04zxwz9" />
-    <bpmn:sequenceFlow id="Flow_1jxw774" sourceRef="Gateway_04zxwz9" targetRef="Event_033e339" />
-    <bpmn:sequenceFlow id="Flow_0zy0mnk" sourceRef="Gateway_178kyci" targetRef="Event_065uzic" />
-    <bpmn:sequenceFlow id="Flow_0wkt56h" sourceRef="Activity_04ybgkf" targetRef="Activity_0ztxu93" />
-    <bpmn:sequenceFlow id="Flow_0opbpz6" sourceRef="Activity_0lqgtac" targetRef="Activity_04ybgkf" />
-    <bpmn:sequenceFlow id="Flow_1o8x3xu" sourceRef="Gateway_0oi9s3k" targetRef="Gateway_04zxwz9" />
-    <bpmn:sequenceFlow id="Flow_15clqef" sourceRef="Activity_09slwuv" targetRef="Gateway_0dkuq2e" />
-    <bpmn:sequenceFlow id="Flow_0bpb2up" sourceRef="Gateway_0dkuq2e" targetRef="Activity_1ai3uix" />
-    <bpmn:sequenceFlow id="Flow_01wgron" sourceRef="Activity_1b468q6" targetRef="Gateway_0ggwm2t" />
-    <bpmn:sequenceFlow id="Flow_1648zwq" sourceRef="Gateway_0cn5bf8" targetRef="Gateway_0ggwm2t" />
-    <bpmn:sequenceFlow id="Flow_0bdikrz" sourceRef="Gateway_0ggwm2t" targetRef="Activity_0deisjr" />
-    <bpmn:sequenceFlow id="Flow_0jhtvrl" sourceRef="Activity_07d95uh" targetRef="Gateway_0s722x8" />
-    <bpmn:sequenceFlow id="Flow_1pdfbzc" sourceRef="Gateway_0s722x8" targetRef="Activity_09slwuv" />
-    <bpmn:sequenceFlow id="Flow_17t89pb" sourceRef="Activity_1ud1lkl" targetRef="Gateway_12v7haz" />
-    <bpmn:sequenceFlow id="Flow_099egq8" sourceRef="Gateway_12v7haz" targetRef="Activity_176kvzt" />
-    <bpmn:sequenceFlow id="Flow_099by04" sourceRef="Activity_1xsbdpr" targetRef="Gateway_134927e" />
-    <bpmn:sequenceFlow id="Flow_15zycj8" sourceRef="Activity_176kvzt" targetRef="Gateway_178kyci" />
-    <bpmn:sequenceFlow id="Flow_016av8y" name="Ja" sourceRef="Gateway_178kyci" targetRef="Activity_17mneq2">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=SollAngepasst="1"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0xlcdjb" sourceRef="Activity_07qs932" targetRef="Gateway_1akozmn" />
-    <bpmn:sequenceFlow id="Flow_1g9b4ky" sourceRef="Activity_0ohbvu5" targetRef="Gateway_1t6jnoh" />
-    <bpmn:sequenceFlow id="Flow_1xr74k8" sourceRef="Gateway_1t6jnoh" targetRef="Activity_07qs932" />
-    <bpmn:sequenceFlow id="Flow_1if3uhg" sourceRef="Activity_11obj82" targetRef="Gateway_0cn5bf8" />
-    <bpmn:sequenceFlow id="Flow_0zpqzrl" name="Nein" sourceRef="Gateway_0cn5bf8" targetRef="Activity_1xsbdpr">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=false</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1cumpie" sourceRef="Activity_04tc80y" targetRef="Gateway_0oi9s3k" />
-    <bpmn:sequenceFlow id="Flow_1b4mu23" sourceRef="Activity_1sasq83" targetRef="Activity_0bdf6i8" />
-    <bpmn:sequenceFlow id="Flow_08m1i2c" sourceRef="Activity_0bdf6i8" targetRef="Activity_07d95uh" />
-    <bpmn:sequenceFlow id="Flow_0eube0w" sourceRef="Activity_17mneq2" targetRef="Activity_1b468q6" />
-    <bpmn:sequenceFlow id="Flow_04nhs1g" sourceRef="Activity_1ai3uix" targetRef="Activity_0ixs62r" />
-    <bpmn:sequenceFlow id="Flow_1l0avzi" sourceRef="Activity_0ixs62r" targetRef="Gateway_1q40nd7" />
-    <bpmn:sequenceFlow id="Flow_1ftovjp" name="Nein" sourceRef="Gateway_1q40nd7" targetRef="Activity_0ohbvu5">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=LieferantInProjekt="0"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0gksss0" sourceRef="Activity_0deisjr" targetRef="Activity_1ud1lkl" />
-    <bpmn:sequenceFlow id="Flow_080tn30" name="Nein" sourceRef="Gateway_0kr54y3" targetRef="Activity_0lqgtac">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=projekt_auswahl&lt;="0"</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_04yx8i8" sourceRef="Activity_171v9fh" targetRef="Gateway_0kr54y3" />
-    <bpmn:sequenceFlow id="Flow_0mic7ib" sourceRef="Activity_1rugmnc" targetRef="Activity_171v9fh" />
   </bpmn:process>
   <bpmn:message id="Message_1s92l7q" name="Message_1s92l7q" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -2130,16 +2140,16 @@
       <bpmndi:BPMNShape id="Participant_1lv6edr_di" bpmnElement="Participant_1lv6edr" isHorizontal="true">
         <dc:Bounds x="129" y="180" width="2701" height="1210" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_0ue2zcq_di" bpmnElement="Lane_0ue2zcq" isHorizontal="true">
-        <dc:Bounds x="159" y="180" width="2671" height="560" />
+      <bpmndi:BPMNShape id="Lane_1btot0y_di" bpmnElement="Lane_1btot0y" isHorizontal="true">
+        <dc:Bounds x="159" y="1030" width="2671" height="360" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_1neh1ul_di" bpmnElement="Lane_1neh1ul" isHorizontal="true">
         <dc:Bounds x="159" y="740" width="2671" height="290" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_1btot0y_di" bpmnElement="Lane_1btot0y" isHorizontal="true">
-        <dc:Bounds x="159" y="1030" width="2671" height="360" />
+      <bpmndi:BPMNShape id="Lane_0ue2zcq_di" bpmnElement="Lane_0ue2zcq" isHorizontal="true">
+        <dc:Bounds x="159" y="180" width="2671" height="560" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1byb43r_di" bpmnElement="Event_1byb43r">
@@ -2587,34 +2597,6 @@
         <di:waypoint x="370" y="436" />
         <di:waypoint x="410" y="436" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_022lf4z_di" bpmnElement="Association_022lf4z">
-        <di:waypoint x="754" y="260" />
-        <di:waypoint x="780" y="215" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_12zf3el_di" bpmnElement="Association_12zf3el">
-        <di:waypoint x="1296" y="260" />
-        <di:waypoint x="1316" y="121" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0joigln_di" bpmnElement="Association_0joigln">
-        <di:waypoint x="2700" y="550" />
-        <di:waypoint x="2720" y="550" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1gs92ij_di" bpmnElement="Association_1gs92ij">
-        <di:waypoint x="1929" y="396" />
-        <di:waypoint x="1951" y="365" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0i4djzi_di" bpmnElement="Association_0i4djzi">
-        <di:waypoint x="593" y="448" />
-        <di:waypoint x="660" y="513" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0iqt12v_di" bpmnElement="Association_0iqt12v">
-        <di:waypoint x="356" y="396" />
-        <di:waypoint x="397" y="351" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1jg3868_di" bpmnElement="Association_1jg3868">
-        <di:waypoint x="2546" y="396" />
-        <di:waypoint x="2587" y="350" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_0gnbwdq_di" bpmnElement="TextAnnotation_0gnbwdq">
         <dc:Bounds x="2720" y="535" width="100" height="30" />
         <bpmndi:BPMNLabel />
@@ -2643,6 +2625,34 @@
         <dc:Bounds x="1270" y="80" width="100" height="41" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0joigln_di" bpmnElement="Association_0joigln">
+        <di:waypoint x="2700" y="550" />
+        <di:waypoint x="2720" y="550" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_022lf4z_di" bpmnElement="Association_022lf4z">
+        <di:waypoint x="754" y="260" />
+        <di:waypoint x="780" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1gs92ij_di" bpmnElement="Association_1gs92ij">
+        <di:waypoint x="1929" y="396" />
+        <di:waypoint x="1951" y="365" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1jg3868_di" bpmnElement="Association_1jg3868">
+        <di:waypoint x="2546" y="396" />
+        <di:waypoint x="2587" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0iqt12v_di" bpmnElement="Association_0iqt12v">
+        <di:waypoint x="356" y="396" />
+        <di:waypoint x="397" y="351" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0i4djzi_di" bpmnElement="Association_0i4djzi">
+        <di:waypoint x="593" y="448" />
+        <di:waypoint x="660" y="513" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_12zf3el_di" bpmnElement="Association_12zf3el">
+        <di:waypoint x="1296" y="260" />
+        <di:waypoint x="1316" y="121" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
