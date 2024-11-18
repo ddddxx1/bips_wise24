@@ -11,7 +11,7 @@ public class KategoriegewichtInProjekt {
     private Id id;
 
     @Column(name = "gewicht", nullable = false)
-    private float gewicht;
+    private Double gewicht;
 
     public KategoriegewichtInProjekt() {
         this.id = new Id();
@@ -21,7 +21,7 @@ public class KategoriegewichtInProjekt {
         this.id = id;
     }
 
-    public void setGewicht(float gewicht) {
+    public void setGewicht(double gewicht) {
         this.gewicht = gewicht;
     }
 
@@ -29,7 +29,7 @@ public class KategoriegewichtInProjekt {
         return id;
     }
 
-    public float getGewicht() {
+    public double getGewicht() {
         return gewicht;
     }
 

@@ -1,6 +1,7 @@
 package de.ostfalia.bips.ws24.camunda.database.domain;
 
 import jakarta.persistence.*;
+import scala.Int;
 
 import java.io.Serializable;
 
@@ -11,7 +12,7 @@ public class ProjektHasAntwort {
     private Id id;
 
     @Column(name = "ist_ko_kriterium", nullable = false)
-    private boolean istKoKriterium;
+    private Integer ist_ko_kriterium;
 
     public ProjektHasAntwort() {
         this.id = new Id();
@@ -21,16 +22,24 @@ public class ProjektHasAntwort {
         this.id = id;
     }
 
-    public void setIstKoKriterium(boolean istKoKriterium) {
-        this.istKoKriterium = istKoKriterium;
-    }
+//    public void setIstKoKriterium(boolean istKoKriterium) {
+//        this.istKoKriterium = istKoKriterium;
+//    }
 
     public Id getId() {
         return id;
     }
 
-    public boolean isIstKoKriterium() {
-        return istKoKriterium;
+//    public boolean isIstKoKriterium() {
+//        return istKoKriterium;
+//    }
+
+    public void setIst_ko_kriterium(Integer ist_ko_kriterium) {
+        this.ist_ko_kriterium = ist_ko_kriterium;
+    }
+
+    public Integer getIst_ko_kriterium() {
+        return ist_ko_kriterium;
     }
 
     @Embeddable
