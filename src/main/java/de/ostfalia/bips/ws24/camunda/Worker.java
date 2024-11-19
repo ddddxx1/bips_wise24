@@ -154,7 +154,8 @@ public class Worker {
 //        ---------------------------------
         LOGGER.info("Antworten_Laden");
 
-        variables.put("frage_auswahl", 1);  // todo: test
+        variables.put("frage_auswahl", 1);  // todo: 输出对应的内容 而不是静态
+//        这个frage_auswahl在projekt-speichern1中被使用.它是设置为KO的frage,该frageId被存储在projekt_has_antwort表中
 
         //final Object projekte = job.getVariablesAsMap().get("projekt_lade");
         final Object frage= job.getVariablesAsMap().get("frage_auswahl");
@@ -188,6 +189,9 @@ public class Worker {
 
     @JobWorker(type = "projekt-speichern1")
     public Map<String, Object> projektSpeichern1(final ActivatedJob job) {
+//        fixme: 当frage不选择第一个时  会报错
+//        could not execute statement [Cannot add or update a child row: a foreign key constraint fails (`bips_wise24`.`projekt_has_antwort`, CONSTRAINT `fk_Projekt_has_Antwort_Antwort1` FOREIGN KEY (`id_antwort`, `id_frage`) REFERENCES `antwort` (`id_antwort`, `id_frage`))] [insert into projekt_has_antwort (ist_ko_kriterium,id_antwort,id_frage,id_projekt) values (?,?,?,?)]; SQL [insert into projekt_has_antwort (ist_ko_kriterium,id_antwort,id_frage,id_projekt) values (?,?,?,?)]; constraint [null]
+        // 原因: idAntwort和idFrage必须在数据库中存在外键对应关系, 但是现在idFrage始终为1, 导致外键约束失败
 
         LOGGER.info("Projekt_Speichern1");
 
