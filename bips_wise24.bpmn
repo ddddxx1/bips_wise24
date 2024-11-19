@@ -2000,6 +2000,11 @@
       <bpmn:incoming>Flow_0bpb2up</bpmn:incoming>
       <bpmn:outgoing>Flow_04nhs1g</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_1q40nd7" name="Lieferant in Projekt">
+      <bpmn:incoming>Flow_1l0avzi</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ftovjp</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0z8hapn</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
     <bpmn:sendTask id="Activity_1xsbdpr" name="Lieferant über Unvollständigkeit informieren">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="lieferant-uber-unvollstandigkeit-informieren" />
@@ -2043,11 +2048,6 @@
     <bpmn:sequenceFlow id="Flow_080tn30" name="Nein" sourceRef="Gateway_0kr54y3" targetRef="Activity_0lqgtac">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=projekt_auswahl&lt;="0"</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:exclusiveGateway id="Gateway_1q40nd7" name="Neuer Lieferant ausgewählt">
-      <bpmn:incoming>Flow_1l0avzi</bpmn:incoming>
-      <bpmn:outgoing>Flow_1ftovjp</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0z8hapn</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
     <bpmn:sendTask id="Activity_1ud1lkl" name="neues Ranking liegt vor">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="neues-ranking-liegt-vor" />
@@ -2295,7 +2295,7 @@
       <bpmndi:BPMNShape id="Gateway_1q40nd7_di" bpmnElement="Gateway_1q40nd7" isMarkerVisible="true">
         <dc:Bounds x="2005" y="411" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1992" y="374" width="77" height="27" />
+          <dc:Bounds x="2004" y="374" width="55" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1rnae1a_di" bpmnElement="Activity_1ud1lkl">
