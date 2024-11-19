@@ -1,10 +1,12 @@
 package de.ostfalia.bips.ws24.camunda.database.domain;
 
 import jakarta.persistence.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 
 @Entity
+@Transactional
 @Table(name = "projekt_has_lieferant")
 public class ProjektHasLieferant {
     @EmbeddedId
@@ -13,7 +15,7 @@ public class ProjektHasLieferant {
     @Column(name = "score", nullable = true)
     private Float score;
 
-    @Column(name = "rank", nullable = true)
+    @Column(name = "`rank`", nullable = true)
     private Integer rank;
 
     public ProjektHasLieferant() {

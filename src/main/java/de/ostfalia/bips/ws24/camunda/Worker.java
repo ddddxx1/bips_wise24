@@ -585,7 +585,7 @@ public class Worker {
 
     @JobWorker(type = "lieferant-zum-projekt-hinzufugen")
     public Map<String, Object> lieferantZumProjektHinzufugen(final ActivatedJob job) {
-//        fixme:SQL语法有错 Operater中的所有参数一一对应，但是提示Sql语句中rank,score,id_lieferant,id_projekt) values (null,null,4,8)
+
         LOGGER.info("Lieferant_ZumProjekt_Hinzufugen");
 
 
