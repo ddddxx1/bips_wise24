@@ -3,9 +3,6 @@
   <bpmn:collaboration id="Collaboration_1rwiuqm">
     <bpmn:extensionElements />
     <bpmn:participant id="Participant_1lv6edr" processRef="bips_wise24" />
-    <bpmn:textAnnotation id="TextAnnotation_0gnbwdq">
-      <bpmn:text>todo：修改form</bpmn:text>
-    </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_16kwl95">
       <bpmn:text>Nur ID und Beschreibung</bpmn:text>
     </bpmn:textAnnotation>
@@ -21,7 +18,6 @@
     <bpmn:textAnnotation id="TextAnnotation_1qyydnx">
       <bpmn:text>z. B. -1 wenn neu angelegt werden soll</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_0joigln" associationDirection="None" sourceRef="Activity_17mneq2" targetRef="TextAnnotation_0gnbwdq" />
     <bpmn:association id="Association_022lf4z" sourceRef="Activity_04ybgkf" targetRef="TextAnnotation_16kwl95" />
     <bpmn:association id="Association_1gs92ij" sourceRef="Activity_0ixs62r" targetRef="TextAnnotation_1fr6f92" />
     <bpmn:association id="Association_1jg3868" sourceRef="Activity_176kvzt" targetRef="TextAnnotation_11oy7u1" />
@@ -1084,6 +1080,7 @@
     <bpmn:userTask id="Activity_1i4ks53" name="Anmelden">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_24e7b63" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0mzna6l</bpmn:incoming>
       <bpmn:outgoing>Flow_02qvf5g</bpmn:outgoing>
@@ -1147,6 +1144,7 @@
     <bpmn:userTask id="Activity_0ztxu93" name="Fragebogen auswählen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cs6cph" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0wkt56h</bpmn:incoming>
       <bpmn:outgoing>Flow_0rwt7ak</bpmn:outgoing>
@@ -1206,6 +1204,7 @@
     <bpmn:userTask id="Activity_1kylabx" name="Im Fragebogen auswählen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_156cmh1" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1j8kovk</bpmn:incoming>
       <bpmn:outgoing>Flow_1suit0v</bpmn:outgoing>
@@ -1223,6 +1222,7 @@
     <bpmn:userTask id="Activity_1sasq83" name="K.O. Kriterien festlegen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1pk3qu8" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0ytrens</bpmn:incoming>
       <bpmn:outgoing>Flow_1b4mu23</bpmn:outgoing>
@@ -1230,6 +1230,7 @@
     <bpmn:userTask id="Activity_0bdf6i8" name="Kategorien gewichten">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_3e98cjj" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1b4mu23</bpmn:incoming>
       <bpmn:outgoing>Flow_08m1i2c</bpmn:outgoing>
@@ -1237,6 +1238,7 @@
     <bpmn:userTask id="Activity_17mneq2" name="Kategorien gewichten">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_0e7sd86" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_016av8y</bpmn:incoming>
       <bpmn:outgoing>Flow_0eube0w</bpmn:outgoing>
@@ -1244,6 +1246,7 @@
     <bpmn:userTask id="Activity_1ai3uix" name="Lieferant auswählen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cq3s87" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0bpb2up</bpmn:incoming>
       <bpmn:outgoing>Flow_04nhs1g</bpmn:outgoing>
@@ -1298,6 +1301,7 @@
     <bpmn:userTask id="Activity_0lqgtac" name="Projekt anlegen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_09qrfoc" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_080tn30</bpmn:incoming>
       <bpmn:outgoing>Flow_0opbpz6</bpmn:outgoing>
@@ -1310,6 +1314,7 @@
     <bpmn:userTask id="Activity_171v9fh" name="Projekt auswählen">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_26cbut7" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0mic7ib</bpmn:incoming>
       <bpmn:outgoing>Flow_04yx8i8</bpmn:outgoing>
@@ -1352,6 +1357,7 @@
     <bpmn:userTask id="Activity_176kvzt" name="Ranking und Antworten vom gewählten Lieferanten  angucken">
       <bpmn:extensionElements>
         <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1cp118s" />
+        <zeebe:assignmentDefinition assignee="demo" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_099egq8</bpmn:incoming>
       <bpmn:outgoing>Flow_15zycj8</bpmn:outgoing>
@@ -1898,14 +1904,6 @@
         <di:waypoint x="370" y="436" />
         <di:waypoint x="410" y="436" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_03wih01_di" bpmnElement="Association_03wih01">
-        <di:waypoint x="1021" y="260" />
-        <di:waypoint x="1053" y="150" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="TextAnnotation_0gnbwdq_di" bpmnElement="TextAnnotation_0gnbwdq">
-        <dc:Bounds x="2720" y="535" width="100" height="30" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_16kwl95_di" bpmnElement="TextAnnotation_16kwl95">
         <dc:Bounds x="780" y="200" width="285" height="30" />
         <bpmndi:BPMNLabel />
@@ -1926,10 +1924,10 @@
         <dc:Bounds x="660" y="500" width="244" height="27" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_0joigln_di" bpmnElement="Association_0joigln">
-        <di:waypoint x="2700" y="550" />
-        <di:waypoint x="2720" y="550" />
-      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0jilvkc_di" bpmnElement="TextAnnotation_0jilvkc">
+        <dc:Bounds x="1010" y="110" width="99.99999794078421" height="40.48582995951417" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_022lf4z_di" bpmnElement="Association_022lf4z">
         <di:waypoint x="754" y="260" />
         <di:waypoint x="780" y="215" />
@@ -1950,10 +1948,10 @@
         <di:waypoint x="593" y="448" />
         <di:waypoint x="660" y="513" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="TextAnnotation_0jilvkc_di" bpmnElement="TextAnnotation_0jilvkc">
-        <dc:Bounds x="1010" y="110" width="99.99999794078421" height="40.48582995951417" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_03wih01_di" bpmnElement="Association_03wih01">
+        <di:waypoint x="1021" y="260" />
+        <di:waypoint x="1053" y="150" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
