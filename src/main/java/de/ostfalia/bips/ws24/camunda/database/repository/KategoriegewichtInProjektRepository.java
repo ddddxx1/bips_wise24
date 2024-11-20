@@ -8,8 +8,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-
+@Transactional
 public interface KategoriegewichtInProjektRepository extends JpaRepository<KategoriegewichtInProjekt, Integer>, JpaSpecificationExecutor<KategoriegewichtInProjekt> {
 
     @Query("SELECT kgip.gewicht FROM KategoriegewichtInProjekt kgip WHERE kgip.id.projekt.idProjekt = :idProjekt AND kgip.id.kategorie.idKategorie = :idKategorie")

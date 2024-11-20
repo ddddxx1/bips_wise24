@@ -1,10 +1,12 @@
 package de.ostfalia.bips.ws24.camunda.database.domain;
 
 import jakarta.persistence.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 
 @Entity
+@Transactional
 @Table(name = "kategoriegewicht_in_projekt")
 public class KategoriegewichtInProjekt {
     @EmbeddedId
