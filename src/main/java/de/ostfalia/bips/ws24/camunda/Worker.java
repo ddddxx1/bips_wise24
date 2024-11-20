@@ -128,7 +128,7 @@ public class Worker {
         projekt.setIdProjekt(newIdProjekt);
         projekt.setKomponente(String.valueOf(newIdProjekt));
 
-        projektService.getRepository().save(projekt);
+        projektService.getRepository().save(projekt);   //写入数据库
         LOGGER.info("newIDProjekt"+ newIdProjekt);
 
         //Projekt Projekte = projektService.getRepository().findProjektByProjektID(newIdProjekt);
@@ -226,7 +226,7 @@ public class Worker {
 //        final Object projektID_KO= job.getVariablesAsMap().get("projekt_auswahl1");
         final Object projektID_KO = ((List<Map<String, Object>>) job.getVariablesAsMap().get("Projekte")).get(0).get("value");
         final Object antwortID_KO= job.getVariablesAsMap().get("antwort_auswahl");
-        final Object frageID_KO= job.getVariablesAsMap().get("frage_auswahl");
+//        final Object frageID_KO= job.getVariablesAsMap().get("frage_auswahl");
         final Object ergebnisKO_KO= job.getVariablesAsMap().get("ergebnisKO");
 
 
@@ -245,12 +245,46 @@ public class Worker {
 //        frage.setIdFrage(parseInt(frageID_KO.toString()));
         frage.setIdFrage(ausgewahlteFrageID_KO);
 
-        projektHasAntwort.setIst_ko_kriterium(1);
-        projektHasAntwort.getId().setProjekt(projekt);
-        projektHasAntwort.getId().setAntwort(antwort);
-        projektHasAntwort.getId().setFrage(frage);
 
-        projektHasAntwortService.getRepository().save(projektHasAntwort);
+        if (parseInt(ergebnisKO_KO.toString()) == 1) {
+            projektHasAntwort.setIst_ko_kriterium(1);
+            projektHasAntwort.getId().setProjekt(projekt);
+            projektHasAntwort.getId().setAntwort(antwort);
+            projektHasAntwort.getId().setFrage(frage);
+
+            projektHasAntwortService.getRepository().save(projektHasAntwort);
+        }
+
+        final Object antwortID_KO1= job.getVariablesAsMap().get("antwort_auswahl1");
+        final Object antwortID_KO2= job.getVariablesAsMap().get("antwort_auswahl2");
+        final Object ergebnisKO_KO1= job.getVariablesAsMap().get("ergebnisKO1");
+        final Object ergebnisKO_KO2= job.getVariablesAsMap().get("ergebnisKO2");
+
+        if (antwortID_KO1 != null && ergebnisKO_KO1 != null && parseInt(ergebnisKO_KO1.toString()) == 1) {
+            int ausgewahlteFrageID_KO1 = antwortService.getRepository().findidFrageByidAntwort(parseInt(antwortID_KO1.toString()));
+            antwort.setIdAntwort(parseInt(antwortID_KO1.toString()));
+            frage.setIdFrage(ausgewahlteFrageID_KO1);
+
+            projektHasAntwort.setIst_ko_kriterium(1);
+            projektHasAntwort.getId().setProjekt(projekt);
+            projektHasAntwort.getId().setAntwort(antwort);
+            projektHasAntwort.getId().setFrage(frage);
+
+            projektHasAntwortService.getRepository().save(projektHasAntwort);
+        }
+
+        if (antwortID_KO2 != null && ergebnisKO_KO2 != null && parseInt(ergebnisKO_KO2.toString()) == 1) {
+            int ausgewahlteFrageID_KO2 = antwortService.getRepository().findidFrageByidAntwort(parseInt(antwortID_KO2.toString()));
+            antwort.setIdAntwort(parseInt(antwortID_KO2.toString()));
+            frage.setIdFrage(ausgewahlteFrageID_KO2);
+
+            projektHasAntwort.setIst_ko_kriterium(1);
+            projektHasAntwort.getId().setProjekt(projekt);
+            projektHasAntwort.getId().setAntwort(antwort);
+            projektHasAntwort.getId().setFrage(frage);
+
+            projektHasAntwortService.getRepository().save(projektHasAntwort);
+        }
 
 
         final HashMap<String, Object> variables = new HashMap<>();
@@ -1544,7 +1578,7 @@ public class Worker {
                 float gewicht = kategoriegewichtInProjektService.findGewichtByIdProjektAndIdKategorie(projektIdInt, idKategorie);
                 int punktValue = antwortService.findPunktByidAntwort(antwortId1);
                 sum += punktValue * gewicht;
-                isLieferant_KO_auswahlen = projektHasAntwortService.existsByProjektIdAndAntwortId(projektIdInt,antwortId1);
+                isLieferant_KO_auswahlen = projektHasAntwortService.existsByProjektIdAndAntwortId(projektIdInt,antwortId1);     // 这里通过数据库中的条目数量来判断是否KO而不考虑数据库中is_ko字段的值  所以只有KO为ja才会被写入数据库
                 String ko = isLieferant_KO_auswahlen ? "1" : "0";
                 i = i+ parseInt(ko);
             }
