@@ -209,6 +209,7 @@ public class Worker {
         variables.put("frage_auswahl", Frage);
         variables.put("Projekte2", Projekte2);
         variables.put("Katergorien", Katergorien);
+        variables.put("projekt_auswahl2", Projekte2.get(0).getValue());
 
 
 
@@ -632,7 +633,6 @@ public class Worker {
         Double gewicht3_up = parseDouble(gewicht3_up_temp.toString());
         Double gewicht4_up = parseDouble(gewicht4_up_temp.toString());
 
-        System.out.println("printing update Information " + projektID + "," + kategorieID1_up + "," + gewicht1_up);
         kategoriegewichtInProjektService.getRepository().setGewicht(projektID,kategorieID1_up,gewicht1_up);
         kategoriegewichtInProjektService.getRepository().setGewicht(projektID,kategorieID2_up,gewicht2_up);
         kategoriegewichtInProjektService.getRepository().setGewicht(projektID,kategorieID3_up,gewicht3_up);

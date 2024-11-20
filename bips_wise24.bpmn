@@ -281,20 +281,6 @@
       "id": "Field_0hadghs"
     },
     {
-      "label": "Projekt Auswählen",
-      "type": "select",
-      "layout": {
-        "row": "Row_17g4mud",
-        "columns": null
-      },
-      "id": "Field_13cx7do",
-      "key": "projekt_auswahl2",
-      "valuesKey": "Projekte2",
-      "validate": {
-        "required": true
-      }
-    },
-    {
       "label": "Katergorien1 Auswählen",
       "type": "select",
       "layout": {
@@ -409,9 +395,9 @@
   "executionPlatformVersion": "8.3.0",
   "exporter": {
     "name": "Camunda Modeler",
-    "version": "5.16.0"
+    "version": "5.28.0"
   },
-  "schemaVersion": 11
+  "schemaVersion": 16
 }</zeebe:userTaskForm>
       <zeebe:userTaskForm id="UserTaskForm_1cq3s87">{
   "components": [
