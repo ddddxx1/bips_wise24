@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import de.ostfalia.bips.ws24.camunda.database.domain.*;
 import de.ostfalia.bips.ws24.camunda.database.service.*;
 import io.camunda.zeebe.client.api.response.ActivatedJob;
+import org.camunda.feel.syntaxtree.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import org.springframework.boot.SpringApplication;
@@ -154,17 +155,43 @@ public class Worker {
 //        ---------------------------------
         LOGGER.info("Antworten_Laden");
 
-        variables.put("frage_auswahl", 1);  // todo: 输出对应的内容 而不是静态
+//        variables.put("frage_auswahl", 1);
 //        这个frage_auswahl在projekt-speichern1中被使用.它是设置为KO的frage,该frageId被存储在projekt_has_antwort表中
 
         //final Object projekte = job.getVariablesAsMap().get("projekt_lade");
-        final Object frage= job.getVariablesAsMap().get("frage_auswahl");
+        final Object frage= job.getVariablesAsMap().get("frage_auswahl");   // 这里的frage不需要读取用户输入，
         final Object projekt_id= job.getVariablesAsMap().get("newIdProjekt");
 
 
-        final List<Option<Integer>> Antworten = antwortService.getRepository().findAntwortIdsByFrageId(parseInt(frage.toString())).stream()
-                .map(e -> new Option<>(e.getAntwortText(), e.getIdAntwort()))
+//        final List<Option<Integer>> Antworten = antwortService.getRepository().findAntwortIdsByFrageId(parseInt(frage.toString())).stream()
+//                .map(e -> new Option<>(e.getAntwortText(), e.getIdAntwort()))
+//                .collect(Collectors.toList());
+
+//        Antworten = Fragebogen -> Frage -> Antwort
+        final List<Option<Integer>> Frage = fragebogenHasFrageService.getRepository().findAllFrageOderById(projekt.getFragebogen().getIdFragebogen()).stream()
+                .map(e -> new Option<>(e.getFrageText(), e.getIdFrage()))
                 .collect(Collectors.toList());
+
+
+
+        int frageCount = Frage.size();
+
+//        List<List<Option<Integer>>> Antworten = new ArrayList<>();
+//        for (int i = 0; i < frageCount; i++) {
+//            final List<Option<Integer>> Antwort = antwortService.getRepository().findAntwortIdsByFrageId(parseInt(Frage.get(i).getValue().toString())).stream()
+//                    .map(e -> new Option<>(e.getAntwortText(), e.getIdAntwort()))
+//                    .collect(Collectors.toList());
+//
+//            Antworten.add(Antwort);
+//        }
+        List<Option<Integer>> Antworten = new ArrayList<>();
+        for (int i = 0; i < frageCount; i++) {
+            List<Option<Integer>> Antwort = antwortService.getRepository().findAntwortIdsByFrageId(parseInt(Frage.get(i).getValue().toString())).stream()
+                    .map(e -> new Option<>(e.getAntwortText(), e.getIdAntwort()))
+                    .collect(Collectors.toList());
+
+            Antworten.addAll(Antwort);
+        }
 
         //Projekt Projekte2 = projektService.getRepository().findProjektByProjektID(parseInt(projekt_id.toString()));
 
@@ -178,7 +205,8 @@ public class Worker {
 
 
 //        final HashMap<String, Object> variables = new HashMap<>();
-        variables.put("Antworten", Antworten);
+        variables.put("Antworten", Antworten);  // 这个Antworten供用户在 K.O. Kriterium中选择，所以这里的Antworten应该根据fragebogen来选择
+        variables.put("frage_auswahl", Frage);
         variables.put("Projekte2", Projekte2);
         variables.put("Katergorien", Katergorien);
 
@@ -189,7 +217,6 @@ public class Worker {
 
     @JobWorker(type = "projekt-speichern1")
     public Map<String, Object> projektSpeichern1(final ActivatedJob job) {
-//        fixme: 当frage不选择第一个时  会报错
 //        could not execute statement [Cannot add or update a child row: a foreign key constraint fails (`bips_wise24`.`projekt_has_antwort`, CONSTRAINT `fk_Projekt_has_Antwort_Antwort1` FOREIGN KEY (`id_antwort`, `id_frage`) REFERENCES `antwort` (`id_antwort`, `id_frage`))] [insert into projekt_has_antwort (ist_ko_kriterium,id_antwort,id_frage,id_projekt) values (?,?,?,?)]; SQL [insert into projekt_has_antwort (ist_ko_kriterium,id_antwort,id_frage,id_projekt) values (?,?,?,?)]; constraint [null]
         // 原因: idAntwort和idFrage必须在数据库中存在外键对应关系, 但是现在idFrage始终为1, 导致外键约束失败
 
@@ -203,6 +230,8 @@ public class Worker {
         final Object ergebnisKO_KO= job.getVariablesAsMap().get("ergebnisKO");
 
 
+//        通过antwortID_KO找到对应的frageID_KO
+        int ausgewahlteFrageID_KO = antwortService.getRepository().findidFrageByidAntwort(parseInt(antwortID_KO.toString()));
 
 
         final ProjektHasAntwort projektHasAntwort = new ProjektHasAntwort();
@@ -213,7 +242,8 @@ public class Worker {
 
         projekt.setIdProjekt(parseInt(projektID_KO.toString()));
         antwort.setIdAntwort(parseInt(antwortID_KO.toString()));
-        frage.setIdFrage(parseInt(frageID_KO.toString()));
+//        frage.setIdFrage(parseInt(frageID_KO.toString()));
+        frage.setIdFrage(ausgewahlteFrageID_KO);
 
         projektHasAntwort.setIst_ko_kriterium(1);
         projektHasAntwort.getId().setProjekt(projekt);
