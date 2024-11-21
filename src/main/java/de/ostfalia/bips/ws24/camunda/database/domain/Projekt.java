@@ -1,8 +1,10 @@
 package de.ostfalia.bips.ws24.camunda.database.domain;
 
 import jakarta.persistence.*;
+import org.springframework.transaction.annotation.Transactional;
 
 @Entity
+@Transactional
 @Table(name = "projekt")
 public class Projekt {
     @Id

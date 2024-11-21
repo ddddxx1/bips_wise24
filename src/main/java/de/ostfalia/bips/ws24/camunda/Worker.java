@@ -254,6 +254,13 @@ public class Worker {
             projektHasAntwort.getId().setFrage(frage);
 
             projektHasAntwortService.getRepository().save(projektHasAntwort);
+        } else {
+            projektHasAntwort.setIst_ko_kriterium(0);
+            projektHasAntwort.getId().setProjekt(projekt);
+            projektHasAntwort.getId().setAntwort(antwort);
+            projektHasAntwort.getId().setFrage(frage);
+
+            projektHasAntwortService.getRepository().save(projektHasAntwort);
         }
 
         final Object antwortID_KO1= job.getVariablesAsMap().get("antwort_auswahl1");
