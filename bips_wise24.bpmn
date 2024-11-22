@@ -164,6 +164,78 @@
       "validate": {
         "required": true
       }
+    },
+    {
+      "text": "### Optional",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_0g16tn1",
+        "columns": null
+      },
+      "id": "Field_0bekmdg"
+    },
+    {
+      "label": "Antwort Auswählen",
+      "type": "select",
+      "layout": {
+        "row": "Row_0uyv64g",
+        "columns": null
+      },
+      "id": "Field_0simqwa",
+      "key": "antwort_auswahl1",
+      "valuesKey": "Antworten"
+    },
+    {
+      "values": [
+        {
+          "label": "Ja",
+          "value": "1"
+        },
+        {
+          "label": "Nein",
+          "value": "0"
+        }
+      ],
+      "label": "K.O. Kreterium Festlegen",
+      "type": "radio",
+      "layout": {
+        "row": "Row_13tjxhy",
+        "columns": null
+      },
+      "id": "Field_1tepa9q",
+      "key": "ergebnisKO1"
+    },
+    {
+      "label": "Antwort Auswählen",
+      "type": "select",
+      "layout": {
+        "row": "Row_0telhui",
+        "columns": null
+      },
+      "id": "Field_0uviscm",
+      "key": "antwort_auswahl2",
+      "valuesKey": "Antworten"
+    },
+    {
+      "values": [
+        {
+          "label": "Ja",
+          "value": "1"
+        },
+        {
+          "label": "Nein",
+          "value": "0"
+        }
+      ],
+      "label": "K.O. Kreterium Festlegen",
+      "type": "radio",
+      "layout": {
+        "row": "Row_1bhouvr",
+        "columns": null
+      },
+      "id": "Field_1wje7hz",
+      "key": "ergebnisKO2"
     }
   ],
   "type": "default",

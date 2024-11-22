@@ -264,45 +264,45 @@ public class Worker {
 //            projektHasAntwortService.getRepository().save(projektHasAntwort);
 //        }
 
-//        final Object antwortID_KO1= job.getVariablesAsMap().get("antwort_auswahl1");
-//        final Object antwortID_KO2= job.getVariablesAsMap().get("antwort_auswahl2");
-//        final Object ergebnisKO_KO1= job.getVariablesAsMap().get("ergebnisKO1");
-//        final Object ergebnisKO_KO2= job.getVariablesAsMap().get("ergebnisKO2");
-//
-//        if (antwortID_KO1 != null && ergebnisKO_KO1 != null && parseInt(ergebnisKO_KO1.toString()) == 1) {
-//            int ausgewahlteFrageID_KO1 = antwortService.getRepository().findidFrageByidAntwort(parseInt(antwortID_KO1.toString()));
-//            antwort.setIdAntwort(parseInt(antwortID_KO1.toString()));
-//            frage.setIdFrage(ausgewahlteFrageID_KO1);
-//
-//            projektHasAntwort.setIst_ko_kriterium(1);
-//            projektHasAntwort.getId().setProjekt(projekt);
-//            projektHasAntwort.getId().setAntwort(antwort);
-//            projektHasAntwort.getId().setFrage(frage);
-//
-//            projektHasAntwortService.getRepository().save(projektHasAntwort);
-//        }
-//
-//        if (antwortID_KO2 != null && ergebnisKO_KO2 != null && parseInt(ergebnisKO_KO2.toString()) == 1) {
-//            int ausgewahlteFrageID_KO2 = antwortService.getRepository().findidFrageByidAntwort(parseInt(antwortID_KO2.toString()));
-//            antwort.setIdAntwort(parseInt(antwortID_KO2.toString()));
-//            frage.setIdFrage(ausgewahlteFrageID_KO2);
-//
-//            projektHasAntwort.setIst_ko_kriterium(1);
-//            projektHasAntwort.getId().setProjekt(projekt);
-//            projektHasAntwort.getId().setAntwort(antwort);
-//            projektHasAntwort.getId().setFrage(frage);
-//
-//            projektHasAntwortService.getRepository().save(projektHasAntwort); // fixme:如果用到三个dropdown，目前代码会将最后一个结果覆盖前面的结果
-//        }
+        final Object antwortID_KO1= job.getVariablesAsMap().get("antwort_auswahl1");
+        final Object antwortID_KO2= job.getVariablesAsMap().get("antwort_auswahl2");
+        final Object ergebnisKO_KO1= job.getVariablesAsMap().get("ergebnisKO1");
+        final Object ergebnisKO_KO2= job.getVariablesAsMap().get("ergebnisKO2");
+
+        if (antwortID_KO1 != null && ergebnisKO_KO1 != null && parseInt(ergebnisKO_KO1.toString()) == 1) {
+            int ausgewahlteFrageID_KO1 = antwortService.getRepository().findidFrageByidAntwort(parseInt(antwortID_KO1.toString()));
+            antwort.setIdAntwort(parseInt(antwortID_KO1.toString()));
+            frage.setIdFrage(ausgewahlteFrageID_KO1);
+
+            projektHasAntwort.setIst_ko_kriterium(1);
+            projektHasAntwort.getId().setProjekt(projekt);
+            projektHasAntwort.getId().setAntwort(antwort);
+            projektHasAntwort.getId().setFrage(frage);
+
+            projektHasAntwortService.getRepository().save(projektHasAntwort);
+        }
+
+        if (antwortID_KO2 != null && ergebnisKO_KO2 != null && parseInt(ergebnisKO_KO2.toString()) == 1) {
+            int ausgewahlteFrageID_KO2 = antwortService.getRepository().findidFrageByidAntwort(parseInt(antwortID_KO2.toString()));
+            antwort.setIdAntwort(parseInt(antwortID_KO2.toString()));
+            frage.setIdFrage(ausgewahlteFrageID_KO2);
+
+            projektHasAntwort.setIst_ko_kriterium(1);
+            projektHasAntwort.getId().setProjekt(projekt);
+            projektHasAntwort.getId().setAntwort(antwort);
+            projektHasAntwort.getId().setFrage(frage);
+
+            projektHasAntwortService.getRepository().save(projektHasAntwort);
+        }
 
 
         final HashMap<String, Object> variables = new HashMap<>();
-        if (parseInt(ergebnisKO_KO.toString()) == 1) {
-            variables.put("projektID_KO", projektHasAntwort.getId().getProjekt().getIdProjekt());
-            variables.put("antwortID_KO", projektHasAntwort.getId().getAntwort().getIdAntwort());
-            variables.put("frageID_KO", projektHasAntwort.getId().getFrage().getIdFrage());
-            variables.put("istKO_KO", projektHasAntwort.getIst_ko_kriterium());
-        }
+//        if (parseInt(ergebnisKO_KO.toString()) == 1 || (ergebnisKO_KO1 != null && parseInt(ergebnisKO_KO1.toString()) == 1) || (ergebnisKO_KO2 != null && parseInt(ergebnisKO_KO2.toString()) == 1)) {
+//            variables.put("projektID_KO", projektHasAntwort.getId().getProjekt().getIdProjekt());
+//            variables.put("antwortID_KO", projektHasAntwort.getId().getAntwort().getIdAntwort());
+//            variables.put("frageID_KO", projektHasAntwort.getId().getFrage().getIdFrage());
+//            variables.put("istKO_KO", projektHasAntwort.getIst_ko_kriterium());
+//        }
 //        variables.put("projektID_KO", projektHasAntwort.getId().getProjekt().getIdProjekt());
 //        variables.put("antwortID_KO", projektHasAntwort.getId().getAntwort().getIdAntwort());
 //        variables.put("frageID_KO", projektHasAntwort.getId().getFrage().getIdFrage());
