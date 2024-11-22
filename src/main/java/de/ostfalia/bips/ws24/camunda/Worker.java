@@ -191,6 +191,7 @@ public class Worker {
                     .collect(Collectors.toList());
 
             Antworten.addAll(Antwort);
+            // 这里要删除vollstandigkeit的antwort
         }
 
         //Projekt Projekte2 = projektService.getRepository().findProjektByProjektID(parseInt(projekt_id.toString()));
@@ -1095,27 +1096,52 @@ public class Worker {
         Integer frageID19 = frage19.getIdFrage();
         Integer frageID20 = frage20.getIdFrage();
 
-        Integer antwortID1 = parseInt(antwort1_temp.toString());
-        Integer antwortID2 = parseInt(antwort2_temp.toString());
-        Integer antwortID3 = parseInt(antwort3_temp.toString());
-        Integer antwortID4 = parseInt(antwort4_temp.toString());
-        Integer antwortID5 = parseInt(antwort5_temp.toString());
-        Integer antwortID6 = parseInt(antwort6_temp.toString());
-        Integer antwortID7 = parseInt(antwort7_temp.toString());
-        Integer antwortID8 = parseInt(antwort8_temp.toString());
-        Integer antwortID9 = parseInt(antwort9_temp.toString());
-        Integer antwortID10 = parseInt(antwort10_temp.toString());
-        Integer antwortID11 = parseInt(antwort11_temp.toString());
-        Integer antwortID12 = parseInt(antwort12_temp.toString());
-        Integer antwortID13 = parseInt(antwort13_temp.toString());
-        Integer antwortID14 = parseInt(antwort14_temp.toString());
-        Integer antwortID15 = parseInt(antwort15_temp.toString());
-        Integer antwortID16 = parseInt(antwort16_temp.toString());
-        Integer antwortID17 = parseInt(antwort17_temp.toString());
-        Integer antwortID18 = parseInt(antwort18_temp.toString());
-        Integer antwortID19 = parseInt(antwort19_temp.toString());
-        Integer antwortID20 = parseInt(antwort20_temp.toString());
+//        Integer antwortID1 = parseInt(antwort1_temp.toString());
+//        Integer antwortID2 = parseInt(antwort2_temp.toString());
+//        Integer antwortID3 = parseInt(antwort3_temp.toString());
+//        Integer antwortID4 = parseInt(antwort4_temp.toString());
+//        Integer antwortID5 = parseInt(antwort5_temp.toString());
+//        Integer antwortID6 = parseInt(antwort6_temp.toString());
+//        Integer antwortID7 = parseInt(antwort7_temp.toString());
+//        Integer antwortID8 = parseInt(antwort8_temp.toString());
+//        Integer antwortID9 = parseInt(antwort9_temp.toString());
+//        Integer antwortID10 = parseInt(antwort10_temp.toString());
+//        Integer antwortID11 = parseInt(antwort11_temp.toString());
+//        Integer antwortID12 = parseInt(antwort12_temp.toString());
+//        Integer antwortID13 = parseInt(antwort13_temp.toString());
+//        Integer antwortID14 = parseInt(antwort14_temp.toString());
+//        Integer antwortID15 = parseInt(antwort15_temp.toString());
+//        Integer antwortID16 = parseInt(antwort16_temp.toString());
+//        Integer antwortID17 = parseInt(antwort17_temp.toString());
+//        Integer antwortID18 = parseInt(antwort18_temp.toString());
+//        Integer antwortID19 = parseInt(antwort19_temp.toString());
+//        Integer antwortID20 = parseInt(antwort20_temp.toString());
 
+        // fixme: antwort temp为空 无法运行
+        // 因为projektHasAntHasLie表格中not null，将空回答id设置为0
+        Integer antwortID1 = (antwort1_temp == null) ? 0 : parseInt(antwort1_temp.toString());
+        Integer antwortID2 = (antwort2_temp == null) ? 0 : parseInt(antwort2_temp.toString());
+        Integer antwortID3 = (antwort3_temp == null) ? 0 : parseInt(antwort3_temp.toString());
+        Integer antwortID4 = (antwort4_temp == null) ? 0 : parseInt(antwort4_temp.toString());
+        Integer antwortID5 = (antwort5_temp == null) ? 0 : parseInt(antwort5_temp.toString());
+        Integer antwortID6 = (antwort6_temp == null) ? 0 : parseInt(antwort6_temp.toString());
+        Integer antwortID7 = (antwort7_temp == null) ? 0 : parseInt(antwort7_temp.toString());
+        Integer antwortID8 = (antwort8_temp == null) ? 0 : parseInt(antwort8_temp.toString());
+        Integer antwortID9 = (antwort9_temp == null) ? 0 : parseInt(antwort9_temp.toString());
+        Integer antwortID10 = (antwort10_temp == null) ? 0 : parseInt(antwort10_temp.toString());
+        Integer antwortID11 = (antwort11_temp == null) ? 0 : parseInt(antwort11_temp.toString());
+        Integer antwortID12 = (antwort12_temp == null) ? 0 : parseInt(antwort12_temp.toString());
+        Integer antwortID13 = (antwort13_temp == null) ? 0 : parseInt(antwort13_temp.toString());
+        Integer antwortID14 = (antwort14_temp == null) ? 0 : parseInt(antwort14_temp.toString());
+        Integer antwortID15 = (antwort15_temp == null) ? 0 : parseInt(antwort15_temp.toString());
+        Integer antwortID16 = (antwort16_temp == null) ? 0 : parseInt(antwort16_temp.toString());
+        Integer antwortID17 = (antwort17_temp == null) ? 0 : parseInt(antwort17_temp.toString());
+        Integer antwortID18 = (antwort18_temp == null) ? 0 : parseInt(antwort18_temp.toString());
+        Integer antwortID19 = (antwort19_temp == null) ? 0 : parseInt(antwort19_temp.toString());
+        Integer antwortID20 = (antwort20_temp == null) ? 0 : parseInt(antwort20_temp.toString());
+
+
+        // 将数据存入数据库
         final ProjektHasLieferantHasAntwort projektHasLieferantHasAntwort1 = new ProjektHasLieferantHasAntwort();
         final Projekt projekt1=new Projekt();
         final Lieferant lieferant1=new Lieferant();
@@ -1129,7 +1155,9 @@ public class Worker {
         projektHasLieferantHasAntwort1.getId().setLieferant(lieferant1);
         projektHasLieferantHasAntwort1.getId().setFrage(frage1_speichern);
         projektHasLieferantHasAntwort1.getId().setAntwort(antwort1);
-        projektHasLieferantHasAntwortService.getRepository().save(projektHasLieferantHasAntwort1);
+        projektHasLieferantHasAntwortService.getRepository().save(projektHasLieferantHasAntwort1);  // fixme
+        // 外键约束问题，idAntwort和idFrage必须存在于对应表中。所以这里需要在数据库中插入对应id。
+        // 尝试通过创建Frage：vollstandigkeit和对应Antwort：vollstandigkeit来解决
 
         final ProjektHasLieferantHasAntwort projektHasLieferantHasAntwort2 = new ProjektHasLieferantHasAntwort();
         final Projekt projekt2=new Projekt();
@@ -1449,62 +1477,79 @@ public class Worker {
 
         List<Frage> frage_all = fragebogenHasFrageService.getRepository().findAllFrageOderById(fragebogenID);
 
-        Frage frage1 = frage_all.get(0);
-        Frage frage2 = frage_all.get(1);
-        Frage frage3 = frage_all.get(2);
-        Frage frage4 = frage_all.get(3);
-        Frage frage5 = frage_all.get(4);
-        Frage frage6 = frage_all.get(5);
-        Frage frage7 = frage_all.get(6);
-        Frage frage8 = frage_all.get(7);
-        Frage frage9 = frage_all.get(8);
-        Frage frage10 = frage_all.get(9);
-        Frage frage11 = frage_all.get(10);
-        Frage frage12 = frage_all.get(11);
-        Frage frage13 = frage_all.get(12);
-        Frage frage14 = frage_all.get(13);
-        Frage frage15 = frage_all.get(14);
-        Frage frage16 = frage_all.get(15);
-        Frage frage17 = frage_all.get(16);
-        Frage frage18 = frage_all.get(17);
-        Frage frage19 = frage_all.get(18);
-        Frage frage20 = frage_all.get(19);
+//        Frage frage1 = frage_all.get(0);
+//        Frage frage2 = frage_all.get(1);
+//        Frage frage3 = frage_all.get(2);
+//        Frage frage4 = frage_all.get(3);
+//        Frage frage5 = frage_all.get(4);
+//        Frage frage6 = frage_all.get(5);
+//        Frage frage7 = frage_all.get(6);
+//        Frage frage8 = frage_all.get(7);
+//        Frage frage9 = frage_all.get(8);
+//        Frage frage10 = frage_all.get(9);
+//        Frage frage11 = frage_all.get(10);
+//        Frage frage12 = frage_all.get(11);
+//        Frage frage13 = frage_all.get(12);
+//        Frage frage14 = frage_all.get(13);
+//        Frage frage15 = frage_all.get(14);
+//        Frage frage16 = frage_all.get(15);
+//        Frage frage17 = frage_all.get(16);
+//        Frage frage18 = frage_all.get(17);
+//        Frage frage19 = frage_all.get(18);
+//        Frage frage20 = frage_all.get(19);
+//
+//        Integer frageID1 = frage1.getIdFrage();
+//        Integer frageID2 = frage2.getIdFrage(); // todo: 为什么这些对象没有使用
+//        Integer frageID3 = frage3.getIdFrage();
+//        Integer frageID4 = frage4.getIdFrage();
+//        Integer frageID5 = frage5.getIdFrage();
+//        Integer frageID6 = frage6.getIdFrage();
+//        Integer frageID7 = frage7.getIdFrage();
+//        Integer frageID8 = frage8.getIdFrage();
+//        Integer frageID9 = frage9.getIdFrage();
+//        Integer frageID10 = frage10.getIdFrage();
+//        Integer frageID11 = frage11.getIdFrage();
+//        Integer frageID12 = frage12.getIdFrage();
+//        Integer frageID13 = frage13.getIdFrage();
+//        Integer frageID14 = frage14.getIdFrage();
+//        Integer frageID15 = frage15.getIdFrage();
+//        Integer frageID16 = frage16.getIdFrage();
+//        Integer frageID17 = frage17.getIdFrage();
+//        Integer frageID18 = frage18.getIdFrage();
+//        Integer frageID19 = frage19.getIdFrage();
+//        Integer frageID20 = frage20.getIdFrage();
+//
+//        Antwort antwort1 = projektHasLieferantHasAntwortService.getRepository().findAntwortByProjektIDLieferanterIDFrageID(projektID,lieferanterID,frageID1);
+//        Integer IstVollstandig_temp;
+//
+//        if (antwort1==null){
+//            IstVollstandig_temp=0;
+//        }else{
+//            IstVollstandig_temp=1;
+//        }
+//
+//        String IstVollstandig = String.valueOf(IstVollstandig_temp);
+//
+//        final HashMap<String, Object> variables = new HashMap<>();
+//        variables.put("IstVollstandig", IstVollstandig);
+//
+//        return variables;
 
-        Integer frageID1 = frage1.getIdFrage();
-        Integer frageID2 = frage2.getIdFrage(); // todo: 为什么这些对象没有使用
-        Integer frageID3 = frage3.getIdFrage();
-        Integer frageID4 = frage4.getIdFrage();
-        Integer frageID5 = frage5.getIdFrage();
-        Integer frageID6 = frage6.getIdFrage();
-        Integer frageID7 = frage7.getIdFrage();
-        Integer frageID8 = frage8.getIdFrage();
-        Integer frageID9 = frage9.getIdFrage();
-        Integer frageID10 = frage10.getIdFrage();
-        Integer frageID11 = frage11.getIdFrage();
-        Integer frageID12 = frage12.getIdFrage();
-        Integer frageID13 = frage13.getIdFrage();
-        Integer frageID14 = frage14.getIdFrage();
-        Integer frageID15 = frage15.getIdFrage();
-        Integer frageID16 = frage16.getIdFrage();
-        Integer frageID17 = frage17.getIdFrage();
-        Integer frageID18 = frage18.getIdFrage();
-        Integer frageID19 = frage19.getIdFrage();
-        Integer frageID20 = frage20.getIdFrage();
 
-        Antwort antwort1 = projektHasLieferantHasAntwortService.getRepository().findAntwortByProjektIDLieferanterIDFrageID(projektID,lieferanterID,frageID1);
-        Integer IstVollstandig_temp;
+        Integer istVollstandig_temp = 1;
 
-        if (antwort1==null){
-            IstVollstandig_temp=0;
-        }else{
-            IstVollstandig_temp=1;
+        for (int i = 0; i < frage_all.stream().count(); i++) {
+            Frage frage = frage_all.get(i);
+            Integer frageID = frage.getIdFrage();
+            Antwort antwort = projektHasLieferantHasAntwortService.getRepository().findAntwortByProjektIDLieferanterIDFrageID(projektID,lieferanterID,frageID);
+            if (antwort == null){
+                istVollstandig_temp = 0;
+                break;
+            }
         }
 
-        String IstVollstandig = String.valueOf(IstVollstandig_temp);
-
         final HashMap<String, Object> variables = new HashMap<>();
-        variables.put("IstVollstandig", IstVollstandig);
-
+        variables.put("IstVollstandig", istVollstandig_temp);
         return variables;
     }
 

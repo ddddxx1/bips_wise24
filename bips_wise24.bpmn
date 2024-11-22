@@ -778,7 +778,7 @@
       "id": "Field_0723b0o",
       "key": "antwort1",
       "validate": {
-        "required": true
+        "required": false
       },
       "valuesKey": "Antwort1",
       "searchable": false
@@ -794,7 +794,7 @@
       "key": "antwort2",
       "valuesKey": "Antwort2",
       "validate": {
-        "required": true
+        "required": false
       }
     },
     {
@@ -808,7 +808,7 @@
       "key": "antwort3",
       "valuesKey": "Antwort3",
       "validate": {
-        "required": true
+        "required": false
       }
     },
     {
@@ -822,7 +822,7 @@
       "key": "antwort4",
       "valuesKey": "Antwort4",
       "validate": {
-        "required": true
+        "required": false
       }
     },
     {
@@ -836,7 +836,7 @@
       "key": "antwort5",
       "valuesKey": "Antwort5",
       "validate": {
-        "required": true
+        "required": false
       }
     },
     {
@@ -850,7 +850,7 @@
       "key": "antwort6",
       "valuesKey": "Antwort6",
       "validate": {
-        "required": true
+        "required": false
       }
     },
     {
@@ -864,7 +864,7 @@
       "key": "antwort7",
       "valuesKey": "Antwort7",
       "validate": {
-        "required": true
+        "required": false
       }
     },
     {
@@ -1056,9 +1056,9 @@
   "executionPlatformVersion": "8.3.0",
   "exporter": {
     "name": "Camunda Modeler",
-    "version": "5.16.0"
+    "version": "5.28.0"
   },
-  "schemaVersion": 11
+  "schemaVersion": 16
 }</zeebe:userTaskForm>
     </bpmn:extensionElements>
     <bpmn:laneSet id="LaneSet_0lw0lrk">
